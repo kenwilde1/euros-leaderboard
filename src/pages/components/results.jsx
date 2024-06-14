@@ -1,10 +1,10 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import db from "../../../utils/firestore"
+import db from "../utils/firestore"
 import { collection, getDocs } from "firebase/firestore"
 
-import { fetchTally } from '../../../utils/calculate_scores';
+import { fetchTally } from '../utils/calculate_scores';
 
 import gold from '../../images/gold.svg';
 import silver from '../../images/silver.svg';
