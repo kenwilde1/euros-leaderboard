@@ -16,14 +16,47 @@
   }
 }
 
+.medal img {
+  height: 30px;
+  width: 30px;
+}
+
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: #004ea0;
+}
+
+.leaderboard {
+  background: white;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 5px;
+  display: flex;
+  align-items: flex-start;
+  justify-items: start;
+}
+
+ol {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: start;
+  justify-content: start;
+}
+
+li:nth-child(odd) {
+  background: lightgray;
+}
+
+.leaderboard-position {
+  display: flex;
+  justify-content: start;
+  gap: 20px;
+  width: 100%;
+  padding: 20px;
+}
+
+.leaderboard-name {
+  display: flex;
+  gap: 10px;
 }
 
 @layer utilities {
