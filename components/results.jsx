@@ -54,7 +54,11 @@ const ListItems = () => {
     const fetchItems = async () => {
       const querySnapshot = await getDocs(collection(db, "results"));
       const items = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-      setScores(fetchTally(items))
+      
+      const querySnapshot2 = await getDocs(collection(db, "scorers"));
+      const items2 = querySnapshot2.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      
+      setScores(fetchTally(items, items2))
     }
     fetchItems()
   }, [])

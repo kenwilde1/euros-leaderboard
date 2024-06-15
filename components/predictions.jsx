@@ -37,27 +37,27 @@ const getFixturesForPerson = (person) => {
     const todaysFixtures = fixtures[date];
 
     if (person === 'Dylan W') {
-        return dyl_w.filter(prediction => {
+        return dyl_w.matchPredictions.filter(prediction => {
             return todaysFixtures.find(fix => fix.id === prediction.id);
         })
     } else if (person === 'Stephen') {
-        return stephen.filter(prediction => {
+        return stephen.matchPredictions.filter(prediction => {
             return todaysFixtures.find(fix => fix.id === prediction.id);
         })
     } else if (person === 'Alan') {
-        return alan.filter(prediction => {
+        return alan.matchPredictions.filter(prediction => {
             return todaysFixtures.find(fix => fix.id === prediction.id);
         })
     } else if (person === 'Hugh') {
-        return hugh.filter(prediction => {
+        return hugh.matchPredictions.filter(prediction => {
             return todaysFixtures.find(fix => fix.id === prediction.id);
         })
     } else if (person === 'Kenny') {
-        return kenny.filter(prediction => {
+        return kenny.matchPredictions.filter(prediction => {
             return todaysFixtures.find(fix => fix.id === prediction.id);
         })
     } else if (person === 'Philip') {
-        return philip.filter(prediction => {
+        return philip.matchPredictions.filter(prediction => {
             return todaysFixtures.find(fix => fix.id === prediction.id);
         })
     }

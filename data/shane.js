@@ -1,4 +1,4 @@
-export default [
+const matchPredictions = [
     { id: "GERSCO", home: "Germany", away: "Scotland", homeGoals: 2, awayGoals: 0 },
     { id: "HUNSUI", home: "Hungary", away: "Switzerland", homeGoals: 1, awayGoals: 1 },
     { id: "SPACRO", home: "Spain", away: "Croatia", homeGoals: 2, awayGoals: 0 },
@@ -36,3 +36,14 @@ export default [
     { id: "GEOPOR", home: "Georgia", away: "Portugal", homeGoals: 0, awayGoals: 4 },
     { id: "CZETUR", home: "Czech Republic", away: "Turkey", homeGoals: 2, awayGoals: 0 }
 ];
+
+const highestScoringTeam = 'France';
+const bestDefence = 'Portugal'
+const topGoalscorer = 'Ronaldo'
+
+export default {
+    matchPredictions,
+    highestScoringTeam,
+    bestDefence,
+    topGoalscorer
+}

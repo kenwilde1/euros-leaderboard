@@ -12,9 +12,9 @@ const matchPredictions = [
     { id: "TURGEO", home: "Turkey", away: "Georgia", homeGoals: 2, awayGoals: 0 },
     { id: "PORCZE", home: "Portugal", away: "Czech Republic", homeGoals: 2, awayGoals: 0 },
     { id: "CROALB", home: "Croatia", away: "Albania", homeGoals: 2, awayGoals: 0 },
-    { id: "GERHUN", home: "Germany", away: "Hungary", homeGoals: 2, awayGoals: 1 },
+    { id: "GERHUN", home: "Germany", away: "Hungary", homeGoals: 2, awayGoals: 0 },
     { id: "SCOSUI", home: "Scotland", away: "Switzerland", homeGoals: 1, awayGoals: 1 },
-    { id: "SLOSER", home: "Slovenia", away: "Serbia", homeGoals: 1, awayGoals: 1 },
+    { id: "SLOSER", home: "Slovenia", away: "Serbia", homeGoals: 1, awayGoals: 2 },
     { id: "DENENG", home: "Denmark", away: "England", homeGoals: 1, awayGoals: 2 },
     { id: "SPAITA", home: "Spain", away: "Italy", homeGoals: 2, awayGoals: 1 },
     { id: "SLOUKR", home: "Slovakia", away: "Ukraine", homeGoals: 1, awayGoals: 1 },
@@ -37,8 +37,8 @@ const matchPredictions = [
     { id: "CZETUR", home: "Czech Republic", away: "Turkey", homeGoals: 1, awayGoals: 2 }
 ];
 
-const highestScoringTeam = 'England';
-const bestDefence = 'Germany'
+const highestScoringTeam = 'Portugal';
+const bestDefence = 'Belgium'
 const topGoalscorer = 'Mbappe'
 
 export default {
