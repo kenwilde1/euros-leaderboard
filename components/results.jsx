@@ -31,7 +31,6 @@ const Scores = (scores) => {
         .sort((a, b) => b.score - a.score)
         .map((player, index) => {
           const score = player.score === 0 ? 'N/A' : player.score
-          console.log(player.name, index);
           return (
           <li className="leaderboard-position">
             <div className="leaderboard-name">
