@@ -97,15 +97,18 @@ const Scores = (scores) => {
 const ListItems = () => {
   const [scores, setScores] = useState([])
   const [selectedTabId, setSelectedTabId] = useState('table');
+  const [lastResult, setLastResult] = useState({})
 
   useEffect(() => {
     const fetchItems = async () => {
       const querySnapshot = await getDocs(collection(db, "results"));
       const items = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-      
+
       const querySnapshot2 = await getDocs(collection(db, "scorers"));
       const items2 = querySnapshot2.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
       
+      const lastResult = items[items.length -1];
+      setLastResult(lastResult);
       setScores(fetchTally(items, items2))
     }
     fetchItems()
@@ -131,9 +134,12 @@ const ListItems = () => {
   return (
     <div className="container">
       <EuiTabs>{renderTabs()}</EuiTabs>
-      {selectedTabId === 'table' && <div className="border w-96 text-center p-4 leaderboard">
+      {selectedTabId === 'table' && 
+      <>
+      <p className="lastUpdated">Last Updated by: {lastResult.home} vs {lastResult.away}</p>
+      <div className="border w-96 text-center p-4 leaderboard">
         <Scores scores={scores} />
-      </div>}
+      </div></>}
       {selectedTabId === 'calc' &&<div className="border w-screen h-24 text-center p-4 calc">
         <Calculator />
       </div>}

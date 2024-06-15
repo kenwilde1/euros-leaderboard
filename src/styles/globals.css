@@ -133,6 +133,7 @@ li:nth-child(odd) {
   height: 130px;
   width: 200px;
   right: 0;
+  z-index:99999;
 }
 
 .nav p:hover {
@@ -228,7 +229,10 @@ li:nth-child(odd) {
 .euiAccordion__childWrapper {
   height: auto !important;
 }
-
+.other-predictions {
+  font-size: 12px;
+  margin: 15px 0px;
+}
 table{
   border-collapse:collapse;
   border:1px solid lightgray;
@@ -246,4 +250,10 @@ table{
     justify-content: center;
     flex-direction: column;
     align-items: center;
+  }
+
+  .lastUpdated {
+    color: darkred;
+    font-size: 12px;
+    font-weight: 600;
   }

@@ -46,8 +46,6 @@ const calculateTeams = (predictions, result, scores, pos, index) => {
 
     if (result) {
         const obj = { [result.home]: result.homeGoals, [result.away]: result.awayGoals }
-        console.log(obj);
-        console.log(highestScoringTeam);
         if (obj[highestScoringTeam]) [
             scores[pos].score += obj[highestScoringTeam]
         ]
