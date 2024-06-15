@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import db from "../../../firebase/firestore"
-import { collection, getDocs } from "firebase/firestore"
+import { collection, getDocs } from "@firebase/firestore"
 
 import { fetchTally } from '../utils/calculate_scores';
 
