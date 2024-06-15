@@ -16,13 +16,13 @@
   }
 }
 
+body {
+  background-color: #004ea0;
+}
+
 .medal img {
   height: 30px;
   width: 30px;
-}
-
-body {
-  background-color: #004ea0;
 }
 
 .leaderboard {
@@ -32,6 +32,7 @@ body {
   display: flex;
   align-items: flex-start;
   justify-items: start;
+  width: 300px;
 }
 
 ol {

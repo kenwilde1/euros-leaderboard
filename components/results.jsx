@@ -1,15 +1,15 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import db from "../../../firebase/firestore"
+import db from "../firebase/firestore"
 import { collection, getDocs } from "@firebase/firestore"
 
-import { fetchTally } from '../utils/calculate_scores';
+import { fetchTally } from './utils/calculate_scores';
 
-import gold from '../../images/gold.svg';
-import silver from '../../images/silver.svg';
-import bronze from '../../images/bronze.svg';
-import normal from '../../images/normal.png';
+import gold from '../src/images/gold.svg';
+import silver from '../src/images/silver.svg';
+import bronze from '../src/images/bronze.svg';
+import normal from '../src/images/normal.png';
 
 const Medal = ({ position }) => {
   console.log(position);
@@ -38,7 +38,7 @@ const Scores = (scores) => {
               <span className="medal"><Medal position={index} /></span>
               <span className="leaderboard-name">{player.name}</span>
             </div>
-            <span className="leaderboard-score font-bold">{score}</span>
+            <span className="leaderboard-score font-bold">{score}pts</span>
             </li>
           );
         })}

@@ -1,10 +1,10 @@
-import hughPredictions from '../../../data/hugh';
-import philipPredictions from '../../../data/philip';
-import stephenPredictions from '../../../data/stephen';
-import kennyPredictions from '../../../data/kenny';
-import dylWPredictions from '../../../data/dyl_w';
-import shanePredictions from '../../../data/shane';
-import alanPredictions from '../../../data/alan';
+import hughPredictions from '../../data/hugh';
+import philipPredictions from '../../data/philip';
+import stephenPredictions from '../../data/stephen';
+import kennyPredictions from '../../data/kenny';
+import dylWPredictions from '../../data/dyl_w';
+import shanePredictions from '../../data/shane';
+import alanPredictions from '../../data/alan';
 
 const getWinner = (result) => {
     if (result.homeGoals > result.awayGoals) {
