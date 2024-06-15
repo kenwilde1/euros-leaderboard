@@ -273,3 +273,8 @@ table{
   .pin-icon {
     padding: 5px;
   }
+
+  .data-grid {
+    width: 90vw !important;
+    scrollbar-width: 10px !important;
+  }

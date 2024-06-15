@@ -27,6 +27,16 @@ const tabs = [
     disabled: false,
   },
   {
+    id: 'pred',
+    name: (
+      <span>
+        <EuiIcon type="eye" />
+        &nbsp;Predictions
+      </span>
+    ),
+    disabled: false,
+  },
+  {
     id: 'calc',
     name: (
       <span>
@@ -36,16 +46,6 @@ const tabs = [
     ),
     disabled: false,
   },
-  {
-    id: 'pred',
-    name: (
-      <span>
-        <EuiIcon type="eye" />
-        &nbsp;Predictions
-      </span>
-    ),
-    disabled: false,
-  }
 ];
 
 const renderTabs = () => {
@@ -102,11 +102,12 @@ const ListItems = () => {
   useEffect(() => {
     const fetchItems = async () => {
       const querySnapshot = await getDocs(collection(db, "results"));
-      const items = querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      const items = querySnapshot.docs
+        .map((doc) => ({ ...doc.data(), id: doc.id }))
+        .sort((a, b) => a.match - b.match);
 
       const querySnapshot2 = await getDocs(collection(db, "scorers"));
       const items2 = querySnapshot2.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-      
       const lastResult = items[items.length -1];
       setLastResult(lastResult);
       setScores(fetchTally(items, items2))

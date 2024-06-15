@@ -46,9 +46,9 @@ const calculateTeams = (predictions, result, scores, pos, index) => {
 
     if (result) {
         const obj = { [result.home]: result.homeGoals, [result.away]: result.awayGoals }
-        if (obj[highestScoringTeam]) [
+        if (obj[highestScoringTeam]) {
             scores[pos].score += obj[highestScoringTeam]
-        ]
+        }
 
         if (obj[bestDefence]) {
             let otherTeam = Object.keys(obj).filter(team => team !== bestDefence)[0];
