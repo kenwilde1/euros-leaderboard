@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import db from "../utils/firestore"
+import db from "../../../firebase/firestore"
 import { collection, getDocs } from "firebase/firestore"
 
 import { fetchTally } from '../utils/calculate_scores';
@@ -23,7 +23,6 @@ const Medal = ({ position }) => {
     return <img src={normal.src} />
   }
 }
-
 
 const Scores = (scores) => {
   return (
