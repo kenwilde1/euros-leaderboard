@@ -253,7 +253,23 @@ table{
   }
 
   .lastUpdated {
-    color: darkred;
+    color: #e4010b;
     font-size: 12px;
     font-weight: 600;
+  }
+
+  .euiAccordion__button {
+    display: flex;
+    width: 100%;
+  }
+
+  .euiAccordion__buttonContent, .accordian-button {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+  }
+
+  .pin-icon {
+    padding: 5px;
   }
