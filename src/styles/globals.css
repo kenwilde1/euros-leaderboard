@@ -17,12 +17,52 @@
 }
 
 body {
-  background-color: #004ea0;
+  background-color: rgb(8,92,172);
 }
 
 .medal img {
   height: 30px;
   width: 30px;
+  margin-left: -5px;
+}
+
+.medal span {
+ font-size: 16px;
+}
+
+.number-input {
+  width: 40%;
+}
+
+.prediction-content, .actual-content {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.actual-form {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  background: limegreen;
+}
+
+.prediction-form {
+  background: white;
+}
+
+h5 {
+  padding-top: 5px;
+  text-align: center;
+}
+
+.points {
+  text-align: center;
+  color: white;
+  font-weight: 600;
+}
+
+.calc {
+  width: 80vw;
 }
 
 .leaderboard {
@@ -33,6 +73,12 @@ body {
   align-items: flex-start;
   justify-items: start;
   width: 300px;
+  padding: 10px;
+}
+
+.title {
+  text-align: center;
+  width: 100vw;
 }
 
 ol {
@@ -65,3 +111,106 @@ li:nth-child(odd) {
     text-wrap: balance;
   }
 }
+
+.nav {
+  display: flex;
+  margin-bottom: 20px;
+  justify-content: center;
+  gap: 0.5rem;
+  color: white;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.active {
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.banner {
+  position: fixed;
+  bottom: 0;
+  height: 130px;
+  width: 200px;
+  right: 0;
+}
+
+.nav p:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+@media screen and (min-width:600px) {
+  .banner {
+    display: none;
+  }
+
+  .calc {
+    width: 50vw !important;
+  }
+
+  table {
+    width: 100% !important;
+  }
+}
+
+.fixture-list {
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  padding: 30px;
+  border-radius: 5px;
+}
+
+.fixture-list h4 {
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.fixture-item {
+  display: flex;
+  gap: 5px;
+  width: 100%;
+  justify-content: center;
+}
+
+.time {
+  font-weight: 600;
+}
+
+.predictions-list {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.prediction-table {
+  position: relative;
+  z-index: 9999;
+  color: black;
+  height: 300px;
+}
+
+.open-content {
+  height: auto !important;
+}
+
+.euiAccordion__childWrapper {
+  height: auto !important;
+}
+
+table{
+  border-collapse:collapse;
+  border:1px solid lightgray;
+  font-size: 14px;
+  }
+  
+  table td, table th{
+  border:1px solid lightgray;
+  text-align: center;
+  padding: 5px;
+  }

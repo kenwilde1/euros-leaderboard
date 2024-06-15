@@ -5,6 +5,8 @@ import { Inter } from "next/font/google";
 
 import ListItems from "../../components/results";
 
+import banner from '../images/banner.png';
+
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
@@ -12,7 +14,8 @@ export default function Home() {
     <main
       className={`flex flex-col items-center gap-12 p-24 ${inter.className}`}
     >
-      <h1 className="font-bold text-white">Euros 2024 Match Predicter</h1>
+      <img className="banner" src={banner.src} />
+      <h1 className="title text-2xl font-bold text-white">Euros 2024 Match Predictor</h1>
       <ListItems />
     </main>
   );
