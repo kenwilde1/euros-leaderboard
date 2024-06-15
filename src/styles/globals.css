@@ -95,7 +95,7 @@ li:nth-child(odd) {
 
 .leaderboard-position {
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   gap: 20px;
   width: 100%;
   padding: 20px;
@@ -139,7 +139,25 @@ li:nth-child(odd) {
   cursor: pointer;
   text-decoration: underline;
 }
+.euiTab {
+  width: 100px;
+  display: flex;
+  justify-content: center;
+}
 
+.euiTabs {
+  margin-bottom: 20px;
+  background: white;
+  width: 300px;
+  padding: 5px;
+}
+
+.euiTab__content > span {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 @media screen and (min-width:600px) {
   .banner {
     display: none;
@@ -151,6 +169,14 @@ li:nth-child(odd) {
 
   table {
     width: 100% !important;
+  }
+
+  .euiTabs {
+    width: 400px;
+  }
+
+  .euiTab {
+    width: 133px;
   }
 }
 
@@ -213,4 +239,11 @@ table{
   border:1px solid lightgray;
   text-align: center;
   padding: 5px;
+  }
+
+  .container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
   }

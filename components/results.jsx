@@ -13,6 +13,54 @@ import bronze from '../src/images/bronze.svg';
 import Calculator from "./calculator";
 import Predictions from "./predictions";
 
+import { EuiTab, EuiTabs, EuiIcon } from "@elastic/eui";
+
+const tabs = [
+  {
+    id: 'table',
+    name: (
+      <span>
+        <EuiIcon type="visTable" />
+        &nbsp;Table
+      </span>
+    ),
+    disabled: false,
+  },
+  {
+    id: 'calc',
+    name: (
+      <span>
+        <EuiIcon type="plus" />
+        &nbsp;Calculator
+      </span>
+    ),
+    disabled: false,
+  },
+  {
+    id: 'pred',
+    name: (
+      <span>
+        <EuiIcon type="eye" />
+        &nbsp;Predictions
+      </span>
+    ),
+    disabled: false,
+  }
+];
+
+const renderTabs = () => {
+  return tabs.map((tab, index) => (
+    <EuiTab
+      {...(tab.href && { href: tab.href, target: '_blank' })}
+      onClick={() => onSelectedTabChanged(tab.id)}
+      isSelected={tab.id === selectedTabId}
+      disabled={tab.disabled}
+      key={index}>
+      {tab.name}
+    </EuiTab>
+  ));
+}
+
 const Medal = ({ position }) => {
   if (position === 0) {
     return <img src={gold.src} />
@@ -48,7 +96,7 @@ const Scores = (scores) => {
 
 const ListItems = () => {
   const [scores, setScores] = useState([])
-  const [currentPage, setCurrentPage] = useState('results');
+  const [selectedTabId, setSelectedTabId] = useState('table');
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -63,22 +111,33 @@ const ListItems = () => {
     fetchItems()
   }, [])
 
+  const onSelectedTabChanged = (id) => {
+    setSelectedTabId(id);
+  };
+
+  const renderTabs = () => {
+    return tabs.map((tab, index) => (
+      <EuiTab
+        {...(tab.href && { href: tab.href, target: '_blank' })}
+        onClick={() => onSelectedTabChanged(tab.id)}
+        isSelected={tab.id === selectedTabId}
+        disabled={tab.disabled}
+        key={index}>
+        {tab.name}
+      </EuiTab>
+    ));
+  };
+
   return (
-    <div>
-      <div className="nav text-small">
-      <p onClick={() => setCurrentPage('results')}className={`${currentPage === 'results' ? 'active' : ''}`}>Table</p>
-      <span> - </span>
-      <p onClick={() => setCurrentPage('calc')} className={`${currentPage === 'calc' ? 'active' : ''}`}>Point Calculator</p>
-      <span> - </span>
-      <p onClick={() => setCurrentPage('pred')} className={`${currentPage === 'pred' ? 'active' : ''}`}>Predictions</p>
-      </div>
-      {currentPage === 'results' && <div className="border w-96 text-center p-4 leaderboard">
+    <div className="container">
+      <EuiTabs>{renderTabs()}</EuiTabs>
+      {selectedTabId === 'table' && <div className="border w-96 text-center p-4 leaderboard">
         <Scores scores={scores} />
       </div>}
-      {currentPage === 'calc' &&<div className="border w-screen h-24 text-center p-4 calc">
+      {selectedTabId === 'calc' &&<div className="border w-screen h-24 text-center p-4 calc">
         <Calculator />
       </div>}
-      {currentPage === 'pred' &&<div className="border w-screen h-24 text-center p-4 calc">
+      {selectedTabId === 'pred' &&<div className="border w-screen h-24 text-center p-4 calc">
         <Predictions />
       </div>}
     </div>
