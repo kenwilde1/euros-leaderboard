@@ -8,6 +8,23 @@
   --background-end-rgb: 255, 255, 255;
 }
 
+.about {
+  width: 90vw;
+  display: flex;
+  justify-content: center;
+  height: auto;
+  background: white;
+  margin-top: 20px;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+}
+
+main {
+  overflow-x: hidden;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
@@ -72,25 +89,13 @@ h5 {
   display: flex;
   align-items: flex-start;
   justify-items: start;
-  width: 300px;
+  width: 90vw;
   padding: 10px;
 }
 
 .title {
   text-align: center;
   width: 100vw;
-}
-
-ol {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  align-items: start;
-  justify-content: start;
-}
-
-li:nth-child(odd) {
-  background: lightgray;
 }
 
 .leaderboard-position {
@@ -178,6 +183,10 @@ li:nth-child(odd) {
 
   .euiTab {
     width: 133px;
+  }
+
+  .about {
+    width: 300px;
   }
 }
 
@@ -277,4 +286,48 @@ table{
   .data-grid {
     width: 90vw !important;
     scrollbar-width: 10px !important;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    height: auto !important;
+    border: 1px solid lightgray;
   }
+
+  div[role="gridcell"], div[role="columnheader"] {
+    border: 1px solid lightgray;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+}
+
+ul span {
+  margin-bottom: 10px;;
+}
+
+/* .Mui-checked {
+  color: lightcoral !important;
+} */
+
+.toggle-desc {
+  color: white;
+}
+
+/* .MuiSwitch-track {
+  color: lightcoral !important;
+} */
+
+.toggle-table {
+  align-self: flex-start;
+}
+
+.scores {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: start;
+  justify-content: start;
+}
+
+.scores li:nth-child(odd) {
+  background: lightgray;
+}

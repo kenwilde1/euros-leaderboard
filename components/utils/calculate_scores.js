@@ -7,7 +7,7 @@ import shanePredictions from '../../data/shane';
 import alanPredictions from '../../data/alan';
 import davidPredictions from '../../data/david';
 
-const getWinner = (result) => {
+export const getWinner = (result) => {
     if (result.homeGoals > result.awayGoals) {
         return result.home;
     } else if (result.homeGoals < result.awayGoals) {

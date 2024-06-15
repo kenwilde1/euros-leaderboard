@@ -13,7 +13,40 @@ import bronze from '../src/images/bronze.svg';
 import Calculator from "./calculator";
 import Predictions from "./predictions";
 
+import AdvancedTable from '../components/advanced_table';
+
 import { EuiTab, EuiTabs, EuiIcon } from "@elastic/eui";
+
+import { Switch, createTheme, ThemeProvider } from '@mui/material';
+
+const theme = createTheme({
+  components: {
+    MuiSwitch: {
+      styleOverrides: {
+        switchBase: {
+          // Controls default (unchecked) color for the thumb
+          color: "#ccc"
+        },
+        colorPrimary: {
+          "&.Mui-checked": {
+            // Controls checked color for the thumb
+            color: "#A9A9A9"
+          }
+        },
+        track: {
+          // Controls default (unchecked) color for the track
+          opacity: 0.2,
+          backgroundColor: "#A9A9A9",
+          ".Mui-checked.Mui-checked + &": {
+            // Controls checked color for the track
+            opacity: 0.7,
+            backgroundColor: "#A9A9A9"
+          }
+        }
+      }
+    }
+  }
+});
 
 const tabs = [
   {
@@ -75,7 +108,7 @@ const Medal = ({ position }) => {
 
 const Scores = (scores) => {
   return (
-    <ol>
+    <ol className="scores">
       {scores.scores
         .sort((a, b) => b.score - a.score)
         .map((player, index) => {
@@ -94,10 +127,13 @@ const Scores = (scores) => {
   )
 }
 
+const LOCAL_STORAGE_KEY = 'euros:advanced';
+
 const ListItems = () => {
   const [scores, setScores] = useState([])
   const [selectedTabId, setSelectedTabId] = useState('table');
-  const [lastResult, setLastResult] = useState({})
+  const [results, setResults] = useState({})
+  const [showAdvancedTable, setShowAdvancedTable] = useState()
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -109,15 +145,31 @@ const ListItems = () => {
       const querySnapshot2 = await getDocs(collection(db, "scorers"));
       const items2 = querySnapshot2.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
       const lastResult = items[items.length -1];
-      setLastResult(lastResult);
+      setResults(items);
       setScores(fetchTally(items, items2))
     }
-    fetchItems()
+    fetchItems();
+
+    const getLocal = () => {
+      const local = window.localStorage.getItem(LOCAL_STORAGE_KEY);
+      if (local) {
+        return JSON.parse(local);
+      } else {
+        return false;
+      }
+    }
+
+    setShowAdvancedTable(getLocal())
   }, [])
 
   const onSelectedTabChanged = (id) => {
     setSelectedTabId(id);
   };
+
+  const handleSwitchChange = (e) => {
+    window.localStorage.setItem(LOCAL_STORAGE_KEY, e.target.checked);
+    setShowAdvancedTable(e.target.checked);
+  }
 
   const renderTabs = () => {
     return tabs.map((tab, index) => (
@@ -132,15 +184,37 @@ const ListItems = () => {
     ));
   };
 
+  const lastResult = results && results[results.length - 1];
+
+  console.log(lastResult);
+
   return (
     <div className="container">
       <EuiTabs>{renderTabs()}</EuiTabs>
-      {selectedTabId === 'table' && 
+      <ThemeProvider theme={theme}>
+      <div className='toggle-table'>
+        <Switch
+          checked={showAdvancedTable}
+          onChange={handleSwitchChange}
+        />
+        <span className='toggle-desc'>Advanced View</span>
+        
+      </div>
+      </ThemeProvider>
+      {selectedTabId === 'table' && showAdvancedTable &&
       <>
-      <p className="lastUpdated">Last Updated by: {lastResult.home} vs {lastResult.away}</p>
-      <div className="border w-96 text-center p-4 leaderboard">
-        <Scores scores={scores} />
-      </div></>}
+      <p className="lastUpdated">Last Updated by: {lastResult && lastResult.home} vs {lastResult && lastResult.away}</p>
+        <AdvancedTable results={results}/></>
+      }
+      {selectedTabId === 'table' && !showAdvancedTable &&
+      <>
+      <p className="lastUpdated">Last Updated by: {lastResult && lastResult.home} vs {lastResult && lastResult.away}</p>
+        <div className="border w-96 text-center p-4 leaderboard">
+          <Scores scores={scores} />
+        </div>
+        </>
+      }
+
       {selectedTabId === 'calc' &&<div className="border w-screen h-24 text-center p-4 calc">
         <Calculator />
       </div>}

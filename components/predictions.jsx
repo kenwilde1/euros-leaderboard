@@ -1,5 +1,5 @@
 
-import { EuiAccordion, EuiHorizontalRule, EuiPanel } from "@elastic/eui";
+import { EuiAccordion, EuiHorizontalRule, EuiIcon, EuiPanel } from "@elastic/eui";
 import { useState } from "react";
 
 import dyl_w from "../data/dyl_w";
@@ -80,6 +80,8 @@ const getMetadataForPerson = (player) => {
         topGoalscorer: metadata.topGoalscorer 
     }
 }
+
+const LOCAL_STORAGE_KEY = 'euros:pinned';
 
 const PersonalPredictions = ({player}) => {
     const predictions = getFixturesForPerson(player);
