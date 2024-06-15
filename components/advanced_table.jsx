@@ -82,11 +82,14 @@ const AdvancedTable = ({ results = [] }) => {
 
     return (
       <>
+      <div className='data-grid'>
         <DataGrid
             columns={columns}
             rows={rows}
-            className='rdg-light data-grid'
+            className='rdg-light'
+            style={{ height: 'auto'}}
         />
+        </div>
         <div className='about'>
           <b>Advanced View</b>
           <ul>
@@ -103,7 +106,7 @@ const AdvancedTable = ({ results = [] }) => {
             <p>The number of times you achieved the maximum available points for a game.</p></span>
           </ul>
         </div>
-      </>
+        </>
     )
 };
 
