@@ -8,11 +8,12 @@ import alan from "../data/alan";
 import hugh from "../data/hugh";
 import kenny from "../data/kenny";
 import philip from "../data/philip";
+import david from "../data/david";
 
 import fixtures from "../data/fixtures";
 import colours from "../data/colours";
 
-const players = ['Dylan W', 'Stephen', 'Alan', 'Hugh', 'Kenny', 'Philip'];
+const players = ['Dylan W', 'Stephen', 'Alan', 'Hugh', 'Kenny', 'Philip', 'David'];
 
 const getFixtures = () => {
     const date = new Date().getDate();
@@ -58,6 +59,10 @@ const getFixturesForPerson = (person) => {
         })
     } else if (person === 'Philip') {
         return philip.matchPredictions.filter(prediction => {
+            return todaysFixtures.find(fix => fix.id === prediction.id);
+        })
+    }else if (person === 'David') {
+        return david.matchPredictions.filter(prediction => {
             return todaysFixtures.find(fix => fix.id === prediction.id);
         })
     }
