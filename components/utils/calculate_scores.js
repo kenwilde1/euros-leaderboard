@@ -61,7 +61,7 @@ const calculateTeams = (predictions, result, scores, pos, index) => {
 
 const calculateTopGoalScorers = (topGoalscorer, goalScorers, scores, pos) => {
     if (goalScorers[0][topGoalscorer]) {
-        scores[pos].score += goalScorers[0][topGoalscorer]
+        scores[pos].score += goalScorers[0][topGoalscorer] * 3
     }
 }
 
