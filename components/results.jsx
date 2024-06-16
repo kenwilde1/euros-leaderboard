@@ -106,11 +106,19 @@ const Medal = ({ position }) => {
   }
 }
 
+const sortingComparator = (a, b) => {
+  if (b.score === a.score) {
+    return a.name.localeCompare(b.name);
+} else {
+    return b.score - a.score;
+}
+}
+
 const Scores = (scores) => {
   return (
     <ol className="scores">
       {scores.scores
-        .sort((a, b) => b.score - a.score)
+        .sort(sortingComparator)
         .map((player, index) => {
           const score = player.score === 0 ? 'N/A' : player.score + 'pts'
           return (
