@@ -69,16 +69,26 @@ const columns = [
   ];
 
 
+  const sortingComparator = (a, b) => {
+    if (b.points === a.points) {
+      return a.name.localeCompare(b.name);
+  } else {
+      return b.points - a.points;
+  }
+  }
+
 const AdvancedTable = ({ results = [] }) => {
 
   const rows = fetchData(players, results)
-  .sort((a, b) => b.points - a.points)
+  .sort(sortingComparator)
   .map((player, index) => {
     return {
       ...player,
       position: index + 1
     }
   })
+
+  console.log(rows);
 
     return (
       <>
