@@ -191,7 +191,7 @@ const ListItems = () => {
   return (
     <div className="container">
       <EuiTabs>{renderTabs()}</EuiTabs>
-      <ThemeProvider theme={theme}>
+      {selectedTabId === 'table' && <ThemeProvider theme={theme}>
       <div className='toggle-table'>
         <Switch
           checked={showAdvancedTable}
@@ -200,7 +200,7 @@ const ListItems = () => {
         <span className='toggle-desc'>Advanced View</span>
         
       </div>
-      </ThemeProvider>
+      </ThemeProvider>}
       {selectedTabId === 'table' && showAdvancedTable &&
       <>
       <p className="lastUpdated">Last Updated by: {lastResult && lastResult.home} vs {lastResult && lastResult.away}</p>
