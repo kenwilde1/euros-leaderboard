@@ -131,7 +131,7 @@ export default function fetchData(players, results) {
             GA: goalsAgainst,
             GbTS: topGoalscorer,
             points: score,
-            RA: `${(wins / results.length) * 100}%`,
+            RA: `${Math.round((wins / results.length) * 100)}%`,
             PP: perfectPoints
         }
     })
