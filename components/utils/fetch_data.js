@@ -85,20 +85,25 @@ const calculateScore = (predictions, goalsFor, goalsAgainst, topGoalscorer, resu
         const winnerOfResult = getWinner(result);
         const winnerOfPrediction = getWinner(prediction);
 
+        let perfectTracker = 0;
+
         if (winnerOfPrediction === winnerOfResult) {
             wins += 1
             runningScore += 3
+            perfectTracker += 1
         }
 
         if (prediction.homeGoals === result.homeGoals) {
             runningScore += 1
+            perfectTracker += 1
         }
 
         if (prediction.awayGoals === result.awayGoals) {
             runningScore += 1
+            perfectTracker += 1
         }
 
-        if (runningScore === 5) {
+        if (perfectTracker === 3) {
             perfectPoints += 1;
         }
     })
