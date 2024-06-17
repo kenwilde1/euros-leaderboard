@@ -79,6 +79,7 @@ const calculateScore = (predictions, goalsFor, goalsAgainst, topGoalscorer, resu
     let runningScore = 0;
     let wins = 0;
     let perfectPoints = 0;
+    let correctGoalsScored = 0;
 
     results && results.length && results.forEach((result, index) => {
         const prediction = predictions.matchPredictions[index];
@@ -96,11 +97,13 @@ const calculateScore = (predictions, goalsFor, goalsAgainst, topGoalscorer, resu
         if (prediction.homeGoals === result.homeGoals) {
             runningScore += 1
             perfectTracker += 1
+            correctGoalsScored += 1;
         }
 
         if (prediction.awayGoals === result.awayGoals) {
             runningScore += 1
             perfectTracker += 1
+            correctGoalsScored += 1
         }
 
         if (perfectTracker === 3) {
@@ -112,7 +115,7 @@ const calculateScore = (predictions, goalsFor, goalsAgainst, topGoalscorer, resu
     runningScore -= goalsAgainst;
     runningScore += topGoalscorer * 3;
 
-    return { score: runningScore, wins, perfectPoints };
+    return { score: runningScore, wins, perfectPoints, correctGoalsScored };
 }
 
 export default function fetchData(players, results) {
@@ -123,7 +126,7 @@ export default function fetchData(players, results) {
         if (!finalObj[name]) finalObj[name] = {}
         const { goalsAgainst, goalsFor } = getGoalsFor(players[name], results);
         const topGoalscorer = calculateTopGoalScorers(players[name].topGoalscorer);
-        const { score, wins, perfectPoints } = calculateScore(players[name], goalsFor, goalsAgainst, topGoalscorer, results)
+        const { score, wins, perfectPoints, correctGoalsScored } = calculateScore(players[name], goalsFor, goalsAgainst, topGoalscorer, results)
         finalObj[name] = {
             position: 0,
             name,
@@ -132,7 +135,9 @@ export default function fetchData(players, results) {
             GbTS: topGoalscorer,
             points: score,
             RA: `${Math.round((wins / results.length) * 100)}%`,
-            PP: perfectPoints
+            PP: perfectPoints ,
+            CGS: correctGoalsScored,
+            CR: wins
         }
     })
 

@@ -336,3 +336,27 @@ ul span {
 .scores li:nth-child(odd) {
   background: lightgray;
 }
+
+.special-column {
+  background-color: #00a85d !important;
+  border: 1px solid black !important;
+  color: white;
+}
+
+.special-column-header {
+  background-color: #027541 !important;
+  border: 1px solid black !important;
+  color: white;
+}
+
+.perfect-column {
+  background-color: #e9c304 !important;
+  border: 1px solid black !important;
+  color: white;
+}
+
+.perfect-column-header {
+  background-color: #c3a302 !important;
+  border: 1px solid black !important;
+  color: white;
+}
