@@ -52,7 +52,8 @@ const columns = [
     },
     {
       key: 'GbTS',
-      name: 'GbTS'
+      name: 'GbTS',
+      width: 60
     },
     {
       key: 'CGS',
@@ -65,6 +66,7 @@ const columns = [
     {
       key: 'points',
       name: 'Points',
+      width: 70
     },
     {
       key: 'RA',
