@@ -30,12 +30,15 @@ const players = {
 const columns = [
     {
       key: 'position',
-      name: 'Position',
+      name: 'Pos',
+      width: 10,
+      frozen: true
     },
     {
       key: 'name',
       name: 'Name',
-      columnMinWidth: '80px'
+      width: 80,
+      frozen: true
     },
     {
       key: 'GF',
@@ -103,11 +106,11 @@ const AdvancedTable = ({ results = [] }) => {
 
     return (
       <>
-      <div className='data-grid'>
+      <div className=''>
         <DataGrid
             columns={columns}
             rows={rows}
-            className='rdg-light'
+            className='rdg-light fill-grid data-grid'
             style={{ height: 'auto'}}
         />
         </div>
