@@ -43,17 +43,18 @@ const calculateScore = (predictions, result, scores, pos, index) => {
 const calculateTeams = (predictions, result, scores, pos, index) => {
     const highestScoringTeam = predictions.highestScoringTeam;
     const bestDefence = predictions.bestDefence;
-
     if (result) {
         const obj = { [result.home]: result.homeGoals, [result.away]: result.awayGoals }
-        if (obj[highestScoringTeam]) {
+
+        if (obj[highestScoringTeam] !== undefined) {
             scores[pos].score += obj[highestScoringTeam]
         }
 
-        if (obj[bestDefence]) {
+        if (obj[bestDefence] !== undefined) {
             let otherTeam = Object.keys(obj).filter(team => team !== bestDefence)[0];
             scores[pos].score -= obj[otherTeam]
         }
+
     }
 }
 
