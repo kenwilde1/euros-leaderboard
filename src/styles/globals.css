@@ -301,8 +301,13 @@ table{
 }
 
 div[role="columnheader"] {
-  width: auto;
+  width: 100%;
 }
+
+div[role="columnheader"] > span {
+  width: 100%;
+}
+
 
 ul {
   display: flex;
