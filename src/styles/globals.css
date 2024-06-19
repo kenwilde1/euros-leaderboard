@@ -300,10 +300,6 @@ table{
     border: 1px solid lightgray;
 }
 
-.my-column > div {
-  display: none;
-}
-
 .rdg-cell span > svg {
   position: absolute;
   bottom: 0;
