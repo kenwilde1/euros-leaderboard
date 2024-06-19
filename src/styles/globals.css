@@ -300,6 +300,10 @@ table{
     border: 1px solid lightgray;
 }
 
+div[role="columnheader"] {
+  width: auto;
+}
+
 ul {
   display: flex;
   flex-direction: column;
