@@ -3,7 +3,7 @@
 import 'react-data-grid/lib/styles.css';
 
 import DataGrid from 'react-data-grid';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 import dyl_w from "../data/dyl_w";
 import stephen from "../data/stephen";
@@ -93,7 +93,44 @@ const columns = [
   }
   }
 
+  function getComparator(sortColumn) {
+    switch (sortColumn) {
+      case 'name':
+      case 'RA':
+        return (a, b) => {
+          return a[sortColumn].localeCompare(b[sortColumn]);
+        };
+      case 'GF':
+      case 'GA':
+      case 'GbTS':
+      case 'CGS':
+      case 'CR':
+      case 'points':
+      case 'PP':
+      case 'id':
+      case 'position':
+        return (a, b) => {
+          console.log(a, b);
+          if (a[sortColumn] === b[sortColumn]) {
+            return 0
+          }
+
+          if (a[sortColumn] > b[sortColumn]) {
+            return 1;
+          }
+
+          if (a[sortColumn] < b[sortColumn]) {
+            return -1;
+          }
+        };
+      default:
+        throw new Error(`Contact Kenny and tell him what you did!"`);
+    }
+  }
+
 const AdvancedTable = ({ results = [] }) => {
+
+  const [sortColumns, setSortColumns] = useState([]);
 
   const rows = fetchData(players, results)
   .sort(sortingComparator)
@@ -104,16 +141,34 @@ const AdvancedTable = ({ results = [] }) => {
     }
   })
 
-  console.log(rows);
+  const sortedRows = useMemo(() => {
+    if (sortColumns.length === 0) return rows;
+
+    return [...rows].sort((a, b) => {
+      for (const sort of sortColumns) {
+        const comparator = getComparator(sort.columnKey);
+        const compResult = comparator(a, b);
+        if (compResult !== 0) {
+          return sort.direction === 'ASC' ? compResult : -compResult;
+        }
+      }
+      return 0;
+    });
+  }, [rows, sortColumns]);
 
     return (
       <>
       <div className=''>
         <DataGrid
             columns={columns}
-            rows={rows}
+            rows={sortedRows}
             className='rdg-light fill-grid data-grid'
             style={{ height: 'auto'}}
+            defaultColumnOptions={{
+              sortable: true
+            }}
+            sortColumns={sortColumns}
+            onSortColumnsChange={setSortColumns}
         />
         </div>
         <div className='about'>
