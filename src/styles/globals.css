@@ -306,6 +306,8 @@ div[role="columnheader"] {
 
 div[role="columnheader"] > span {
   width: 100%;
+  display: flex;
+  justify-content: flex-start;
 }
 
 
