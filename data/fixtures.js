@@ -18,4 +18,14 @@ export default {
         { id: 'TURGEO', time: '17:00', home: 'Turkey', away: 'Georgia'},
         { id: 'PORCZE', time: '20:00', home: 'Portugal', away: 'Czech Republic'}
     ],
+    19: [
+        { id: 'CROALB', time: '14:00', home: 'Croatia', away: 'Albania'},
+        { id: 'GERHUN', time: '17:00', home: 'Germany', away: 'Hungary'},
+        { id: 'SCOSUI', time: '20:00', home: 'Scotland', away: 'Switzerland'} 
+    ],
+    20: [
+        { id: 'SLOSER', time: '14:00', home: 'Slovenia', away: 'Serbia'},
+        { id: 'DENENG', time: '17:00', home: 'Denmark', away: 'England'},
+        { id: 'SPAITA', time: '20:00', home: 'Spain', away: 'Italy'}
+    ]
 }
