@@ -300,7 +300,16 @@ table{
     border: 1px solid lightgray;
 }
 
-/* div[role="columnheader"] {
+.my-column > div {
+  display: none;
+}
+
+.rdg-cell span > svg {
+  display: none;
+  visibility: hidden;
+}
+
+div[role="columnheader"] {
   width: 100%;
 }
 
@@ -308,7 +317,7 @@ div[role="columnheader"] > span {
   width: 100%;
   display: flex;
   justify-content: flex-start;
-} */
+}
 
 
 ul {
