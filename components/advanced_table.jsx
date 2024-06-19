@@ -130,8 +130,6 @@ const columns = [
 
 const AdvancedTable = ({ results = [] }) => {
 
-  const [sortColumns, setSortColumns] = useState([]);
-
   const rows = fetchData(players, results)
   .sort(sortingComparator)
   .map((player, index) => {
@@ -141,47 +139,15 @@ const AdvancedTable = ({ results = [] }) => {
     }
   })
 
-  const sortedRows = useMemo(() => {
-    if (sortColumns.length === 0) return rows;
-
-    return [...rows].sort((a, b) => {
-      for (const sort of sortColumns) {
-        const comparator = getComparator(sort.columnKey);
-        const compResult = comparator(a, b);
-        if (compResult !== 0) {
-          return sort.direction === 'ASC' ? compResult : -compResult;
-        }
-      }
-      return 0;
-    });
-  }, [rows, sortColumns]);
-
     return (
       <>
       <div className=''>
         <DataGrid
             columns={columns}
-            rows={sortedRows}
+            rows={rows}
             className='rdg-light fill-grid data-grid'
             style={{ height: 'auto'}}
-            defaultColumnOptions={{
-              sortable: true,
-              resizable: true
-            }}
-            sortColumns={sortColumns}
-            onSortColumnsChange={setSortColumns}
-            sx={{
-              '@media (hover: none)': {
-                '&& .MuiDataGrid-menuIcon': {
-                  width: 0,
-                  visibility: 'hidden',
-                }
-              },
-              '&& .MuiDataGrid-columnHeader--sorted .MuiDataGrid-menuIcon': {
-                width: 'auto',
-                visibility: 'visible',
-              }
-            }}
+
         />
         </div>
         <div className='about'>
