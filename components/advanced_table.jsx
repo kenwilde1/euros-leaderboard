@@ -170,6 +170,18 @@ const AdvancedTable = ({ results = [] }) => {
             }}
             sortColumns={sortColumns}
             onSortColumnsChange={setSortColumns}
+            sx={{
+              '@media (hover: none)': {
+                '&& .MuiDataGrid-menuIcon': {
+                  width: 0,
+                  visibility: 'hidden',
+                }
+              },
+              '&& .MuiDataGrid-columnHeader--sorted .MuiDataGrid-menuIcon': {
+                width: 'auto',
+                visibility: 'visible',
+              }
+            }}
         />
         </div>
         <div className='about'>

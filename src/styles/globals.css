@@ -300,14 +300,14 @@ table{
     border: 1px solid lightgray;
 }
 
-.rdg-cell span > svg {
+/* .rdg-cell span > svg {
   position: absolute;
   bottom: 0;
   right: 2px;
   height:100%;
   padding-top:5px;
   width: 10px;
-}
+} */
 
 div[role="columnheader"] {
   width: 100%;
