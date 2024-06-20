@@ -6,8 +6,14 @@
 .pnp.js
 .yarn/install-state.gz
 package-lock.json
-/firebase/firebaseConfig.js
 
+firebase/firebaseConfig.js
+firebase/*
+*firebaseConfig*
+/firebase
+/firebase*
+/firebase/*
+firebaseConfig.js*
 # testing
 /coverage
 
