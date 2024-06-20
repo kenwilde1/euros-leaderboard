@@ -1,47 +1,6 @@
 import { getWinner } from "./calculate_scores";
 
-const sampleResults = [
-    {
-        "homeGoals": 5,
-        "away": "Scotland",
-        "home": "Germany",
-        "awayGoals": 1,
-        "id": "GERSCO"
-    },
-    {
-        "home": "Hungary",
-        "away": "Switzerland",
-        "homeGoals": 1,
-        "awayGoals": 3,
-        "id": "HUNSUI"
-    },
-    {
-        "homeGoals": 3,
-        "home": "Spain",
-        "awayGoals": 0,
-        "away": "Croatia",
-        "id": "SPACRO"
-    },
-    {
-        "homeGoals": 2,
-        "home": "Italy",
-        "awayGoals": 1,
-        "away": "Albania",
-        "id": "ITAALB"
-    }
-]
-
-const sampleTopGoalscores = [
-    {
-        "Mbappe": 0,
-        "Lukaku": 0,
-        "Ronaldo": 0,
-        "Havertz": 1,
-        "id": "8ZeNhu225W2aGJhYZne1"
-    }
-]
-
-
+import cachedRows from '../../data/cached_data';
 
 const getGoalsFor = (predictions, results = []) => {
     const highestScoringTeam = predictions.highestScoringTeam;
@@ -68,9 +27,9 @@ const getGoalsFor = (predictions, results = []) => {
     }
 }
 
-const calculateTopGoalScorers = (topGoalscorer) => {
-    if (sampleTopGoalscores[0][topGoalscorer] && sampleTopGoalscores[0][topGoalscorer] > 0) {
-        return sampleTopGoalscores[0][topGoalscorer]
+const calculateTopGoalScorers = (topGoalscorer, scorers) => {
+    if (scorers[topGoalscorer] && scorers[topGoalscorer] > 0) {
+        return scorers[topGoalscorer]
     }
     return 0;
 }
@@ -81,8 +40,8 @@ const calculateScore = (predictions, goalsFor, goalsAgainst, topGoalscorer, resu
     let perfectPoints = 0;
     let correctGoalsScored = 0;
 
-    results && results.length && results.forEach((result, index) => {
-        const prediction = predictions.matchPredictions[index];
+    results && results.length && results.forEach((result) => {
+        const prediction = predictions.matchPredictions.find(pred => pred.id === result.id);
         const winnerOfResult = getWinner(result);
         const winnerOfPrediction = getWinner(prediction);
 
@@ -118,14 +77,13 @@ const calculateScore = (predictions, goalsFor, goalsAgainst, topGoalscorer, resu
     return { score: runningScore, wins, perfectPoints, correctGoalsScored };
 }
 
-export default function fetchData(players, results) {
+export default function fetchData(players, results, originalResults, scorers) {
     const names = Object.keys(players);
-    
     let finalObj = {};
     names.forEach(name => {
         if (!finalObj[name]) finalObj[name] = {}
         const { goalsAgainst, goalsFor } = getGoalsFor(players[name], results);
-        const topGoalscorer = calculateTopGoalScorers(players[name].topGoalscorer);
+        const topGoalscorer = calculateTopGoalScorers(players[name].topGoalscorer, scorers);
         const { score, wins, perfectPoints, correctGoalsScored } = calculateScore(players[name], goalsFor, goalsAgainst, topGoalscorer, results)
         finalObj[name] = {
             position: 0,
@@ -139,7 +97,25 @@ export default function fetchData(players, results) {
             CGS: correctGoalsScored,
             CR: wins
         }
-    })
+    });
+
+    cachedRows.forEach(cachedRow => {
+        const playerObj = finalObj[cachedRow.name];
+        const wins = playerObj.CR + cachedRow.CR;
+        finalObj[cachedRow.name] = {
+            CGS: playerObj.CGS + cachedRow.CGS,
+            CR: playerObj.CR + cachedRow.CR,
+            GA: playerObj.GA + cachedRow.GA,
+            GF: playerObj.GF + cachedRow.GF,
+            RA: `${Math.round((wins / originalResults.length) * 100)}%`,
+            name: cachedRow.name,
+            PP: playerObj.PP + cachedRow.PP,
+            points: playerObj.points + cachedRow.points,
+            position: 0,
+            GbTS: playerObj.GbTS + cachedRow.GbTS
+        }
+    });
+
 
     return Object.values(finalObj);
 }

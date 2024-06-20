@@ -16,7 +16,7 @@ export default {
     ],
     18: [
         { id: 'TURGEO', time: '17:00', home: 'Turkey', away: 'Georgia'},
-        { id: 'PORCZE', time: '20:00', home: 'Portugal', away: 'Czech Republic'}
+        { id: 'PORCZE', time: '20:00', home: 'Portugal', away: 'Czechia'}
     ],
     19: [
         { id: 'CROALB', time: '14:00', home: 'Croatia', away: 'Albania'},
@@ -27,5 +27,15 @@ export default {
         { id: 'SLOSER', time: '14:00', home: 'Slovenia', away: 'Serbia'},
         { id: 'DENENG', time: '17:00', home: 'Denmark', away: 'England'},
         { id: 'SPAITA', time: '20:00', home: 'Spain', away: 'Italy'}
-    ]
+    ],
+    21: [
+        { id: 'SLOUKR', time: '14:00', home: 'Slovakia', away: 'Ukraine'},
+        { id: 'POLAUT', time: '17:00', home: 'Poland', away: 'Austria'},
+        { id: 'NETFRA', time: '20:00', home: 'Netherlands', away: 'France'}
+    ],
+    22: [
+        { id: 'GEOCZE', time: '14:00', home: 'Georgia', away: 'Czechia'},
+        { id: 'TURPOR', time: '17:00', home: 'Turkey', away: 'Portugal'},
+        { id: 'BELROM', time: '20:00', home: 'Belgium', away: 'Romania'}
+    ],
 }

@@ -10,7 +10,7 @@ const matchPredictions = [
     { id: "BELSLO", home: "Belgium", away: "Slovakia", homeGoals: 3, awayGoals: 0 },
     { id: "AUTFRA", home: "Austria", away: "France", homeGoals: 0, awayGoals: 2 },
     { id: "TURGEO", home: "Turkey", away: "Georgia", homeGoals: 2, awayGoals: 0 },
-    { id: "PORCZE", home: "Portugal", away: "Czech Republic", homeGoals: 2, awayGoals: 0 },
+    { id: "PORCZE", home: "Portugal", away: "Czechia", homeGoals: 2, awayGoals: 0 },
     { id: "CROALB", home: "Croatia", away: "Albania", homeGoals: 2, awayGoals: 0 },
     { id: "GERHUN", home: "Germany", away: "Hungary", homeGoals: 2, awayGoals: 0 },
     { id: "SCOSUI", home: "Scotland", away: "Switzerland", homeGoals: 0, awayGoals: 1 },
@@ -20,7 +20,7 @@ const matchPredictions = [
     { id: "SLOUKR", home: "Slovakia", away: "Ukraine", homeGoals: 0, awayGoals: 0 },
     { id: "POLAUT", home: "Poland", away: "Austria", homeGoals: 1, awayGoals: 1 },
     { id: "NETFRA", home: "Netherlands", away: "France", homeGoals: 1, awayGoals: 2 },
-    { id: "GEOCZE", home: "Georgia", away: "Czech Republic", homeGoals: 1, awayGoals: 0 },
+    { id: "GEOCZE", home: "Georgia", away: "Czechia", homeGoals: 1, awayGoals: 0 },
     { id: "TURPOR", home: "Turkey", away: "Portugal", homeGoals: 0, awayGoals: 2 },
     { id: "BELROM", home: "Belgium", away: "Romania", homeGoals: 3, awayGoals: 0 },
     { id: "SUIGER", home: "Switzerland", away: "Germany", homeGoals: 0, awayGoals: 2 },
@@ -34,7 +34,7 @@ const matchPredictions = [
     { id: "SLOROM", home: "Slovakia", away: "Romania", homeGoals: 1, awayGoals: 1 },
     { id: "UKRBEL", home: "Ukraine", away: "Belgium", homeGoals: 1, awayGoals: 2 },
     { id: "GEOPOR", home: "Georgia", away: "Portugal", homeGoals: 0, awayGoals: 2 },
-    { id: "CZETUR", home: "Czech Republic", away: "Turkey", homeGoals: 1, awayGoals: 1 }
+    { id: "CZETUR", home: "Czechia", away: "Turkey", homeGoals: 1, awayGoals: 1 }
 ];
 
 const highestScoringTeam = 'England';

@@ -17,7 +17,7 @@ import colours from "../data/colours";
 const players = ['Dylan W', 'Stephen', 'Alan', 'Hugh', 'Kenny', 'Philip', 'David', 'Shane'];
 
 const getFixtures = () => {
-    const date = new Date().getDate();
+    const date = new Date().getDate() + 1;
     const lastIndex = fixtures[date].length - 1;
     return fixtures[date].map((match, index) => {
         return (
@@ -35,7 +35,7 @@ const getFixtures = () => {
 }
 
 const getFixturesForPerson = (person) => {
-    const date = new Date().getDate();
+    const date = new Date().getDate() + 1;
     const todaysFixtures = fixtures[date];
 
     const persons = {

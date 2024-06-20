@@ -3,7 +3,6 @@
 import 'react-data-grid/lib/styles.css';
 
 import DataGrid from 'react-data-grid';
-import { useState, useEffect, useMemo } from 'react';
 
 import dyl_w from "../data/dyl_w";
 import stephen from "../data/stephen";
@@ -94,43 +93,10 @@ const columns = [
   }
   }
 
-  function getComparator(sortColumn) {
-    switch (sortColumn) {
-      case 'name':
-      case 'RA':
-        return (a, b) => {
-          return a[sortColumn].localeCompare(b[sortColumn]);
-        };
-      case 'GF':
-      case 'GA':
-      case 'GbTS':
-      case 'CGS':
-      case 'CR':
-      case 'points':
-      case 'PP':
-      case 'id':
-      case 'position':
-        return (a, b) => {
-          if (a[sortColumn] === b[sortColumn]) {
-            return 0
-          }
 
-          if (a[sortColumn] > b[sortColumn]) {
-            return 1;
-          }
-
-          if (a[sortColumn] < b[sortColumn]) {
-            return -1;
-          }
-        };
-      default:
-        throw new Error(`Contact Kenny and tell him what you did!"`);
-    }
-  }
-
-const AdvancedTable = ({ results = [] }) => {
-
-  const rows = fetchData(players, results)
+const AdvancedTable = ({ results = [], scorers }) => {
+  const resultsToConsider = results && results.length ? results.slice(17) : results;
+  const rows = fetchData(players, resultsToConsider, results, scorers)
   .sort(sortingComparator)
   .map((player, index) => {
     return {

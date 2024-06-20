@@ -141,7 +141,8 @@ const ListItems = () => {
   const [scores, setScores] = useState([])
   const [selectedTabId, setSelectedTabId] = useState('table');
   const [results, setResults] = useState({})
-  const [showAdvancedTable, setShowAdvancedTable] = useState()
+  const [showAdvancedTable, setShowAdvancedTable] = useState();
+  const [scorers, setScorers] = useState({});
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -152,8 +153,9 @@ const ListItems = () => {
 
       const querySnapshot2 = await getDocs(collection(db, "scorers"));
       const items2 = querySnapshot2.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-      const lastResult = items[items.length -1];
+
       setResults(items);
+      setScorers(items2[0]);
       setScores(fetchTally(items, items2))
     }
     fetchItems();
@@ -194,8 +196,6 @@ const ListItems = () => {
 
   const lastResult = results && results[results.length - 1];
 
-  console.log(lastResult);
-
   return (
     <div className="container">
       <EuiTabs>{renderTabs()}</EuiTabs>
@@ -212,7 +212,7 @@ const ListItems = () => {
       {selectedTabId === 'table' && showAdvancedTable &&
       <>
       <p className="lastUpdated">Last Updated by: {lastResult && lastResult.home} vs {lastResult && lastResult.away}</p>
-        <AdvancedTable results={results}/></>
+        <AdvancedTable results={results} scorers={scorers} /></>
       }
       {selectedTabId === 'table' && !showAdvancedTable &&
       <>

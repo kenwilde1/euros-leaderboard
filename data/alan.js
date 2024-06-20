@@ -15,7 +15,7 @@ export default {
         { id: "BELSLO", home: "Belgium", away: "Slovakia", homeGoals: 4, awayGoals: 1 },
         { id: "AUTFRA", home: "Austria", away: "France", homeGoals: 0, awayGoals: 3 },
         { id: "TURGEO", home: "Turkey", away: "Georgia", homeGoals: 2, awayGoals: 0 },
-        { id: "PORCZE", home: "Portugal", away: "Czech Republic", homeGoals: 4, awayGoals: 0 },
+        { id: "PORCZE", home: "Portugal", away: "Czechia", homeGoals: 4, awayGoals: 0 },
         { id: "CROALB", home: "Croatia", away: "Albania", homeGoals: 2, awayGoals: 0 },
         { id: "GERHUN", home: "Germany", away: "Hungary", homeGoals: 1, awayGoals: 0 },
         { id: "SCOSUI", home: "Scotland", away: "Switzerland", homeGoals: 1, awayGoals: 1 },
@@ -25,7 +25,7 @@ export default {
         { id: "SLOUKR", home: "Slovakia", away: "Ukraine", homeGoals: 1, awayGoals: 2 },
         { id: "POLAUT", home: "Poland", away: "Austria", homeGoals: 1, awayGoals: 0 },
         { id: "NETFRA", home: "Netherlands", away: "France", homeGoals: 1, awayGoals: 3 },
-        { id: "GEOCZE", home: "Georgia", away: "Czech Republic", homeGoals: 0, awayGoals: 0 },
+        { id: "GEOCZE", home: "Georgia", away: "Czechia", homeGoals: 0, awayGoals: 0 },
         { id: "TURPOR", home: "Turkey", away: "Portugal", homeGoals: 0, awayGoals: 2 },
         { id: "BELROM", home: "Belgium", away: "Romania", homeGoals: 3, awayGoals: 0 },
         { id: "SUIGER", home: "Switzerland", away: "Germany", homeGoals: 1, awayGoals: 2 },
@@ -39,7 +39,7 @@ export default {
         { id: "SLOROM", home: "Slovakia", away: "Romania", homeGoals: 2, awayGoals: 0 },
         { id: "UKRBEL", home: "Ukraine", away: "Belgium", homeGoals: 0, awayGoals: 2 },
         { id: "GEOPOR", home: "Georgia", away: "Portugal", homeGoals: 0, awayGoals: 3 },
-        { id: "CZETUR", home: "Czech Republic", away: "Turkey", homeGoals: 1, awayGoals: 1 }
+        { id: "CZETUR", home: "Czechia", away: "Turkey", homeGoals: 1, awayGoals: 1 }
     ],
     highestScoringTeam,
     bestDefence,
