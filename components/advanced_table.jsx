@@ -47,7 +47,7 @@ const columns = [
     {
       key: 'name',
       name: 'Name',
-      width: 80,
+      width: 95,
       frozen: true,
     },
     {
