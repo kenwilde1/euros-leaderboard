@@ -15,7 +15,7 @@ import Predictions from "./predictions";
 
 import AdvancedTable from '../components/advanced_table';
 
-import { EuiTab, EuiTabs, EuiIcon } from "@elastic/eui";
+import { EuiTab, EuiTabs, EuiIcon, EuiSpacer } from "@elastic/eui";
 
 import { Switch, createTheme, ThemeProvider } from '@mui/material';
 
@@ -25,6 +25,8 @@ import players from "../data/players";
 
 import { faAngleUp, faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { getLiveScore } from "./get_live_score";
 
 const theme = createTheme({
   components: {
@@ -128,7 +130,7 @@ const Scores = ({ scores, positionUpdates }) => {
       {scores
         .sort(sortingComparator)
         .map((player, index) => {
-          const score = player.score === 0 ? 'N/A' : player.score + 'pts'
+          const score = player.score === 0 ? 'N/A' : player.score + 'pts'  
           return (
           <li className="leaderboard-position">
             <div className="leaderboard-name">
@@ -232,16 +234,20 @@ const ListItems = () => {
           onChange={handleSwitchChange}
         />
         <span className='toggle-desc'>Advanced View</span>
-        
       </div>
+      <EuiSpacer />
       </ThemeProvider>}
       {selectedTabId === 'table' && showAdvancedTable && Object.keys(positionUpdates).length &&
       <>
+      {getLiveScore(lastResult && lastResult.id)}
+      <EuiSpacer />
       <p className="lastUpdated">Last Updated by: {lastResult && lastResult.home} vs {lastResult && lastResult.away}</p>
         <AdvancedTable rows={rows} positionUpdates={positionUpdates} /></>
       }
       {selectedTabId === 'table' && !showAdvancedTable &&
       <>
+      {getLiveScore(lastResult && lastResult.id)}
+      <EuiSpacer />
       <p className="lastUpdated">Last Updated by: {lastResult && lastResult.home} vs {lastResult && lastResult.away}</p>
         <div className="border w-96 text-center p-4 leaderboard">
           <Scores scores={scores} positionUpdates={positionUpdates} />

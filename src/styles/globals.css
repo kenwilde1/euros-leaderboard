@@ -380,7 +380,6 @@ ul span {
   gap: 4px;
 }
 
-
 .pos-update-same {
   color: orange;
 }
@@ -391,4 +390,51 @@ ul span {
 
 .pos-update-down {
   color: red;
+}
+
+.live-fixture {
+    width: 100%;
+    background: white !important;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 20px;
+}
+
+.live-container span {
+padding-right: 5px;
+}
+
+.circle {
+  background-color: #75daad;
+  height: 13px;
+  width: 13px;
+  border-radius: 50%;
+}
+
+.live {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 600;
+}
+
+.now {
+  width: 90vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.link {
+  padding: 5px 10px;
+  border-radius: 4px;
+  background: rgb(8,92,172);
+  color: white;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 }
