@@ -371,3 +371,24 @@ ul span {
   border: 1px solid black !important;
   color: white;
 }
+
+.pos-update {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  gap: 4px;
+}
+
+
+.pos-update-same {
+  color: orange;
+}
+
+.pos-update-up {
+  color: green;
+}
+
+.pos-update-down {
+  color: red;
+}

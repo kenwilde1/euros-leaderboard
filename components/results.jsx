@@ -23,6 +23,9 @@ import fetchData from "./utils/fetch_data";
 
 import players from "../data/players";
 
+import { faAngleUp, faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 const theme = createTheme({
   components: {
     MuiSwitch: {
@@ -85,19 +88,6 @@ const tabs = [
   },
 ];
 
-const renderTabs = () => {
-  return tabs.map((tab, index) => (
-    <EuiTab
-      {...(tab.href && { href: tab.href, target: '_blank' })}
-      onClick={() => onSelectedTabChanged(tab.id)}
-      isSelected={tab.id === selectedTabId}
-      disabled={tab.disabled}
-      key={index}>
-      {tab.name}
-    </EuiTab>
-  ));
-}
-
 const Medal = ({ position }) => {
   if (position === 0) {
     return <img src={gold.src} />
@@ -118,10 +108,24 @@ const sortingComparator = (a, b) => {
 }
 }
 
-const Scores = (scores) => {
+export const getPositionUpdateLabel = (points) => {
+  if (points > 0) {
+      return <span className="pos-update pos-update-up">
+        <FontAwesomeIcon icon={faAngleUp} color="green"/>
+        {points}
+        </span>
+    } else if (points < 0) {
+      return <span className="pos-update pos-update-down">
+        <FontAwesomeIcon icon={faAngleDown} color="red"/>
+        {Math.abs(points)}
+        </span>
+    }
+  }
+
+const Scores = ({ scores, positionUpdates }) => {
   return (
     <ol className="scores">
-      {scores.scores
+      {scores
         .sort(sortingComparator)
         .map((player, index) => {
           const score = player.score === 0 ? 'N/A' : player.score + 'pts'
@@ -130,6 +134,7 @@ const Scores = (scores) => {
             <div className="leaderboard-name">
               <span className="medal"><Medal position={index} /></span>
               <span className="leaderboard-name">{player.name}</span>
+              {getPositionUpdateLabel(positionUpdates[player.name])}
             </div>
             <span className="leaderboard-score font-bold">{score}</span>
             </li>
@@ -153,6 +158,7 @@ const ListItems = () => {
   const [results, setResults] = useState({})
   const [showAdvancedTable, setShowAdvancedTable] = useState();
   const [scorers, setScorers] = useState({});
+  const [positionUpdates, setPositionUpdates] =  useState({});
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -163,10 +169,11 @@ const ListItems = () => {
 
       const querySnapshot2 = await getDocs(collection(db, "scorers"));
       const items2 = querySnapshot2.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-
+      const { scores, updatesToPositions } = fetchTally(items, items2);
+      setPositionUpdates(updatesToPositions)
       setResults(items);
       setScorers(items2[0]);
-      setScores(fetchTally(items, items2))
+      setScores(scores)
     }
     fetchItems();
 
@@ -215,7 +222,7 @@ const ListItems = () => {
       }
     })
 
-  return (
+    return (
     <div className="container">
       <EuiTabs>{renderTabs()}</EuiTabs>
       {selectedTabId === 'table' && <ThemeProvider theme={theme}>
@@ -228,16 +235,16 @@ const ListItems = () => {
         
       </div>
       </ThemeProvider>}
-      {selectedTabId === 'table' && showAdvancedTable &&
+      {selectedTabId === 'table' && showAdvancedTable && Object.keys(positionUpdates).length &&
       <>
       <p className="lastUpdated">Last Updated by: {lastResult && lastResult.home} vs {lastResult && lastResult.away}</p>
-        <AdvancedTable rows={rows} /></>
+        <AdvancedTable rows={rows} positionUpdates={positionUpdates} /></>
       }
       {selectedTabId === 'table' && !showAdvancedTable &&
       <>
       <p className="lastUpdated">Last Updated by: {lastResult && lastResult.home} vs {lastResult && lastResult.away}</p>
         <div className="border w-96 text-center p-4 leaderboard">
-          <Scores scores={scores} />
+          <Scores scores={scores} positionUpdates={positionUpdates} />
         </div>
         </>
       }
