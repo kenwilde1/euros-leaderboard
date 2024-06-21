@@ -53,7 +53,7 @@ const Live = ({home, away}) => {
     )
 }
 
-const NextGame = ({ home, away}) => {
+const NextGame = ({ home, away, time }) => {
     return (
         <EuiPanel className="now">
         <div className="live">Next Up:</div>
@@ -61,6 +61,8 @@ const NextGame = ({ home, away}) => {
                 <span style={{ color: colours[home] }}>{home}</span>
                 <span>  vs  </span>
                 <span style={{ color: colours[away] }}>{away}</span>
+                {' '}
+                <span><b>{time}</b></span>
             </div>
             <span className="link">
                 <a target="_blank" href={`https://www.google.com/search?q=${home}+vs+${away}+fixture`}>View Fixture</a>
@@ -78,7 +80,7 @@ export function getLiveScore(lastResult) {
         if (!match) {
             const tomorrowsFirstGame = fixtures[new Date().getDate() + 1][0];
             console.log(tomorrowsFirstGame);
-            return <NextGame home={tomorrowsFirstGame.home} away={tomorrowsFirstGame.away} />
+            return <NextGame home={tomorrowsFirstGame.home} away={tomorrowsFirstGame.away} time={tomorrowsFirstGame.time} />
         }
 
         const isBeforeMatch = match && getIsBeforeNextGame(match.time);
@@ -88,7 +90,7 @@ export function getLiveScore(lastResult) {
             return <Live home={match.home} away={match.away} />;
         } else if (isBeforeMatch && !isAfterMatch) {
 
-            return <NextGame home={match.home} away={match.away} />
+            return <NextGame home={match.home} away={match.away} time={match.time} />
         }
     }
 
