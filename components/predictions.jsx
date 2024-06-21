@@ -2,29 +2,9 @@
 import { EuiAccordion, EuiHorizontalRule, EuiIcon, EuiPanel } from "@elastic/eui";
 import { useState } from "react";
 
-import dyl_w from "../data/dyl_w";
-import stephen from "../data/stephen";
-import alan from "../data/alan";
-import hugh from "../data/hugh";
-import kenny from "../data/kenny";
-import philip from "../data/philip";
-import david from "../data/david";
-import shane from '../data/shane';
-
 import fixtures from "../data/fixtures";
 import colours from "../data/colours";
-const players = ['Dylan W', 'Stephen', 'Alan', 'Hugh', 'Kenny', 'Philip', 'David', 'Shane'];
-
-const playerData = {
-    'Dylan W': dyl_w,
-    'Stephen': stephen,
-    'Alan': alan,
-    'Hugh': hugh,
-    'Kenny': kenny,
-    'Philip': philip,
-    'David': david,
-    'Shane': shane
-};
+import players from "../data/players";
 
 const getFixtures = () => {
     const date = new Date().getDate();
@@ -47,7 +27,7 @@ const getFixtures = () => {
 const getFixturesForPerson = (person) => {
     const date = new Date().getDate();
     const todaysFixtures = fixtures[date];
-    const predictions = playerData[person]?.matchPredictions;
+    const predictions = players[person]?.matchPredictions;
 
     if (!predictions) return [];
 
@@ -57,7 +37,7 @@ const getFixturesForPerson = (person) => {
 };
 
 const getMetadataForPerson = (player) => {
-    const metadata = playerData[player];
+    const metadata = players[player];
 
     return { 
         highestScoringTeam: metadata.highestScoringTeam,
@@ -126,6 +106,8 @@ const PersonalPredictions = ({ player }) => {
 };
 
 const Predictions = () => {
+    const people = Object.keys(players);
+
     return (
         <div className="predictions-page">
             <div className="fixture-list">
@@ -133,7 +115,7 @@ const Predictions = () => {
                 {getFixtures()}
             </div>
             <div className="predictions-list">
-                {players.map(player => <PersonalPredictions key={player} player={player} />)}
+                {people.map(player => <PersonalPredictions key={player} player={player} />)}
             </div>
         </div>
     );

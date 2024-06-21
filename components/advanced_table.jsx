@@ -4,28 +4,6 @@ import 'react-data-grid/lib/styles.css';
 
 import DataGrid from 'react-data-grid';
 
-import dyl_w from "../data/dyl_w";
-import stephen from "../data/stephen";
-import alan from "../data/alan";
-import hugh from "../data/hugh";
-import kenny from "../data/kenny";
-import philip from "../data/philip";
-import david from "../data/david";
-import shane from '../data/shane';
-
-import fetchData from './utils/fetch_data';
-
-const players = {
-    'Dylan W': dyl_w,
-    'Stephen': stephen,
-    'Alan': alan,
-    'Hugh': hugh,
-    'Kenny': kenny,
-    'Philip': philip,
-    'David': david,
-    'Shane': shane
-};
-
 const columns = [
     {
       key: 'position',
@@ -85,26 +63,7 @@ const columns = [
   ];
 
 
-  const sortingComparator = (a, b) => {
-    if (b.points === a.points) {
-      return a.name.localeCompare(b.name);
-  } else {
-      return b.points - a.points;
-  }
-  }
-
-
-const AdvancedTable = ({ results = [], scorers }) => {
-  const resultsToConsider = results && results.length ? results.slice(17) : results;
-  const rows = fetchData(players, resultsToConsider, results, scorers)
-  .sort(sortingComparator)
-  .map((player, index) => {
-    return {
-      ...player,
-      position: index + 1
-    }
-  })
-
+const AdvancedTable = ({ rows }) => {
     return (
       <>
       <div className=''>

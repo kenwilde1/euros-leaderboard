@@ -19,6 +19,10 @@ import { EuiTab, EuiTabs, EuiIcon } from "@elastic/eui";
 
 import { Switch, createTheme, ThemeProvider } from '@mui/material';
 
+import fetchData from "./utils/fetch_data";
+
+import players from "../data/players";
+
 const theme = createTheme({
   components: {
     MuiSwitch: {
@@ -134,7 +138,13 @@ const Scores = (scores) => {
     </ol>
   )
 }
-
+const sortingComparatorRows = (a, b) => {
+  if (b.points === a.points) {
+    return a.name.localeCompare(b.name);
+} else {
+    return b.points - a.points;
+}
+}
 const LOCAL_STORAGE_KEY = 'euros:advanced';
 
 const ListItems = () => {
@@ -195,6 +205,15 @@ const ListItems = () => {
   };
 
   const lastResult = results && results[results.length - 1];
+  const resultsToConsider = results && results.length ? results.slice(17) : results;
+  const rows = fetchData(players, resultsToConsider, results, scorers)
+    .sort(sortingComparatorRows)
+    .map((player, index) => {
+      return {
+        ...player,
+        position: index + 1
+      }
+    })
 
   return (
     <div className="container">
@@ -212,7 +231,7 @@ const ListItems = () => {
       {selectedTabId === 'table' && showAdvancedTable &&
       <>
       <p className="lastUpdated">Last Updated by: {lastResult && lastResult.home} vs {lastResult && lastResult.away}</p>
-        <AdvancedTable results={results} scorers={scorers} /></>
+        <AdvancedTable rows={rows} /></>
       }
       {selectedTabId === 'table' && !showAdvancedTable &&
       <>

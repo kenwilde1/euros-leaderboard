@@ -85,6 +85,7 @@ export default function fetchData(players, results, originalResults, scorers) {
         const { goalsAgainst, goalsFor } = getGoalsFor(players[name], results);
         const topGoalscorer = calculateTopGoalScorers(players[name].topGoalscorer, scorers);
         const { score, wins, perfectPoints, correctGoalsScored } = calculateScore(players[name], goalsFor, goalsAgainst, topGoalscorer, results)
+        
         finalObj[name] = {
             position: 0,
             name,
@@ -92,7 +93,7 @@ export default function fetchData(players, results, originalResults, scorers) {
             GA: goalsAgainst,
             GbTS: topGoalscorer,
             points: score,
-            RA: `${Math.round((wins / results.length) * 100)}%`,
+            RA: `${Math.round((wins / originalResults.length) * 100)}%`,
             PP: perfectPoints ,
             CGS: correctGoalsScored,
             CR: wins
