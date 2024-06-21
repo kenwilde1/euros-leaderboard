@@ -131,7 +131,6 @@ export const fetchTally = (results, goalScorers) => {
        { name: 'Dylan W', score: 0 },
        { name: 'Kenny', score: 0 },
        { name: 'David', score: 0 },
-       { name: 'Dylan C', score: 0 }
     ];
 
     let previousScores = [
@@ -143,7 +142,6 @@ export const fetchTally = (results, goalScorers) => {
         { name: 'Dylan W', score: 0 },
         { name: 'Kenny', score: 0 },
         { name: 'David', score: 0 },
-        { name: 'Dylan C', score: 0 }
      ];
     
     const lengthOfResults = results.length - 2;
