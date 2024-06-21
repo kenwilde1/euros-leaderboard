@@ -9,7 +9,6 @@ const timeString = "20:54"
 
 const getMatch = (games, lastResult) => {
     const isResultLoggedToday = games.findIndex(game => lastResult === game.id);
-    console.log(isResultLoggedToday);
     if (isResultLoggedToday !== -1) {
         return games[isResultLoggedToday + 1];
     } else {
@@ -79,7 +78,6 @@ export function getLiveScore(lastResult) {
         const match = getMatch(todaysFixtures, lastResult);
         if (!match) {
             const tomorrowsFirstGame = fixtures[new Date().getDate() + 1][0];
-            console.log(tomorrowsFirstGame);
             return <NextGame home={tomorrowsFirstGame.home} away={tomorrowsFirstGame.away} time={tomorrowsFirstGame.time} />
         }
 

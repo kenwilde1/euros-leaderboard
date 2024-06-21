@@ -121,6 +121,23 @@ const calculateTopGoalScorers = (topGoalscorer, res, scores, pos, previousScores
     });
 }
 
+function calculatePointDifferences(scores, previousScores) {
+    // Create a map for previous scores for quick lookup
+    let previousScoresMap = {};
+    previousScores.forEach(item => {
+        previousScoresMap[item.name] = item.score;
+    });
+
+    // Calculate point differences
+    let pointDifferences = {};
+    scores.forEach(item => {
+        let previousScore = previousScoresMap[item.name] || 0;
+        pointDifferences[item.name] = item.score - previousScore;
+    });
+
+    return pointDifferences;
+}
+
 export const fetchTally = (results, goalScorers) => {
     const scores = [
        { name: 'Hugh', score: 0 },
@@ -179,7 +196,8 @@ export const fetchTally = (results, goalScorers) => {
         calculateTopGoalScorers(davidPredictions.topGoalscorer, res, scores, 7, previousScores, index, lengthOfResults); 
       })
 
-    const updates = getMapOfMovedPositions(scores, previousScores);
-
-    return { scores, updatesToPositions: updates };
+      const updates = getMapOfMovedPositions(scores, previousScores);
+      const pointDiff = calculatePointDifferences(scores, previousScores);
+    
+    return { scores, updatesToPositions: updates, pointDiff };
 }

@@ -124,13 +124,29 @@ export const getPositionUpdateLabel = (points) => {
     }
   }
 
-const Scores = ({ scores, positionUpdates }) => {
+const Scores = ({ scores, positionUpdates, pointDiff }) => {
   return (
     <ol className="scores">
       {scores
         .sort(sortingComparator)
         .map((player, index) => {
-          const score = player.score === 0 ? 'N/A' : player.score + 'pts'  
+          const score = player.score === 0 ? 'N/A' : player.score + 'pts'
+
+          const pointDifference = pointDiff[player.name];
+          let x = '';
+          let pointDiffClass = '';
+
+          if (pointDifference > 0) {
+            x = `(+${pointDifference})`
+            pointDiffClass = 'points-up'
+          } else if (pointDifference < 0) {
+            x = `(-${pointDifference})`
+            pointDiffClass = 'points-down'
+          } else {
+            x = `(+${pointDifference})`
+            pointDiffClass = 'points-same'
+          }
+
           return (
           <li className="leaderboard-position">
             <div className="leaderboard-name">
@@ -138,7 +154,7 @@ const Scores = ({ scores, positionUpdates }) => {
               <span className="leaderboard-name">{player.name}</span>
               {getPositionUpdateLabel(positionUpdates[player.name])}
             </div>
-            <span className="leaderboard-score font-bold">{score}</span>
+            <span className="leaderboard-score font-bold">{score}<span className={`pointDiff ${pointDiffClass}`}>{x}</span></span>
             </li>
           );
         })}
@@ -161,6 +177,7 @@ const ListItems = () => {
   const [showAdvancedTable, setShowAdvancedTable] = useState();
   const [scorers, setScorers] = useState({});
   const [positionUpdates, setPositionUpdates] =  useState({});
+  const [pointDiff, setPointDiff] = useState({});
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -171,7 +188,9 @@ const ListItems = () => {
 
       const querySnapshot2 = await getDocs(collection(db, "scorers"));
       const items2 = querySnapshot2.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-      const { scores, updatesToPositions } = fetchTally(items, items2);
+      const { scores, updatesToPositions, pointDiff } = fetchTally(items, items2);
+      
+      setPointDiff(pointDiff);
       setPositionUpdates(updatesToPositions)
       setResults(items);
       setScorers(items2[0]);
@@ -227,6 +246,9 @@ const ListItems = () => {
     return (
     <div className="container">
       <EuiTabs>{renderTabs()}</EuiTabs>
+      <EuiSpacer />
+      {selectedTabId === 'table' && getLiveScore(lastResult && lastResult.id)}
+      <EuiSpacer />
       {selectedTabId === 'table' && <ThemeProvider theme={theme}>
       <div className='toggle-table'>
         <Switch
@@ -235,22 +257,19 @@ const ListItems = () => {
         />
         <span className='toggle-desc'>Advanced View</span>
       </div>
-      <EuiSpacer />
       </ThemeProvider>}
       {selectedTabId === 'table' && showAdvancedTable && Object.keys(positionUpdates).length &&
       <>
-      {getLiveScore(lastResult && lastResult.id)}
-      <EuiSpacer />
+      {/* {getLiveScore(lastResult && lastResult.id)} */}
       <p className="lastUpdated">Last Updated by: {lastResult && lastResult.home} vs {lastResult && lastResult.away}</p>
         <AdvancedTable rows={rows} positionUpdates={positionUpdates} /></>
       }
       {selectedTabId === 'table' && !showAdvancedTable &&
       <>
-      {getLiveScore(lastResult && lastResult.id)}
-      <EuiSpacer />
+      {/* {getLiveScore(lastResult && lastResult.id)} */}
       <p className="lastUpdated">Last Updated by: {lastResult && lastResult.home} vs {lastResult && lastResult.away}</p>
         <div className="border w-96 text-center p-4 leaderboard">
-          <Scores scores={scores} positionUpdates={positionUpdates} />
+          <Scores scores={scores} positionUpdates={positionUpdates} pointDiff={pointDiff} />
         </div>
         </>
       }
