@@ -38,4 +38,8 @@ export default {
         { id: 'TURPOR', time: '17:00', home: 'Turkey', away: 'Portugal'},
         { id: 'BELROM', time: '20:00', home: 'Belgium', away: 'Romania'}
     ],
+    23: [
+        { id: 'SUIGER', time: '20:00', home: 'Switzerland', away: 'Germany'},
+        { id: 'SCOHUN', time: '20:00', home: 'Scotland', away: 'Hungary'},
+    ]
 }
