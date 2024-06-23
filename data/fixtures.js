@@ -41,5 +41,21 @@ export default {
     23: [
         { id: 'SUIGER', time: '20:00', home: 'Switzerland', away: 'Germany'},
         { id: 'SCOHUN', time: '20:00', home: 'Scotland', away: 'Hungary'},
+    ],
+    24: [
+        { id: 'ALBSPA', time: '20:00', home: 'Albania', away: 'Spain'},
+        { id: 'CROITA', time: '20:00', home: 'Croatia', away: 'Italy'},
+    ],
+    25: [
+        { id: 'FRAPOL', time: '17:00', home: 'France', away: 'Poland'},
+        { id: 'NETAUT', time: '17:00', home: 'Netherlands', away: 'Austria'},
+        { id: 'DENSER', time: '20:00', home: 'Denmark', away: 'Serbia'},
+        { id: 'ENGSLO', time: '20:00', home: 'England', away: 'Slovenia'},
+    ],
+    25: [
+        { id: 'SLOROM', time: '17:00', home: 'Slovakia', away: 'Romania'},
+        { id: 'UKRBEL', time: '17:00', home: 'Ukraine', away: 'Belgium'},
+        { id: 'GEOPOR', time: '20:00', home: 'Georgia', away: 'Portugal'},
+        { id: 'CZETUR', time: '20:00', home: 'Czechia', away: 'Turkey'},
     ]
 }
