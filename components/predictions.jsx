@@ -77,17 +77,15 @@ const PersonalPredictions = ({ player, open }) => {
         }
     }, [open])
 
-    console.log(player, open, isContentOpen);
-
     return (
-        <EuiPanel className={isContentOpen && open ? 'open-content' : ''}>
+        <EuiPanel className={isContentOpen ? 'open-content' : ''}>
             <EuiAccordion
                 id={player}
                 buttonContent={player}
                 onToggle={setIsOpen}
-                forceState={open ? 'open' : 'closed'}
+                forceState={isContentOpen ? 'open' : 'closed'}
             >
-                {isContentOpen && !!open && 
+                {isContentOpen && 
                     <>
                         <MetadataDisplay metadata={metadata} />
                         <table className="prediction-table">
