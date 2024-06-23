@@ -28,7 +28,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { getLiveScore } from "./get_live_score";
 
-const theme = createTheme({
+export const theme = createTheme({
   components: {
     MuiSwitch: {
       styleOverrides: {

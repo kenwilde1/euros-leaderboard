@@ -1,10 +1,13 @@
 
-import { EuiAccordion, EuiHorizontalRule, EuiIcon, EuiPanel } from "@elastic/eui";
-import { useState } from "react";
+import { EuiAccordion, EuiHorizontalRule, EuiSpacer, EuiPanel } from "@elastic/eui";
+import { useEffect, useState } from "react";
 
 import fixtures from "../data/fixtures";
 import colours from "../data/colours";
 import players from "../data/players";
+
+import { Switch, ThemeProvider } from '@mui/material';
+import { theme } from "./results";
 
 const getFixtures = () => {
     const date = new Date().getDate();
@@ -63,19 +66,28 @@ const MetadataDisplay = ({ metadata }) => (
     </div>
 );
 
-const PersonalPredictions = ({ player }) => {
+const PersonalPredictions = ({ player, open }) => {
     const predictions = getFixturesForPerson(player);
     const metadata = getMetadataForPerson(player);
-    const [isContentOpen, setIsOpen] = useState(false);
+    const [isContentOpen, setIsOpen] = useState(open);
+
+    useEffect(() => {
+        if (isContentOpen !== open) {
+            setIsOpen(open);
+        }
+    }, [open])
+
+    console.log(player, open, isContentOpen);
 
     return (
-        <EuiPanel className={isContentOpen ? 'open-content' : ''}>
+        <EuiPanel className={isContentOpen && open ? 'open-content' : ''}>
             <EuiAccordion
                 id={player}
                 buttonContent={player}
                 onToggle={setIsOpen}
+                forceState={open ? 'open' : 'closed'}
             >
-                {isContentOpen && 
+                {isContentOpen && !!open && 
                     <>
                         <MetadataDisplay metadata={metadata} />
                         <table className="prediction-table">
@@ -105,8 +117,28 @@ const PersonalPredictions = ({ player }) => {
     );
 };
 
+const LOCAL_STORAGE_KEY = 'euros:open-predictions';
+
 const Predictions = () => {
     const people = Object.keys(players);
+    const [open, setOpen] = useState();
+
+    const handleSwitchChange = (e) => {
+        window.localStorage.setItem(LOCAL_STORAGE_KEY, e.target.checked);
+        setOpen(e.target.checked);
+      }
+    
+    useEffect(() => {
+        const getLocal = () => {
+            const local = window.localStorage.getItem(LOCAL_STORAGE_KEY);
+            if (local) {
+              return JSON.parse(local);
+            } else {
+              return false;
+            }
+          }
+        setOpen(getLocal())
+    }, [])
 
     return (
         <div className="predictions-page">
@@ -114,8 +146,20 @@ const Predictions = () => {
                 <h4>Today's fixtures</h4>
                 {getFixtures()}
             </div>
+            <div className="toggle-predictions">
+            <ThemeProvider theme={theme}>
+            <EuiSpacer />
+      <div className='toggle-table'>
+        <Switch
+          checked={open}
+          onChange={handleSwitchChange}
+        />
+        <span className='toggle-desc'>Open all predictions</span>
+      </div>
+      </ThemeProvider>
+            </div>
             <div className="predictions-list">
-                {people.map(player => <PersonalPredictions key={player} player={player} />)}
+                {people.map(player => <PersonalPredictions key={player} player={player} open={open} />)}
             </div>
         </div>
     );

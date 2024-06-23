@@ -55,7 +55,7 @@ const Live = ({home, away}) => {
 const NextGame = ({ home, away, time }) => {
     return (
         <EuiPanel className="now">
-        <div className="live">Next Up:</div>
+        <div className="live">Next up:</div>
             <div>
                 <span style={{ color: colours[home] }}>{home}</span>
                 <span>  vs  </span>
