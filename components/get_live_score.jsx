@@ -9,6 +9,7 @@ const timeString = "20:54"
 
 const getMatch = (games, lastResult) => {
     const isResultLoggedToday = games.findIndex(game => lastResult === game.id);
+    
     if (isResultLoggedToday !== -1) {
         return games[isResultLoggedToday + 1];
     } else {
@@ -70,12 +71,20 @@ const NextGame = ({ home, away, time }) => {
     )
 }
 
-export function getLiveScore(lastResult) {
+export function getLiveScore(lastResult, isHistorical) {
+
+    if (isHistorical) {
+        return <EuiPanel className="now">
+            You're viewing historical results, no fixtures / live scores will be displayed.
+    </EuiPanel>
+    }
+
     if (lastResult) {
         const todaysDateDate = new Date().getDate();
         const todaysFixtures = fixtures[todaysDateDate];
     
         const match = getMatch(todaysFixtures, lastResult);
+
         if (!match) {
             const tomorrowsFirstGame = fixtures[new Date().getDate() + 1][0];
             return <NextGame home={tomorrowsFirstGame.home} away={tomorrowsFirstGame.away} time={tomorrowsFirstGame.time} />

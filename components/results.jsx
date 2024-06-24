@@ -28,6 +28,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { getLiveScore } from "./get_live_score";
 
+import { ViewOtherResults } from "./view_other_results";
+
 export const theme = createTheme({
   components: {
     MuiSwitch: {
@@ -175,27 +177,43 @@ const ListItems = () => {
   const [selectedTabId, setSelectedTabId] = useState('table');
   const [results, setResults] = useState({})
   const [showAdvancedTable, setShowAdvancedTable] = useState();
-  const [scorers, setScorers] = useState({});
+  const [scorers, setScorers] = useState([]);
   const [positionUpdates, setPositionUpdates] =  useState({});
   const [pointDiff, setPointDiff] = useState({});
+  const [lastResult, setLastResult] = useState();
+  const [isHistorical, setIsHistorical] = useState(false);
+  const [lengthOfAllResults, setLengthOfAllResults] = useState();
+
+  const fetchItems = async (indexToSlice) => {
+    const querySnapshot = await getDocs(collection(db, "results"));
+    let items = querySnapshot.docs
+      .map((doc) => ({ ...doc.data(), id: doc.id }))
+      .sort((a, b) => a.match - b.match);
+
+    const querySnapshot2 = await getDocs(collection(db, "scorers"));
+    const items2 = querySnapshot2.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+    const { scores, updatesToPositions, pointDiff } = fetchTally(items, items2, indexToSlice);
+
+    if (!indexToSlice) {
+      setLengthOfAllResults(items.length);
+    }
+
+    setPointDiff(pointDiff);
+    setPositionUpdates(updatesToPositions)
+    if (indexToSlice !== undefined) {
+      const newItems = items.slice(0, indexToSlice)
+      setResults(newItems);
+      setLastResult(newItems[newItems.length - 1])
+    } else {
+      setResults(items);
+      setLastResult(items[items.length - 1])
+    }
+
+    setScorers(items2);
+    setScores(scores)
+  }
 
   useEffect(() => {
-    const fetchItems = async () => {
-      const querySnapshot = await getDocs(collection(db, "results"));
-      const items = querySnapshot.docs
-        .map((doc) => ({ ...doc.data(), id: doc.id }))
-        .sort((a, b) => a.match - b.match);
-
-      const querySnapshot2 = await getDocs(collection(db, "scorers"));
-      const items2 = querySnapshot2.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-      const { scores, updatesToPositions, pointDiff } = fetchTally(items, items2);
-      
-      setPointDiff(pointDiff);
-      setPositionUpdates(updatesToPositions)
-      setResults(items);
-      setScorers(items2[0]);
-      setScores(scores)
-    }
     fetchItems();
 
     const getLocal = () => {
@@ -232,9 +250,47 @@ const ListItems = () => {
     ));
   };
 
-  const lastResult = results && results[results.length - 1];
+  const filterResults = (pos) => {
+    if (pos === -1 && results.length === 1) {
+      return;
+    }
+
+    if (pos === 1 && results.length === lengthOfAllResults) {
+      return;
+    }
+
+    if (pos === undefined) {
+      fetchItems();
+      setIsHistorical(false);
+    } else {
+      const indexToSlice = results.length + pos;
+      console.log(indexToSlice);
+      console.log(lengthOfAllResults);
+      console.log(results.length);
+      if (lengthOfAllResults === indexToSlice) {
+        setIsHistorical(false);
+      }
+      if (indexToSlice !== undefined && indexToSlice > 0) {
+        fetchItems(indexToSlice);
+      } else if (indexToSlice !== undefined) {
+        const newItems = results.slice(0, indexToSlice)
+        const { scores, updatesToPositions, pointDiff } = fetchTally(results, scorers, indexToSlice);
+        setPointDiff(pointDiff);
+        setPositionUpdates(updatesToPositions)
+        setResults(newItems);
+        setLastResult(newItems[newItems.length - 1])
+        setScores(scores);
+      }
+      if (lengthOfAllResults === indexToSlice) {
+        setIsHistorical(false);
+      } else {
+        setIsHistorical(true)
+      }
+    }
+  }
+
   const resultsToConsider = results && results.length ? results.slice(17) : results;
-  const rows = fetchData(players, resultsToConsider, results, scorers)
+  const rows = fetchData(players, resultsToConsider, results, scorers[0])
     .sort(sortingComparatorRows)
     .map((player, index) => {
       return {
@@ -247,7 +303,9 @@ const ListItems = () => {
     <div className="container">
       <EuiTabs>{renderTabs()}</EuiTabs>
       <EuiSpacer />
-      {selectedTabId === 'table' && getLiveScore(lastResult && lastResult.id)}
+      {selectedTabId === 'table' && getLiveScore(lastResult && lastResult.id, isHistorical)}
+      <EuiSpacer />
+      {selectedTabId === 'table' && <ViewOtherResults filterResults={filterResults} />}
       <EuiSpacer />
       {selectedTabId === 'table' && <ThemeProvider theme={theme}>
       <div className='toggle-table'>
@@ -260,13 +318,11 @@ const ListItems = () => {
       </ThemeProvider>}
       {selectedTabId === 'table' && showAdvancedTable && Object.keys(positionUpdates).length &&
       <>
-      {/* {getLiveScore(lastResult && lastResult.id)} */}
       <p className="lastUpdated">Last Updated by: {lastResult && lastResult.home} vs {lastResult && lastResult.away}</p>
         <AdvancedTable rows={rows} positionUpdates={positionUpdates} /></>
       }
       {selectedTabId === 'table' && !showAdvancedTable &&
       <>
-      {/* {getLiveScore(lastResult && lastResult.id)} */}
       <p className="lastUpdated">Last Updated by: {lastResult && lastResult.home} vs {lastResult && lastResult.away}</p>
         <div className="border w-96 text-center p-4 leaderboard">
           <Scores scores={scores} positionUpdates={positionUpdates} pointDiff={pointDiff} />

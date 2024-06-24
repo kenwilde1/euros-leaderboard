@@ -28,7 +28,7 @@ const getGoalsFor = (predictions, results = []) => {
 }
 
 const calculateTopGoalScorers = (topGoalscorer, scorers) => {
-    if (scorers[topGoalscorer] && scorers[topGoalscorer] > 0) {
+    if (scorers && scorers[topGoalscorer] && scorers[topGoalscorer] > 0) {
         return scorers[topGoalscorer]
     }
     return 0;
@@ -80,6 +80,7 @@ const calculateScore = (predictions, goalsFor, goalsAgainst, topGoalscorer, resu
 export default function fetchData(players, results, originalResults, scorers) {
     const names = Object.keys(players);
     let finalObj = {};
+
     names.forEach(name => {
         if (!finalObj[name]) finalObj[name] = {}
         const { goalsAgainst, goalsFor } = getGoalsFor(players[name], results);

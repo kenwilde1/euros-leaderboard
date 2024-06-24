@@ -43,8 +43,8 @@ export default {
         { id: 'SCOHUN', time: '20:00', home: 'Scotland', away: 'Hungary'},
     ],
     24: [
-        { id: 'ALBSPA', time: '20:00', home: 'Albania', away: 'Spain'},
         { id: 'CROITA', time: '20:00', home: 'Croatia', away: 'Italy'},
+        { id: 'ALBSPA', time: '20:00', home: 'Albania', away: 'Spain'},
     ],
     25: [
         { id: 'FRAPOL', time: '17:00', home: 'France', away: 'Poland'},

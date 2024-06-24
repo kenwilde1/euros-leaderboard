@@ -188,6 +188,10 @@ h5 {
   .about {
     width: 300px;
   }
+
+  .toggle-results {
+    width: 90vw;
+  }
 }
 
 .fixture-list {
@@ -429,6 +433,7 @@ padding-right: 5px;
   justify-content: center;
   align-items: center;
   gap: 5px;
+  height: 124px;
 }
 
 .link {
@@ -454,4 +459,15 @@ padding-right: 5px;
 
 .points-same {
   color: orange;
+}
+
+.toggle-results {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  width: 90vw;
+}
+
+.toggle-results button {
+  min-inline-size: 50px !important;
 }

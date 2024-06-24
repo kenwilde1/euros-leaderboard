@@ -138,7 +138,12 @@ function calculatePointDifferences(scores, previousScores) {
     return pointDifferences;
 }
 
-export const fetchTally = (results, goalScorers) => {
+export const fetchTally = (results, goalScorers, indexToSlice) => {
+
+    if (indexToSlice !== undefined) {
+        results = results.slice(0, indexToSlice);
+    }
+
     const scores = [
        { name: 'Hugh', score: 0 },
        { name: 'Philip', score: 0 },
@@ -198,6 +203,6 @@ export const fetchTally = (results, goalScorers) => {
 
       const updates = getMapOfMovedPositions(scores, previousScores);
       const pointDiff = calculatePointDifferences(scores, previousScores);
-    
-    return { scores, updatesToPositions: updates, pointDiff };
+
+      return { scores, updatesToPositions: updates, pointDiff };
 }
