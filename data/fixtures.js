@@ -52,7 +52,7 @@ export default {
         { id: 'DENSER', time: '20:00', home: 'Denmark', away: 'Serbia'},
         { id: 'ENGSLO', time: '20:00', home: 'England', away: 'Slovenia'},
     ],
-    25: [
+    26: [
         { id: 'SLOROM', time: '17:00', home: 'Slovakia', away: 'Romania'},
         { id: 'UKRBEL', time: '17:00', home: 'Ukraine', away: 'Belgium'},
         { id: 'GEOPOR', time: '20:00', home: 'Georgia', away: 'Portugal'},
