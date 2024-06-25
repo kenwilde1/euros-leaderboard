@@ -184,7 +184,7 @@ const Scores = ({ scores, positionUpdates, pointDiff }) => {
               </span>
               {getPositionUpdateLabel(positionUpdates[player.name])}
             </div>
-            <span className="leaderboard-score font-bold">{score}<span className={`pointDiff ${pointDiffClass}`}>{x}</span></span>
+            <span className="leaderboard-score font-bold">{score}<span className={`pointDiff ${pointDiffClass}`}>{' '}{x}</span></span>
             </li>
           );
         })}
