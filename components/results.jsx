@@ -37,7 +37,7 @@ import defaultOne from '../data/defaultOne.jpg';
 const avatars = {
     Alan: defaultOne,
     David: david,
-    ['Dylan W']: dylan,
+    Dylan: dylan,
     Stephen: defaultOne,
     Hugh: defaultOne,
     Philip: defaultOne,

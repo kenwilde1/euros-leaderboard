@@ -150,7 +150,7 @@ export const fetchTally = (results, goalScorers, indexToSlice) => {
        { name: 'Stephen', score: 0 },
        { name: 'Shane', score: 0 },
        { name: 'Alan', score: 0 },
-       { name: 'Dylan W', score: 0 },
+       { name: 'Dylan', score: 0 },
        { name: 'Kenny', score: 0 },
        { name: 'David', score: 0 },
     ];
@@ -161,7 +161,7 @@ export const fetchTally = (results, goalScorers, indexToSlice) => {
         { name: 'Stephen', score: 0 },
         { name: 'Shane', score: 0 },
         { name: 'Alan', score: 0 },
-        { name: 'Dylan W', score: 0 },
+        { name: 'Dylan', score: 0 },
         { name: 'Kenny', score: 0 },
         { name: 'David', score: 0 },
      ];

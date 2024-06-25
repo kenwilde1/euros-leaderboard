@@ -8,7 +8,7 @@ import david from "./david";
 import shane from './shane';
 
 const players = {
-  'Dylan W': dyl_w,
+  'Dylan': dyl_w,
   'Stephen': stephen,
   'Alan': alan,
   'Hugh': hugh,
