@@ -44,6 +44,11 @@ body {
 }
 
 .medal span {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.medal span {
  font-size: 16px;
 }
 
@@ -104,11 +109,13 @@ h5 {
   gap: 20px;
   width: 100%;
   padding: 20px;
+  align-items: center;
 }
 
 .leaderboard-name {
   display: flex;
   gap: 10px;
+  align-items: center;
 }
 
 @layer utilities {
@@ -470,4 +477,11 @@ padding-right: 5px;
 
 .toggle-results button {
   min-inline-size: 50px !important;
+}
+
+.avatar {
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  background: lightcoral;
 }

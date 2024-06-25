@@ -32,7 +32,6 @@ const calculateTopGoalScorers = (topGoalscorer, results) => {
     results && results.length && results.forEach(res => {
         const goalScorers = res.scorers;
         goalScorers && goalScorers.forEach(scorer => {
-            console.log(scorer);
             if (scorer === topGoalscorer) {
                 score = 1;
             }
@@ -94,12 +93,11 @@ const calculateScore = (predictions, goalsFor, goalsAgainst, topGoalscorer, resu
 export default function fetchData(players, results, originalResults, scorers) {
     const names = Object.keys(players);
     let finalObj = {};
-    console.log(results);
+
     names.forEach(name => {
         if (!finalObj[name]) finalObj[name] = {}
         const { goalsAgainst, goalsFor } = getGoalsFor(players[name], results);
         const topGoalscorer = calculateTopGoalScorers(players[name].topGoalscorer, results);
-        console.log(topGoalscorer);
         const { score, wins, perfectPoints, correctGoalsScored } = calculateScore(players[name], goalsFor, goalsAgainst, topGoalscorer, results)
         
         finalObj[name] = {

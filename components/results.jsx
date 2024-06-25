@@ -30,6 +30,21 @@ import { getLiveScore } from "./get_live_score";
 
 import { ViewOtherResults } from "./view_other_results";
 
+import david from '../data/david.png'
+import dylan from '../data/dylan.jpg';
+import defaultOne from '../data/defaultOne.jpg';
+
+const avatars = {
+    Alan: defaultOne,
+    David: david,
+    ['Dylan W']: dylan,
+    Stephen: defaultOne,
+    Hugh: defaultOne,
+    Philip: defaultOne,
+    Shane: defaultOne,
+    Kenny: defaultOne
+}
+
 export const theme = createTheme({
   components: {
     MuiSwitch: {
@@ -100,7 +115,7 @@ const Medal = ({ position }) => {
   } else if (position === 2) {
     return <img src={bronze.src} />
   } else {
-    return `${position + 1}.`;
+    return <span>{`${position + 1}.`}</span>;
   }
 }
 
@@ -110,6 +125,16 @@ const sortingComparator = (a, b) => {
 } else {
     return b.score - a.score;
 }
+}
+
+const getAvatar = (name) => {
+  console.log(avatars);
+  console.log(name);
+  if (avatars[name] && avatars[name].src) {
+    return <img className='avatar' src={avatars[name].src} />
+  }
+
+  return <span className="avatar"></span>
 }
 
 export const getPositionUpdateLabel = (points) => {
@@ -153,7 +178,10 @@ const Scores = ({ scores, positionUpdates, pointDiff }) => {
           <li className="leaderboard-position">
             <div className="leaderboard-name">
               <span className="medal"><Medal position={index} /></span>
-              <span className="leaderboard-name">{player.name}</span>
+              <span className="leaderboard-name">
+                {getAvatar(player.name)}
+                <b>{player.name}</b>
+              </span>
               {getPositionUpdateLabel(positionUpdates[player.name])}
             </div>
             <span className="leaderboard-score font-bold">{score}<span className={`pointDiff ${pointDiffClass}`}>{x}</span></span>
@@ -264,9 +292,6 @@ const ListItems = () => {
       setIsHistorical(false);
     } else {
       const indexToSlice = results.length + pos;
-      console.log(indexToSlice);
-      console.log(lengthOfAllResults);
-      console.log(results.length);
       if (lengthOfAllResults === indexToSlice) {
         setIsHistorical(false);
       }
@@ -288,8 +313,6 @@ const ListItems = () => {
       }
     }
   }
-
-  const resultsToConsider = results && results.length ? results.slice(17) : results;
 
   const rows = fetchData(players, results, results, scorers[0])
     .sort(sortingComparatorRows)
