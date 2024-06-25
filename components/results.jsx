@@ -290,7 +290,8 @@ const ListItems = () => {
   }
 
   const resultsToConsider = results && results.length ? results.slice(17) : results;
-  const rows = fetchData(players, resultsToConsider, results, scorers[0])
+
+  const rows = fetchData(players, results, results, scorers[0])
     .sort(sortingComparatorRows)
     .map((player, index) => {
       return {

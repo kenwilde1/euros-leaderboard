@@ -27,12 +27,26 @@ const getGoalsFor = (predictions, results = []) => {
     }
 }
 
-const calculateTopGoalScorers = (topGoalscorer, scorers) => {
-    if (scorers && scorers[topGoalscorer] && scorers[topGoalscorer] > 0) {
-        return scorers[topGoalscorer]
-    }
-    return 0;
+const calculateTopGoalScorers = (topGoalscorer, results) => {
+    let score = 0;
+    results && results.length && results.forEach(res => {
+        const goalScorers = res.scorers;
+        goalScorers && goalScorers.forEach(scorer => {
+            console.log(scorer);
+            if (scorer === topGoalscorer) {
+                score = 1;
+            }
+        });
+    })
+    return score;
 }
+
+// const calculateTopGoalScorers = (topGoalscorer, scorers) => {
+//     if (scorers && scorers[topGoalscorer] && scorers[topGoalscorer] > 0) {
+//         return scorers[topGoalscorer]
+//     }
+//     return 0;
+// }
 
 const calculateScore = (predictions, goalsFor, goalsAgainst, topGoalscorer, results = []) => {
     let runningScore = 0;
@@ -80,11 +94,12 @@ const calculateScore = (predictions, goalsFor, goalsAgainst, topGoalscorer, resu
 export default function fetchData(players, results, originalResults, scorers) {
     const names = Object.keys(players);
     let finalObj = {};
-
+    console.log(results);
     names.forEach(name => {
         if (!finalObj[name]) finalObj[name] = {}
         const { goalsAgainst, goalsFor } = getGoalsFor(players[name], results);
-        const topGoalscorer = calculateTopGoalScorers(players[name].topGoalscorer, scorers);
+        const topGoalscorer = calculateTopGoalScorers(players[name].topGoalscorer, results);
+        console.log(topGoalscorer);
         const { score, wins, perfectPoints, correctGoalsScored } = calculateScore(players[name], goalsFor, goalsAgainst, topGoalscorer, results)
         
         finalObj[name] = {
@@ -101,22 +116,22 @@ export default function fetchData(players, results, originalResults, scorers) {
         }
     });
 
-    cachedRows.forEach(cachedRow => {
-        const playerObj = finalObj[cachedRow.name];
-        const wins = playerObj.CR + cachedRow.CR;
-        finalObj[cachedRow.name] = {
-            CGS: playerObj.CGS + cachedRow.CGS,
-            CR: playerObj.CR + cachedRow.CR,
-            GA: playerObj.GA + cachedRow.GA,
-            GF: playerObj.GF + cachedRow.GF,
-            RA: `${Math.round((wins / originalResults.length) * 100)}%`,
-            name: cachedRow.name,
-            PP: playerObj.PP + cachedRow.PP,
-            points: playerObj.points + cachedRow.points,
-            position: 0,
-            GbTS: playerObj.GbTS + cachedRow.GbTS
-        }
-    });
+    // cachedRows.forEach(cachedRow => {
+    //     const playerObj = finalObj[cachedRow.name];
+    //     const wins = playerObj.CR + cachedRow.CR;
+    //     finalObj[cachedRow.name] = {
+    //         CGS: playerObj.CGS + cachedRow.CGS,
+    //         CR: playerObj.CR + cachedRow.CR,
+    //         GA: playerObj.GA + cachedRow.GA,
+    //         GF: playerObj.GF + cachedRow.GF,
+    //         RA: `${Math.round((wins / originalResults.length) * 100)}%`,
+    //         name: cachedRow.name,
+    //         PP: playerObj.PP + cachedRow.PP,
+    //         points: playerObj.points + cachedRow.points,
+    //         position: 0,
+    //         GbTS: playerObj.GbTS + cachedRow.GbTS
+    //     }
+    // });
 
 
     return Object.values(finalObj);
