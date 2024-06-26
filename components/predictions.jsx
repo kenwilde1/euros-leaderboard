@@ -10,8 +10,11 @@ import { Switch, ThemeProvider } from '@mui/material';
 import { theme } from "./results";
 
 const getFixtures = () => {
-    const date = new Date().getDate();
+    const date = new Date().getDate() + 1;
     const todaysFixtures = fixtures[date];
+    if (!todaysFixtures) {
+        return <span>Future fixtures in progress...</span>
+    }
     const lastIndex = todaysFixtures.length - 1;
 
     return todaysFixtures.map((match, index) => (
@@ -28,8 +31,12 @@ const getFixtures = () => {
 };
 
 const getFixturesForPerson = (person) => {
-    const date = new Date().getDate();
+    const date = new Date().getDate() + 1;
     const todaysFixtures = fixtures[date];
+    if (!todaysFixtures) {
+        return []
+    }
+
     const predictions = players[person]?.matchPredictions;
 
     if (!predictions) return [];
@@ -137,6 +144,12 @@ const Predictions = () => {
           }
         setOpen(getLocal())
     }, [])
+
+    const todaysFixtures = fixtures[new Date().getDate() + 1];
+
+    if (!todaysFixtures) {
+        return <span className="fixture-list">✨ Fill out the Excel ladies ✨</span>
+    }
 
     return (
         <div className="predictions-page">
