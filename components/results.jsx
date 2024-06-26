@@ -56,7 +56,7 @@ const groupStageUpdates = [
     Philip: 14,
     Dylan: 16,
     Kenny: 10,
-    Alan: 10,
+    Alan: 12,
     Shane: 10,
     David: 16
   },
