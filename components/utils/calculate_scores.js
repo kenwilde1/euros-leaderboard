@@ -17,8 +17,14 @@ export const getWinner = (result) => {
     }
 }
 
-const calculateScore = (predictions, result, scores, pos, index, previousScores, lengthOfResults) => {
-    if (result) {
+const calculateScore = (predictions, result, scores, pos, index, previousScores, lengthOfResults, name) => {
+
+    if (result && result.id === 'group-stage') {
+        scores[pos].score += result[name];
+        if (index <= lengthOfResults) {
+            previousScores[pos].score += result[name];
+        }
+    } else if (result) {
         let runningScore = 0;
         const prediction = predictions.matchPredictions[index];
         const winnerOfResult = getWinner(result);
@@ -44,6 +50,8 @@ const calculateScore = (predictions, result, scores, pos, index, previousScores,
 }
 
 const calculateTeams = (predictions, result, scores, pos, index, previousScores, lengthOfResults) => {
+    if (result.id === 'group-stage') return;
+    
     const highestScoringTeam = predictions.highestScoringTeam;
     const bestDefence = predictions.bestDefence;
     if (result) {
@@ -169,25 +177,25 @@ export const fetchTally = (results, goalScorers, indexToSlice) => {
     const lengthOfResults = results.length - 2;
 
    results.forEach((result, index) => {
-        calculateScore(hughPredictions, result, scores, 0, index, previousScores, lengthOfResults);
-        calculateScore(philipPredictions, result, scores, 1, index, previousScores, lengthOfResults);
-        calculateScore(stephenPredictions, result, scores, 2, index, previousScores, lengthOfResults);
-        calculateScore(shanePredictions, result, scores, 3, index, previousScores, lengthOfResults);
-        calculateScore(alanPredictions, result, scores, 4, index, previousScores, lengthOfResults);
-        calculateScore(dylWPredictions, result, scores, 5, index, previousScores, lengthOfResults);
-        calculateScore(kennyPredictions, result, scores, 6, index, previousScores, lengthOfResults);
-        calculateScore(davidPredictions, result, scores, 7, index, previousScores, lengthOfResults);
+        calculateScore(hughPredictions, result, scores, 0, index, previousScores, lengthOfResults, 'Hugh');
+        calculateScore(philipPredictions, result, scores, 1, index, previousScores, lengthOfResults, 'Philip');
+        calculateScore(stephenPredictions, result, scores, 2, index, previousScores, lengthOfResults, 'Stephen');
+        calculateScore(shanePredictions, result, scores, 3, index, previousScores, lengthOfResults, 'Shane');
+        calculateScore(alanPredictions, result, scores, 4, index, previousScores, lengthOfResults, 'Alan');
+        calculateScore(dylWPredictions, result, scores, 5, index, previousScores, lengthOfResults, 'Dylan');
+        calculateScore(kennyPredictions, result, scores, 6, index, previousScores, lengthOfResults, 'Kenny');
+        calculateScore(davidPredictions, result, scores, 7, index, previousScores, lengthOfResults, 'David');
    });
 
    results.forEach((result, index) => {
-        calculateTeams(hughPredictions, result, scores, 0, index, previousScores, lengthOfResults);
-        calculateTeams(philipPredictions, result, scores, 1, index, previousScores, lengthOfResults);
-        calculateTeams(stephenPredictions, result, scores, 2, index, previousScores, lengthOfResults);
-        calculateTeams(shanePredictions, result, scores, 3, index, previousScores, lengthOfResults);
-        calculateTeams(alanPredictions, result, scores, 4, index, previousScores, lengthOfResults);
-        calculateTeams(dylWPredictions, result, scores, 5, index, previousScores, lengthOfResults);
-        calculateTeams(kennyPredictions, result, scores, 6, index, previousScores, lengthOfResults);
-        calculateTeams(davidPredictions, result, scores, 7, index, previousScores, lengthOfResults);
+        calculateTeams(hughPredictions, result, scores, 0, index, previousScores, lengthOfResults, 'Hugh');
+        calculateTeams(philipPredictions, result, scores, 1, index, previousScores, lengthOfResults, 'Philip');
+        calculateTeams(stephenPredictions, result, scores, 2, index, previousScores, lengthOfResults, 'Stephen');
+        calculateTeams(shanePredictions, result, scores, 3, index, previousScores, lengthOfResults, 'Shane');
+        calculateTeams(alanPredictions, result, scores, 4, index, previousScores, lengthOfResults, 'Alan');
+        calculateTeams(dylWPredictions, result, scores, 5, index, previousScores, lengthOfResults, 'Dylan');
+        calculateTeams(kennyPredictions, result, scores, 6, index, previousScores, lengthOfResults, 'Kenny');
+        calculateTeams(davidPredictions, result, scores, 7, index, previousScores, lengthOfResults, 'David');
     });
 
     results.forEach((res, index) => {

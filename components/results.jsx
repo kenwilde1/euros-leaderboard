@@ -34,6 +34,8 @@ import david from '../data/david.png'
 import dylan from '../data/dylan.jpg';
 import defaultOne from '../data/defaultOne.jpg';
 
+import fixtures from "../data/fixtures";
+
 const avatars = {
     Alan: defaultOne,
     David: david,
@@ -43,6 +45,41 @@ const avatars = {
     Philip: defaultOne,
     Shane: defaultOne,
     Kenny: defaultOne
+}
+
+const groupStageUpdates = [
+  {
+    id: 'group-stage',
+    text: 'Group Winners and Runners Up',
+    Stephen: 12,
+    Hugh: 12,
+    Philip: 14,
+    Dylan: 16,
+    Kenny: 10,
+    Alan: 10,
+    Shane: 10,
+    David: 16
+  },
+  {
+    id: 'group-stage',
+    text: 'Best 3rd Place Teams',
+    Stephen: 0,
+    Hugh: 5,
+    Philip: 0,
+    Dylan: 0,
+    Kenny: 0,
+    Alan: 5,
+    Shane: 0,
+    David: 0
+  },
+]
+
+const getLastUpdated = (lastResult) => {
+  if (lastResult.id === 'group-stage') {
+    return <span>{lastResult.text}</span>
+  } else {
+    return <>{lastResult && lastResult.home} vs {lastResult && lastResult.away}</>
+  }
 }
 
 export const theme = createTheme({
@@ -215,8 +252,7 @@ const ListItems = () => {
     let items = querySnapshot.docs
       .map((doc) => ({ ...doc.data(), id: doc.id }))
       .sort((a, b) => a.match - b.match);
-    // items.push({ home: 'Georgia', away: 'Portugal', homeGoals: 2, awayGoals: 0, id: 'GEOPOR', match: 35 })
-    // items.push({ home: 'Czechia', away: 'Turkey', homeGoals: 1, awayGoals: 1, id: 'CZETUR', match: 36 })
+    items.splice(36, 0, ...groupStageUpdates);
     const querySnapshot2 = await getDocs(collection(db, "scorers"));
     const items2 = querySnapshot2.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
     const { scores, updatesToPositions, pointDiff } = fetchTally(items, items2, indexToSlice);
@@ -313,9 +349,6 @@ const ListItems = () => {
     }
   }
 
-  // temp1.splice(36, 0, 1);
-
-  // console.log(results);
   const rows = fetchData(players, results, results, scorers[0])
     .sort(sortingComparatorRows)
     .map((player, index) => {
@@ -349,7 +382,7 @@ const ListItems = () => {
       }
       {selectedTabId === 'table' && !showAdvancedTable &&
       <>
-      <p className="lastUpdated">Last Updated by: {lastResult && lastResult.home} vs {lastResult && lastResult.away}</p>
+      <p className="lastUpdated">Last Updated by: {lastResult && getLastUpdated(lastResult)}</p>
         <div className="border w-96 text-center p-4 leaderboard">
           <Scores scores={scores} positionUpdates={positionUpdates} pointDiff={pointDiff} />
         </div>

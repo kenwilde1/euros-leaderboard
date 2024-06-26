@@ -1,7 +1,5 @@
 import { getWinner } from "./calculate_scores";
 
-import cachedRows from '../../data/cached_data';
-
 const getGoalsFor = (predictions, results = []) => {
     const highestScoringTeam = predictions.highestScoringTeam;
     const bestDefence = predictions.bestDefence;
@@ -10,14 +8,17 @@ const getGoalsFor = (predictions, results = []) => {
     let y = 0
 
     results && results.length && results.forEach(result => {
-        const obj = { [result.home]: result.homeGoals, [result.away]: result.awayGoals }
-        if (obj[highestScoringTeam] !== undefined) {
-            x += obj[highestScoringTeam]
-        }
+        if (result.id !== 'group-stage') {
+        
+            const obj = { [result.home]: result.homeGoals, [result.away]: result.awayGoals }
+            if (obj[highestScoringTeam] !== undefined) {
+                x += obj[highestScoringTeam]
+            }
 
-        if (obj[bestDefence] !== undefined) {
-            let otherTeam = Object.keys(obj).filter(team => team !== bestDefence)[0];
-            y += obj[otherTeam]
+            if (obj[bestDefence] !== undefined) {
+                let otherTeam = Object.keys(obj).filter(team => team !== bestDefence)[0];
+                y += obj[otherTeam]
+            }
         }
     })
 
@@ -47,40 +48,46 @@ const calculateTopGoalScorers = (topGoalscorer, results) => {
 //     return 0;
 // }
 
-const calculateScore = (predictions, goalsFor, goalsAgainst, topGoalscorer, results = []) => {
+const calculateScore = (predictions, goalsFor, goalsAgainst, topGoalscorer, results = [], name) => {
     let runningScore = 0;
     let wins = 0;
     let perfectPoints = 0;
     let correctGoalsScored = 0;
 
     results && results.length && results.forEach((result) => {
-        const prediction = predictions.matchPredictions.find(pred => pred.id === result.id);
-        const winnerOfResult = getWinner(result);
-        const winnerOfPrediction = getWinner(prediction);
 
-        let perfectTracker = 0;
-
-        if (winnerOfPrediction === winnerOfResult) {
-            wins += 1
-            runningScore += 3
-            perfectTracker += 1
+        if (result.id === 'group-stage') {
+            runningScore += result[name];
+        } else {
+            const prediction = predictions.matchPredictions.find(pred => pred.id === result.id);
+            const winnerOfResult = getWinner(result);
+            const winnerOfPrediction = getWinner(prediction);
+    
+            let perfectTracker = 0;
+    
+            if (winnerOfPrediction === winnerOfResult) {
+                wins += 1
+                runningScore += 3
+                perfectTracker += 1
+            }
+    
+            if (prediction.homeGoals === result.homeGoals) {
+                runningScore += 1
+                perfectTracker += 1
+                correctGoalsScored += 1;
+            }
+    
+            if (prediction.awayGoals === result.awayGoals) {
+                runningScore += 1
+                perfectTracker += 1
+                correctGoalsScored += 1
+            }
+    
+            if (perfectTracker === 3) {
+                perfectPoints += 1;
+            }
         }
 
-        if (prediction.homeGoals === result.homeGoals) {
-            runningScore += 1
-            perfectTracker += 1
-            correctGoalsScored += 1;
-        }
-
-        if (prediction.awayGoals === result.awayGoals) {
-            runningScore += 1
-            perfectTracker += 1
-            correctGoalsScored += 1
-        }
-
-        if (perfectTracker === 3) {
-            perfectPoints += 1;
-        }
     })
 
     runningScore += goalsFor;
@@ -98,7 +105,7 @@ export default function fetchData(players, results, originalResults, scorers) {
         if (!finalObj[name]) finalObj[name] = {}
         const { goalsAgainst, goalsFor } = getGoalsFor(players[name], results);
         const topGoalscorer = calculateTopGoalScorers(players[name].topGoalscorer, results);
-        const { score, wins, perfectPoints, correctGoalsScored } = calculateScore(players[name], goalsFor, goalsAgainst, topGoalscorer, results)
+        const { score, wins, perfectPoints, correctGoalsScored } = calculateScore(players[name], goalsFor, goalsAgainst, topGoalscorer, results, name)
         
         finalObj[name] = {
             position: 0,

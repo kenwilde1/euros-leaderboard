@@ -73,9 +73,9 @@ const NextGame = ({ home, away, time }) => {
 
 export function getLiveScore(lastResult, isHistorical) {
 
-    if (isHistorical) {
-        return <EuiPanel className="now">
-            You're viewing historical results, no fixtures / live scores will be displayed.
+    if (isHistorical || lastResult === 'group-stage') {
+        return <EuiPanel className="historical-fixtures">
+            No fixture data available.
     </EuiPanel>
     }
 
