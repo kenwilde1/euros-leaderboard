@@ -31,7 +31,7 @@ const getFixtures = () => {
 };
 
 const getFixturesForPerson = (person) => {
-    const date = new Date().getDate() + 1;
+    const date = new Date().getDate();
     const todaysFixtures = fixtures[date];
     if (!todaysFixtures) {
         return []
