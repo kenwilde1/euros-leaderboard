@@ -32,9 +32,9 @@ import { ViewOtherResults } from "./view_other_results";
 
 import david from '../data/david.png'
 import dylan from '../data/dylan.jpg';
-import defaultOne from '../data/defaultOne.jpg';
+// import defaultOne from '../data/defaultOne.jpg';
 
-import fixtures from "../data/fixtures";
+const defaultOne = {};
 
 const avatars = {
     Alan: defaultOne,
@@ -169,7 +169,7 @@ const getAvatar = (name) => {
     return <img className='avatar' src={avatars[name].src} />
   }
 
-  return <span className="avatar"></span>
+  return <span></span>
 }
 
 export const getPositionUpdateLabel = (points) => {
@@ -215,11 +215,14 @@ const Scores = ({ scores, positionUpdates, pointDiff }) => {
               <span className="medal"><Medal position={index} /></span>
               <span className="leaderboard-name">
                 {getAvatar(player.name)}
-                <b>{player.name}</b>
+                {player.name}
               </span>
               {getPositionUpdateLabel(positionUpdates[player.name])}
             </div>
-            <span className="leaderboard-score font-bold">{score}<span className={`pointDiff ${pointDiffClass}`}>{' '}{x}</span></span>
+            <div className="leaderboard-score font-bold">
+              <span>{score}</span>
+              <span className={`pointDiff ${pointDiffClass}`}>{' '}{x}</span>
+            </div>
             </li>
           );
         })}

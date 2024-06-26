@@ -38,14 +38,14 @@ body {
 }
 
 .medal img {
-  height: 30px;
-  width: 30px;
+  height: 25px;
+  width: 25px;
   margin-left: -5px;
 }
 
 .medal span {
-  margin-left: 5px;
-  margin-right: 5px;
+  /* margin-left: 5px;
+  margin-right: 5px; */
 }
 
 .medal span {
@@ -481,7 +481,7 @@ padding-right: 5px;
 
 .avatar {
   border-radius: 50%;
-  height: 50px;
-  width: 50px;
+  height: 45px;
+  width: 45px;
   background: lightcoral;
 }
