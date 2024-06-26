@@ -10,7 +10,7 @@ import { Switch, ThemeProvider } from '@mui/material';
 import { theme } from "./results";
 
 const getFixtures = () => {
-    const date = new Date().getDate() + 1;
+    const date = new Date().getDate();
     const todaysFixtures = fixtures[date];
     if (!todaysFixtures) {
         return <span>Future fixtures in progress...</span>
@@ -145,7 +145,7 @@ const Predictions = () => {
         setOpen(getLocal())
     }, [])
 
-    const todaysFixtures = fixtures[new Date().getDate() + 1];
+    const todaysFixtures = fixtures[new Date().getDate()];
 
     if (!todaysFixtures) {
         return <span className="fixture-list">✨ Fill out the Excel ladies ✨</span>
