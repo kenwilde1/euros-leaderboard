@@ -86,8 +86,13 @@ export function getLiveScore(lastResult, isHistorical) {
         const match = getMatch(todaysFixtures, lastResult);
 
         if (!match) {
-            const tomorrowsFirstGame = fixtures[new Date().getDate() + 1][0];
-            return <NextGame home={tomorrowsFirstGame.home} away={tomorrowsFirstGame.away} time={tomorrowsFirstGame.time} />
+            const tomorrowsFirstGame = fixtures[new Date().getDate() + 1];
+            
+            if (!tomorrowsFirstGame) {
+                return <EuiPanel>Future fixtures in progress...</EuiPanel>
+            }
+            
+            return <NextGame home={tomorrowsFirstGame[0].home} away={tomorrowsFirstGame[0].away} time={tomorrowsFirstGame[0].time} />
         }
 
         const isBeforeMatch = match && getIsBeforeNextGame(match.time);

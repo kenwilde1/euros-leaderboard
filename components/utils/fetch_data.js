@@ -114,23 +114,5 @@ export default function fetchData(players, results, originalResults, scorers) {
         }
     });
 
-    // cachedRows.forEach(cachedRow => {
-    //     const playerObj = finalObj[cachedRow.name];
-    //     const wins = playerObj.CR + cachedRow.CR;
-    //     finalObj[cachedRow.name] = {
-    //         CGS: playerObj.CGS + cachedRow.CGS,
-    //         CR: playerObj.CR + cachedRow.CR,
-    //         GA: playerObj.GA + cachedRow.GA,
-    //         GF: playerObj.GF + cachedRow.GF,
-    //         RA: `${Math.round((wins / originalResults.length) * 100)}%`,
-    //         name: cachedRow.name,
-    //         PP: playerObj.PP + cachedRow.PP,
-    //         points: playerObj.points + cachedRow.points,
-    //         position: 0,
-    //         GbTS: playerObj.GbTS + cachedRow.GbTS
-    //     }
-    // });
-
-
     return Object.values(finalObj);
 }

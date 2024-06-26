@@ -128,8 +128,6 @@ const sortingComparator = (a, b) => {
 }
 
 const getAvatar = (name) => {
-  console.log(avatars);
-  console.log(name);
   if (avatars[name] && avatars[name].src) {
     return <img className='avatar' src={avatars[name].src} />
   }
@@ -167,7 +165,7 @@ const Scores = ({ scores, positionUpdates, pointDiff }) => {
             x = `(+${pointDifference})`
             pointDiffClass = 'points-up'
           } else if (pointDifference < 0) {
-            x = `(-${pointDifference})`
+            x = `(${pointDifference})`
             pointDiffClass = 'points-down'
           } else {
             x = `(+${pointDifference})`
@@ -217,7 +215,8 @@ const ListItems = () => {
     let items = querySnapshot.docs
       .map((doc) => ({ ...doc.data(), id: doc.id }))
       .sort((a, b) => a.match - b.match);
-
+    // items.push({ home: 'Georgia', away: 'Portugal', homeGoals: 2, awayGoals: 0, id: 'GEOPOR', match: 35 })
+    // items.push({ home: 'Czechia', away: 'Turkey', homeGoals: 1, awayGoals: 1, id: 'CZETUR', match: 36 })
     const querySnapshot2 = await getDocs(collection(db, "scorers"));
     const items2 = querySnapshot2.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
     const { scores, updatesToPositions, pointDiff } = fetchTally(items, items2, indexToSlice);
@@ -314,6 +313,9 @@ const ListItems = () => {
     }
   }
 
+  // temp1.splice(36, 0, 1);
+
+  // console.log(results);
   const rows = fetchData(players, results, results, scorers[0])
     .sort(sortingComparatorRows)
     .map((player, index) => {
