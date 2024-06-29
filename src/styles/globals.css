@@ -34,7 +34,7 @@ main {
 }
 
 body {
-  background-color: rgb(8,92,172);
+  background-color: rgb(8, 92, 172);
 }
 
 .medal img {
@@ -49,14 +49,15 @@ body {
 }
 
 .medal span {
- font-size: 16px;
+  font-size: 16px;
 }
 
 .number-input {
   width: 40%;
 }
 
-.prediction-content, .actual-content {
+.prediction-content,
+.actual-content {
   display: flex;
   justify-content: space-between;
   padding: 20px;
@@ -96,6 +97,7 @@ h5 {
   justify-items: start;
   width: 90vw;
   padding: 10px;
+  min-height: 581px;
 }
 
 .title {
@@ -145,7 +147,7 @@ h5 {
   height: 130px;
   width: 200px;
   right: 0;
-  z-index:99999;
+  z-index: 99999;
 }
 
 .nav p:hover {
@@ -171,7 +173,7 @@ h5 {
   justify-content: center;
   align-items: center;
 }
-@media screen and (min-width:600px) {
+@media screen and (min-width: 600px) {
   .banner {
     display: none;
   }
@@ -253,62 +255,65 @@ h5 {
   font-size: 12px;
   margin: 15px 0px;
 }
-table{
-  border-collapse:collapse;
-  border:1px solid lightgray;
+table {
+  border-collapse: collapse;
+  border: 1px solid lightgray;
   font-size: 14px;
-  }
-  
-  table td, table th{
-  border:1px solid lightgray;
+}
+
+table td,
+table th {
+  border: 1px solid lightgray;
   text-align: center;
   padding: 5px;
-  }
+}
 
-  .container {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-  }
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
 
-  .lastUpdated {
-    color: #e4010b;
-    font-size: 12px;
-    font-weight: 600;
-  }
+.lastUpdated {
+  color: #e4010b;
+  font-size: 12px;
+  font-weight: 600;
+}
 
-  .euiAccordion__button {
-    display: flex;
-    width: 100%;
-  }
+.euiAccordion__button {
+  display: flex;
+  width: 100%;
+}
 
-  .euiAccordion__buttonContent, .accordian-button {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    align-items: center;
-  }
+.euiAccordion__buttonContent,
+.accordian-button {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
 
-  .pin-icon {
-    padding: 5px;
-  }
+.pin-icon {
+  padding: 5px;
+}
 
-  .data-grid {
-    width: 90vw !important;
-    scrollbar-width: 10px !important;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    height: auto !important;
-    border: 1px solid lightgray;
-    overflow:auto;
-  }
+.data-grid {
+  width: 90vw !important;
+  scrollbar-width: 10px !important;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  height: auto !important;
+  border: 1px solid lightgray;
+  overflow: auto;
+}
 
-  div[role="grid"] {
-    width: 150vw;
-  }
+div[role="grid"] {
+  width: 150vw;
+}
 
-  div[role="gridcell"], div[role="columnheader"] {
-    border: 1px solid lightgray;
+div[role="gridcell"],
+div[role="columnheader"] {
+  border: 1px solid lightgray;
 }
 
 div[role="columnheader"] {
@@ -321,14 +326,13 @@ div[role="columnheader"] > span {
   justify-content: flex-start;
 }
 
-
 ul {
   display: flex;
   flex-direction: column;
 }
 
 ul span {
-  margin-bottom: 10px;;
+  margin-bottom: 10px;
 }
 
 /* .Mui-checked {
@@ -404,19 +408,19 @@ ul span {
 }
 
 .live-fixture {
-    width: 100%;
-    background: white !important;
-    border: 1px solid black;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-    padding: 20px;
+  width: 100%;
+  background: white !important;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  padding: 20px;
 }
 
 .live-container span {
-padding-right: 5px;
+  padding-right: 5px;
 }
 
 .circle {
@@ -446,9 +450,10 @@ padding-right: 5px;
 .link {
   padding: 5px 10px;
   border-radius: 4px;
-  background: rgb(8,92,172);
+  background: rgb(8, 92, 172);
   color: white;
-  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 }
 
 .pointDiff {
