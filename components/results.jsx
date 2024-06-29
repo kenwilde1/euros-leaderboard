@@ -219,7 +219,6 @@ const ListItems = () => {
   const [selectedTabId, setSelectedTabId] = useState("table");
   const [results, setResults] = useState({});
   const [showAdvancedTable, setShowAdvancedTable] = useState();
-  const [scorers, setScorers] = useState([]);
   const [positionUpdates, setPositionUpdates] = useState({});
   const [pointDiff, setPointDiff] = useState({});
   const [lastResult, setLastResult] = useState();
@@ -227,39 +226,40 @@ const ListItems = () => {
   const [lengthOfAllResults, setLengthOfAllResults] = useState();
 
   const fetchItems = async (indexToSlice) => {
-    const querySnapshot = await getDocs(collection(db, "results"));
-    let items = querySnapshot.docs
-      .map((doc) => ({ ...doc.data(), id: doc.id }))
-      .sort((a, b) => a.match - b.match);
-    items.splice(36, 0, ...groupStageUpdates);
-    const querySnapshot2 = await getDocs(collection(db, "scorers"));
-    const items2 = querySnapshot2.docs.map((doc) => ({
-      ...doc.data(),
-      id: doc.id,
-    }));
-    const { scores, updatesToPositions, pointDiff } = fetchTally(
-      items,
-      items2,
-      indexToSlice
-    );
+    try {
+      // Fetch results
+      const resultsSnapshot = await getDocs(collection(db, "results"));
+      let items = resultsSnapshot.docs
+        .map((doc) => ({ ...doc.data(), id: doc.id }))
+        .sort((a, b) => a.match - b.match);
 
-    if (!indexToSlice) {
-      setLengthOfAllResults(items.length);
+      // Insert groupStageUpdates at index 36
+      items.splice(36, 0, ...groupStageUpdates);
+
+      // Process tally
+      const { scores, updatesToPositions, pointDiff } = fetchTally(
+        items,
+        indexToSlice
+      );
+
+      // Set state for tally results
+      setPointDiff(pointDiff);
+      setPositionUpdates(updatesToPositions);
+      setScores(scores);
+
+      // Update results based on indexToSlice
+      if (indexToSlice !== undefined) {
+        const newItems = items.slice(0, indexToSlice);
+        setResults(newItems);
+        setLastResult(newItems[newItems.length - 1]);
+      } else {
+        setResults(items);
+        setLastResult(items[items.length - 1]);
+        setLengthOfAllResults(items.length);
+      }
+    } catch (error) {
+      console.error("Error fetching items:", error);
     }
-
-    setPointDiff(pointDiff);
-    setPositionUpdates(updatesToPositions);
-    if (indexToSlice !== undefined) {
-      const newItems = items.slice(0, indexToSlice);
-      setResults(newItems);
-      setLastResult(newItems[newItems.length - 1]);
-    } else {
-      setResults(items);
-      setLastResult(items[items.length - 1]);
-    }
-
-    setScorers(items2);
-    setScores(scores);
   };
 
   useEffect(() => {
@@ -277,10 +277,6 @@ const ListItems = () => {
     setShowAdvancedTable(getLocal());
   }, []);
 
-  const onSelectedTabChanged = (id) => {
-    setSelectedTabId(id);
-  };
-
   const handleSwitchChange = (e) => {
     window.localStorage.setItem(LOCAL_STORAGE_KEY, e.target.checked);
     setShowAdvancedTable(e.target.checked);
@@ -290,7 +286,7 @@ const ListItems = () => {
     return tabs.map((tab, index) => (
       <EuiTab
         {...(tab.href && { href: tab.href, target: "_blank" })}
-        onClick={() => onSelectedTabChanged(tab.id)}
+        onClick={() => setSelectedTabId(tab.id)}
         isSelected={tab.id === selectedTabId}
         disabled={tab.disabled}
         key={index}
@@ -301,46 +297,52 @@ const ListItems = () => {
   };
 
   const filterResults = (pos) => {
-    if (pos === -1 && results.length === 1) {
+    const currentLength = results.length;
+
+    // Exit conditions
+    if (
+      (pos === -1 && currentLength === 1) ||
+      (pos === 1 && currentLength === lengthOfAllResults)
+    ) {
       return;
     }
 
-    if (pos === 1 && results.length === lengthOfAllResults) {
-      return;
-    }
-
+    // Fetch all items if pos is undefined
     if (pos === undefined) {
       fetchItems();
       setIsHistorical(false);
+      return;
+    }
+
+    const indexToSlice = currentLength + pos;
+
+    // Check if the index to slice reaches the total length of results
+    if (lengthOfAllResults === indexToSlice) {
+      setIsHistorical(false);
     } else {
-      const indexToSlice = results.length + pos;
-      if (lengthOfAllResults === indexToSlice) {
-        setIsHistorical(false);
-      }
-      if (indexToSlice !== undefined && indexToSlice > 0) {
-        fetchItems(indexToSlice);
-      } else if (indexToSlice !== undefined) {
-        const newItems = results.slice(0, indexToSlice);
-        const { scores, updatesToPositions, pointDiff } = fetchTally(
-          results,
-          scorers,
-          indexToSlice
-        );
-        setPointDiff(pointDiff);
-        setPositionUpdates(updatesToPositions);
-        setResults(newItems);
-        setLastResult(newItems[newItems.length - 1]);
-        setScores(scores);
-      }
-      if (lengthOfAllResults === indexToSlice) {
-        setIsHistorical(false);
-      } else {
-        setIsHistorical(true);
-      }
+      setIsHistorical(true);
+    }
+
+    // Fetch or slice items based on the calculated index
+    if (indexToSlice > 0) {
+      fetchItems(indexToSlice);
+    } else {
+      const newItems = results.slice(0, indexToSlice);
+      const { scores, updatesToPositions, pointDiff } = fetchTally(
+        results,
+        indexToSlice
+      );
+
+      // Update state with new values
+      setPointDiff(pointDiff);
+      setPositionUpdates(updatesToPositions);
+      setResults(newItems);
+      setLastResult(newItems[newItems.length - 1]);
+      setScores(scores);
     }
   };
 
-  const rows = fetchData(players, results, results, scorers[0])
+  const rows = fetchData(players, results, results)
     .sort(sortingComparatorRows)
     .map((player, index) => {
       return {
@@ -349,61 +351,85 @@ const ListItems = () => {
       };
     });
 
+  const renderLastUpdated = () => (
+    <p className="lastUpdated">
+      Last Updated by: {lastResult && getLastUpdated(lastResult)}
+    </p>
+  );
+
+  const renderScores = () => (
+    <div className="border w-96 text-center p-4 leaderboard">
+      <Scores
+        scores={scores}
+        positionUpdates={positionUpdates}
+        pointDiff={pointDiff}
+      />
+    </div>
+  );
+
+  const renderAdvancedTable = () => (
+    <>
+      <p className="lastUpdated">
+        Last Updated by: {lastResult && lastResult.home} vs{" "}
+        {lastResult && lastResult.away}
+      </p>
+      <AdvancedTable rows={rows} positionUpdates={positionUpdates} />
+    </>
+  );
+
+  const renderTableContent = () => (
+    <>
+      <ViewOtherResults filterResults={filterResults} />
+      <EuiSpacer />
+      <ThemeProvider theme={theme}>
+        <div className="toggle-table">
+          <Switch checked={showAdvancedTable} onChange={handleSwitchChange} />
+          <span className="toggle-desc">Advanced View</span>
+        </div>
+      </ThemeProvider>
+      {showAdvancedTable && Object.keys(positionUpdates).length ? (
+        renderAdvancedTable()
+      ) : (
+        <>
+          {renderLastUpdated()}
+          {renderScores()}
+        </>
+      )}
+    </>
+  );
+
+  const renderContent = () => {
+    switch (selectedTabId) {
+      case "table":
+        return (
+          <>
+            {getLiveScore(lastResult?.id, isHistorical)}
+            <EuiSpacer />
+            {renderTableContent()}
+          </>
+        );
+      case "calc":
+        return (
+          <div className="border w-screen h-24 text-center p-4 calc">
+            <Calculator />
+          </div>
+        );
+      case "pred":
+        return (
+          <div className="border w-screen h-24 text-center p-4 calc">
+            <Predictions />
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="container">
       <EuiTabs>{renderTabs()}</EuiTabs>
       <EuiSpacer />
-      {selectedTabId === "table" &&
-        getLiveScore(lastResult && lastResult.id, isHistorical)}
-      <EuiSpacer />
-      {selectedTabId === "table" && (
-        <ViewOtherResults filterResults={filterResults} />
-      )}
-      <EuiSpacer />
-      {selectedTabId === "table" && (
-        <ThemeProvider theme={theme}>
-          <div className="toggle-table">
-            <Switch checked={showAdvancedTable} onChange={handleSwitchChange} />
-            <span className="toggle-desc">Advanced View</span>
-          </div>
-        </ThemeProvider>
-      )}
-      {selectedTabId === "table" &&
-        showAdvancedTable &&
-        Object.keys(positionUpdates).length && (
-          <>
-            <p className="lastUpdated">
-              Last Updated by: {lastResult && lastResult.home} vs{" "}
-              {lastResult && lastResult.away}
-            </p>
-            <AdvancedTable rows={rows} positionUpdates={positionUpdates} />
-          </>
-        )}
-      {selectedTabId === "table" && !showAdvancedTable && (
-        <>
-          <p className="lastUpdated">
-            Last Updated by: {lastResult && getLastUpdated(lastResult)}
-          </p>
-          <div className="border w-96 text-center p-4 leaderboard">
-            <Scores
-              scores={scores}
-              positionUpdates={positionUpdates}
-              pointDiff={pointDiff}
-            />
-          </div>
-        </>
-      )}
-
-      {selectedTabId === "calc" && (
-        <div className="border w-screen h-24 text-center p-4 calc">
-          <Calculator />
-        </div>
-      )}
-      {selectedTabId === "pred" && (
-        <div className="border w-screen h-24 text-center p-4 calc">
-          <Predictions />
-        </div>
-      )}
+      {renderContent()}
     </div>
   );
 };

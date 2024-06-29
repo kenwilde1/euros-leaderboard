@@ -115,7 +115,7 @@ const calculateScore = (
   return { score: runningScore, wins, perfectPoints, correctGoalsScored };
 };
 
-export default function fetchData(players, results, originalResults, scorers) {
+export default function fetchData(players, results, originalResults) {
   const names = Object.keys(players);
   let finalObj = {};
 

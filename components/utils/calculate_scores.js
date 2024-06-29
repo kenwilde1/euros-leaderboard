@@ -175,7 +175,7 @@ function calculatePointDifferences(scores, previousScores) {
   return pointDifferences;
 }
 
-export const fetchTally = (results, goalScorers, indexToSlice) => {
+export const fetchTally = (results, indexToSlice) => {
   if (indexToSlice !== undefined) {
     results = results.slice(0, indexToSlice);
   }
