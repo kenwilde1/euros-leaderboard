@@ -31,18 +31,24 @@ import { ViewOtherResults } from "./view_other_results";
 
 import david from "../data/david.png";
 import dylan from "../data/dylan.jpg";
+import hugh from "../data/hugh.png";
+import alan from "../data/alan.jpg";
+import shane from "../data/shane.jpg";
+import phil from "../data/phil.jpg";
+import stephen from "../data/stephen.jpg";
+import kenny from "../data/kenny.jpg";
 
 const defaultOne = {};
 
 const avatars = {
-  Alan: defaultOne,
+  Alan: alan,
   David: david,
   Dylan: dylan,
-  Stephen: defaultOne,
-  Hugh: defaultOne,
-  Philip: defaultOne,
-  Shane: defaultOne,
-  Kenny: defaultOne,
+  Stephen: stephen,
+  Hugh: hugh,
+  Philip: phil,
+  Shane: shane,
+  Kenny: kenny,
 };
 
 const groupStageUpdates = [
@@ -121,7 +127,11 @@ const Medal = ({ position }) => {
   } else if (position === 2) {
     return <img src={bronze.src} />;
   } else {
-    return <span>{`${position + 1}.`}</span>;
+    return (
+      <span>
+        <b>{`${position + 1}.`}</b>
+      </span>
+    );
   }
 };
 
@@ -180,6 +190,8 @@ const Scores = ({ scores, positionUpdates, pointDiff }) => {
           pointDiffClass = "points-same";
         }
 
+        const name = player.name === "Stephen" ? "Ste" : player.name;
+
         return (
           <li className="leaderboard-position">
             <div className="leaderboard-name">
@@ -188,7 +200,7 @@ const Scores = ({ scores, positionUpdates, pointDiff }) => {
               </span>
               <span className="leaderboard-name">
                 {getAvatar(player.name)}
-                {player.name}
+                {name}
               </span>
               {getPositionUpdateLabel(positionUpdates[player.name])}
             </div>
@@ -360,7 +372,6 @@ const ListItems = ({ selectedTabId }) => {
 
   const renderTableContent = () => (
     <>
-      <ViewOtherResults filterResults={filterResults} />
       <EuiSpacer />
       <ThemeProvider theme={theme}>
         <div className="toggle-table">
@@ -368,6 +379,9 @@ const ListItems = ({ selectedTabId }) => {
           <span className="toggle-desc">Advanced View</span>
         </div>
       </ThemeProvider>
+      <EuiSpacer />
+      <ViewOtherResults filterResults={filterResults} />
+      <EuiSpacer />
       {showAdvancedTable && Object.keys(positionUpdates).length ? (
         <>{renderAdvancedTable()}</>
       ) : (
@@ -385,7 +399,6 @@ const ListItems = ({ selectedTabId }) => {
         return (
           <>
             {getLiveScore(lastResult?.id, isHistorical)}
-            <EuiSpacer />
             {renderTableContent()}
           </>
         );

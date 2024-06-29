@@ -8,10 +8,15 @@ export function ViewOtherResults({ filterResults }) {
         onClick={() => filterResults(-1)}
         iconType="arrowLeft"
         size="s"
+        className="prev-button"
       >
         Prev
       </EuiButton>
-      <EuiButton color="warning" onClick={() => filterResults()} size="s">
+      <EuiButton
+        className="latest-button"
+        onClick={() => filterResults()}
+        size="s"
+      >
         Back to latest
       </EuiButton>
       <EuiButton
@@ -19,6 +24,7 @@ export function ViewOtherResults({ filterResults }) {
         iconType="arrowRight"
         iconSide="right"
         size="s"
+        className="next-button"
       >
         Next
       </EuiButton>

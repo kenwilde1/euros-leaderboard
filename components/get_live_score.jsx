@@ -2,8 +2,24 @@ import moment from "moment";
 
 import fixtures from "../data/fixtures";
 
-import colours from "../data/colours";
 import { EuiPanel } from "@elastic/eui";
+
+import Flag from "react-flagkit";
+
+export const countryFlagMap = {
+  Germany: "DE",
+  Denmark: "DK",
+  Switzerland: "CH",
+  England: "GB-ENG",
+  Slovakia: "SK",
+  Spain: "ES",
+  Georgia: "GE",
+  France: "FR",
+  Belgium: "BE",
+  Slovenia: "SI",
+  Portugal: "PT",
+  Italy: "IT",
+};
 
 const timeString = "20:54";
 
@@ -43,14 +59,20 @@ const getIsLastMatchOver = (time) => {
 
 const Live = ({ home, away }) => {
   return (
-    <EuiPanel className="now">
+    <EuiPanel className="now live-score">
       <div className="live">
         <div className="circle"></div>Live
       </div>
-      <div>
-        <span style={{ color: colours[home] }}>{home}</span>
+      <div className="teams">
+        <div className="teams-home">
+          <Flag country={countryFlagMap[home]} />
+          {home}
+        </div>
         <span> vs </span>
-        <span style={{ color: colours[away] }}>{away}</span>
+        <div className="teams-away">
+          <Flag country={countryFlagMap[away]} />
+          {away}
+        </div>
       </div>
       <span className="link">
         <a
@@ -66,15 +88,18 @@ const Live = ({ home, away }) => {
 
 const NextGame = ({ home, away, time }) => {
   return (
-    <EuiPanel className="now">
+    <EuiPanel className="now live-score">
       <div className="live">Next up:</div>
-      <div>
-        <span style={{ color: colours[home] }}>{home}</span>
+      <div className="teams">
+        <div className="teams-home">
+          <Flag country={countryFlagMap[home]} />
+          {home}
+        </div>
         <span> vs </span>
-        <span style={{ color: colours[away] }}>{away}</span>{" "}
-        <span>
-          <b>{time}</b>
-        </span>
+        <div className="teams-away">
+          <Flag country={countryFlagMap[away]} />
+          {away}
+        </div>
       </div>
       <span className="link">
         <a

@@ -66,4 +66,8 @@ export default {
     { id: "ENGSLO2", time: "17:00", home: "England", away: "Slovakia" },
     { id: "SPAGEO", time: "20:00", home: "Spain", away: "Georgia" },
   ],
+  1: [
+    { id: "FRABEL", time: "17:00", home: "France", away: "Belgium" },
+    { id: "PORSLO", time: "20:00", home: "Portugal", away: "Slovenia" },
+  ],
 };

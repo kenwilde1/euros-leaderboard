@@ -7,11 +7,14 @@ import {
 import { useEffect, useState } from "react";
 
 import fixtures from "../data/fixtures";
-import colours from "../data/colours";
 import players from "../data/players";
 
 import { Switch, ThemeProvider } from "@mui/material";
 import { theme } from "./results";
+
+import { countryFlagMap } from "./get_live_score";
+
+import Flag from "react-flagkit";
 
 const getFixtures = () => {
   const date = new Date().getDate();
@@ -24,11 +27,15 @@ const getFixtures = () => {
   return todaysFixtures.map((match, index) => (
     <>
       <div className="fixture-item">
-        <span style={{ color: colours[match.home] }}>{match.home}</span>
+        <div className="fixture-item-home">
+          <Flag country={countryFlagMap[match.home]} />
+        </div>
         <span>vs</span>
-        <span style={{ color: colours[match.away] }}>{match.away}</span>
-        <span className="time">{match.time}</span>
+        <div className="fixture-item-away">
+          <Flag country={countryFlagMap[match.away]} />
+        </div>
       </div>
+      <span className="time">{match.time}</span>
       {lastIndex !== index && <EuiHorizontalRule />}
     </>
   ));
