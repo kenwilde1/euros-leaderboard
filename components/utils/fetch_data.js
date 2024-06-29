@@ -45,7 +45,7 @@ const calculateTopGoalScorers = (topGoalscorer, results) => {
       goalScorers &&
         goalScorers.forEach((scorer) => {
           if (scorer === topGoalscorer) {
-            score = 1;
+            score += 1;
           }
         });
     });
@@ -128,6 +128,7 @@ export default function fetchData(players, results, originalResults) {
       players[name].topGoalscorer,
       results
     );
+
     const { score, wins, perfectPoints, correctGoalsScored } = calculateScore(
       players[name],
       goalsFor,
