@@ -10,12 +10,11 @@ import gold from "../src/images/gold.svg";
 import silver from "../src/images/silver.svg";
 import bronze from "../src/images/bronze.svg";
 
-import Calculator from "./calculator";
 import Predictions from "./predictions";
 
 import AdvancedTable from "../components/advanced_table";
 
-import { EuiTab, EuiTabs, EuiSpacer } from "@elastic/eui";
+import { EuiSpacer } from "@elastic/eui";
 
 import { Switch, createTheme, ThemeProvider } from "@mui/material";
 
@@ -32,8 +31,6 @@ import { ViewOtherResults } from "./view_other_results";
 
 import david from "../data/david.png";
 import dylan from "../data/dylan.jpg";
-
-import { tabs } from "./tabs";
 
 const defaultOne = {};
 
@@ -198,7 +195,7 @@ const Scores = ({ scores, positionUpdates, pointDiff }) => {
             <div className="leaderboard-score font-bold">
               <span>{score}</span>
               <span className={`pointDiff ${pointDiffClass}`}>
-                <b>{x}</b>
+                <b> {x}</b>
               </span>
             </div>
           </li>
@@ -216,9 +213,8 @@ const sortingComparatorRows = (a, b) => {
 };
 const LOCAL_STORAGE_KEY = "euros:advanced";
 
-const ListItems = () => {
+const ListItems = ({ selectedTabId }) => {
   const [scores, setScores] = useState([]);
-  const [selectedTabId, setSelectedTabId] = useState("table");
   const [results, setResults] = useState({});
   const [showAdvancedTable, setShowAdvancedTable] = useState();
   const [positionUpdates, setPositionUpdates] = useState({});
@@ -237,8 +233,6 @@ const ListItems = () => {
 
       // Insert groupStageUpdates at index 36
       items.splice(36, 0, ...groupStageUpdates);
-
-      console.log(items);
 
       // Process tally
       const { scores, updatesToPositions, pointDiff } = fetchTally(
@@ -284,20 +278,6 @@ const ListItems = () => {
   const handleSwitchChange = (e) => {
     window.localStorage.setItem(LOCAL_STORAGE_KEY, e.target.checked);
     setShowAdvancedTable(e.target.checked);
-  };
-
-  const renderTabs = () => {
-    return tabs.map((tab, index) => (
-      <EuiTab
-        {...(tab.href && { href: tab.href, target: "_blank" })}
-        onClick={() => setSelectedTabId(tab.id)}
-        isSelected={tab.id === selectedTabId}
-        disabled={tab.disabled}
-        key={index}
-      >
-        {tab.name}
-      </EuiTab>
-    ));
   };
 
   const filterResults = (pos) => {
@@ -409,12 +389,6 @@ const ListItems = () => {
             {renderTableContent()}
           </>
         );
-      case "calc":
-        return (
-          <div className="border w-screen h-24 text-center p-4 calc">
-            <Calculator />
-          </div>
-        );
       case "pred":
         return (
           <div className="border w-screen h-24 text-center p-4 calc">
@@ -428,7 +402,6 @@ const ListItems = () => {
 
   return (
     <div className="container">
-      <EuiTabs>{renderTabs()}</EuiTabs>
       <EuiSpacer />
       {renderContent()}
     </div>

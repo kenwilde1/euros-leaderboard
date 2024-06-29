@@ -6,6 +6,21 @@ import banner from "../images/banner.png";
 
 import localFont from "next/font/local";
 
+import { useState } from "react";
+
+import { EuiButtonGroup } from "@elastic/eui";
+
+const toggleButtons = [
+  {
+    id: `table`,
+    label: "Table",
+  },
+  {
+    id: `pred`,
+    label: "Predictions",
+  },
+];
+
 const euroFont = localFont({
   src: [
     {
@@ -27,15 +42,24 @@ const euroFont = localFont({
 });
 
 export default function Home() {
+  const [toggleIdSelected, setToggleIdSelected] = useState("table");
+
   return (
-    <main
-      className={`flex flex-col items-center gap-12 p-24 ${euroFont.className}`}
-    >
+    <main className={`flex flex-col items-center pt-24 ${euroFont.className}`}>
       <img className="banner" src={banner.src} />
       <h1 className="title text-2xl font-bold text-white">
         Euros 2024 Match Predictor
       </h1>
-      <ListItems />
+      <EuiButtonGroup
+        className="navbar"
+        legend="options to select table or prediction tabs"
+        options={toggleButtons}
+        idSelected={toggleIdSelected}
+        onChange={(id) => setToggleIdSelected(id)}
+        isFullWidth
+        color="danger"
+      />
+      <ListItems selectedTabId={toggleIdSelected} />
     </main>
   );
 }

@@ -85,7 +85,7 @@ h5 {
 }
 
 .calc {
-  width: 80vw;
+  width: 90vw;
 }
 
 .leaderboard {
@@ -154,17 +154,20 @@ h5 {
   cursor: pointer;
   text-decoration: underline;
 }
+
 .euiTab {
-  width: 100px;
-  display: flex;
-  justify-content: center;
+  /* width: 100px; */
+  /* display: flex;
+  justify-content: center; */
 }
 
 .euiTabs {
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   background: white;
-  width: 300px;
+  /* width: 300px; */
   padding: 5px;
+  border-radius: 5px;
+  width: 90vw;
 }
 
 .euiTab__content > span {
@@ -273,6 +276,7 @@ table th {
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 100px;
 }
 
 .lastUpdated {
@@ -489,4 +493,9 @@ ul span {
   height: 45px;
   width: 45px;
   background: lightcoral;
+}
+
+.navbar {
+  width: 90vw;
+  margin-top: 20px;
 }
