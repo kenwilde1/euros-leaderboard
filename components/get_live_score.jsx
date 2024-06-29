@@ -101,6 +101,7 @@ const NextGame = ({ home, away, time }) => {
           {away}
         </div>
       </div>
+      <b>{time}</b>
       <span className="link">
         <a
           target="_blank"

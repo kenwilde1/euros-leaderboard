@@ -460,8 +460,8 @@ ul span {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 10px;
-  height: 140px;
+  gap: 4px;
+  height: 155px;
   background-color: var(--secondary-offset);
 }
 
