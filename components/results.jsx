@@ -197,7 +197,9 @@ const Scores = ({ scores, positionUpdates, pointDiff }) => {
             </div>
             <div className="leaderboard-score font-bold">
               <span>{score}</span>
-              <span className={`pointDiff ${pointDiffClass}`}> {x}</span>
+              <span className={`pointDiff ${pointDiffClass}`}>
+                <b>{x}</b>
+              </span>
             </div>
           </li>
         );
@@ -235,6 +237,8 @@ const ListItems = () => {
 
       // Insert groupStageUpdates at index 36
       items.splice(36, 0, ...groupStageUpdates);
+
+      console.log(items);
 
       // Process tally
       const { scores, updatesToPositions, pointDiff } = fetchTally(
@@ -369,10 +373,7 @@ const ListItems = () => {
 
   const renderAdvancedTable = () => (
     <>
-      <p className="lastUpdated">
-        Last Updated by: {lastResult && lastResult.home} vs{" "}
-        {lastResult && lastResult.away}
-      </p>
+      {renderLastUpdated()}
       <AdvancedTable rows={rows} positionUpdates={positionUpdates} />
     </>
   );
@@ -388,7 +389,7 @@ const ListItems = () => {
         </div>
       </ThemeProvider>
       {showAdvancedTable && Object.keys(positionUpdates).length ? (
-        renderAdvancedTable()
+        <>{renderAdvancedTable()}</>
       ) : (
         <>
           {renderLastUpdated()}

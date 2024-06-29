@@ -9,21 +9,23 @@ const getGoalsFor = (predictions, results = []) => {
 
   results &&
     results.length &&
-    results.forEach((result) => {
-      if (result.id !== "group-stage") {
-        const obj = {
-          [result.home]: result.homeGoals,
-          [result.away]: result.awayGoals,
-        };
-        if (obj[highestScoringTeam] !== undefined) {
-          x += obj[highestScoringTeam];
-        }
+    results.forEach((result, index) => {
+      if (index < 36) {
+        if (result.id !== "group-stage") {
+          const obj = {
+            [result.home]: result.homeGoals,
+            [result.away]: result.awayGoals,
+          };
+          if (obj[highestScoringTeam] !== undefined) {
+            x += obj[highestScoringTeam];
+          }
 
-        if (obj[bestDefence] !== undefined) {
-          let otherTeam = Object.keys(obj).filter(
-            (team) => team !== bestDefence
-          )[0];
-          y += obj[otherTeam];
+          if (obj[bestDefence] !== undefined) {
+            let otherTeam = Object.keys(obj).filter(
+              (team) => team !== bestDefence
+            )[0];
+            y += obj[otherTeam];
+          }
         }
       }
     });

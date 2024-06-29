@@ -143,8 +143,6 @@ const Predictions = () => {
     setOpen(getLocal());
   }, []);
 
-  return <span className="fixture-list">✨ Fill out the Excel ladies ✨</span>;
-
   return (
     <div className="predictions-page">
       <div className="fixture-list">
