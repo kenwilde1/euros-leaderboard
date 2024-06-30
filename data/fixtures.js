@@ -70,4 +70,8 @@ export default {
     { id: "FRABEL", time: "17:00", home: "France", away: "Belgium" },
     { id: "PORSLO", time: "20:00", home: "Portugal", away: "Slovenia" },
   ],
+  2: [
+    { id: "ROMNET", time: "17:00", home: "Romania", away: "Netherlands" },
+    { id: "AUTTUR", time: "20:00", home: "Austria", away: "Turkey" },
+  ],
 };

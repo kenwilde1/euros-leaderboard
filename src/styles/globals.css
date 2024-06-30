@@ -189,35 +189,6 @@ h5 {
   justify-content: center;
   align-items: center;
 }
-@media screen and (min-width: 600px) {
-  .banner {
-    display: none;
-  }
-
-  .calc {
-    width: 50vw !important;
-  }
-
-  table {
-    width: 100% !important;
-  }
-
-  .euiTabs {
-    width: 400px;
-  }
-
-  .euiTab {
-    width: 133px;
-  }
-
-  .about {
-    width: 300px;
-  }
-
-  .toggle-results {
-    width: 90vw;
-  }
-}
 
 .fixture-list {
   background: white;
@@ -364,9 +335,9 @@ ul span {
   color: lightcoral !important;
 } */
 
-.toggle-table {
+/* .toggle-table {
   align-self: flex-start;
-}
+} */
 
 .scores {
   display: flex;
@@ -576,4 +547,59 @@ ul span {
 .euiPanel,
 .fixture-list {
   background-color: var(--secondary-offset) !important;
+}
+
+@media screen and (min-width: 600px) {
+  .banner {
+    display: none;
+  }
+
+  .calc {
+    width: 50vw !important;
+  }
+
+  table {
+    width: 100% !important;
+  }
+
+  .euiTabs {
+    width: 400px;
+  }
+
+  .euiTab {
+    width: 133px;
+  }
+
+  .about {
+    width: 300px;
+  }
+
+  .toggle-results {
+    width: 90vw;
+  }
+  .container {
+    width: 60vw !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .now {
+    width: 30vw;
+  }
+
+  .navbar,
+  .toggle-table {
+    width: 30vw;
+  }
+
+  .leaderboard {
+    width: 30vw;
+  }
+
+  .toggle-table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
