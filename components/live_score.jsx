@@ -41,7 +41,11 @@ const Fixture = ({ fixture, index }) => {
   }
 
   return (
-    <div className="fixture">
+    <a
+      className="fixture"
+      href={`https://www.google.com/search?q=${fixture.home}+vs+${fixture.away}`}
+      target="_blank"
+    >
       <div className="fixture-time">{date}</div>
       <div className="fixture-round">{fixture.round}</div>
       <div className="fixture-teams">
@@ -66,7 +70,7 @@ const Fixture = ({ fixture, index }) => {
           {fixture.away}
         </div>
       </div>
-    </div>
+    </a>
   );
 };
 
