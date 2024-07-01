@@ -2,15 +2,14 @@
 
 import ListItems from "../../components/results";
 
-import banner from "../images/banner.png";
-
 import localFont from "next/font/local";
 
 import { useState } from "react";
 
-import { EuiButtonGroup } from "@elastic/eui";
+import { EuiButton, EuiButtonGroup, EuiSpacer } from "@elastic/eui";
 
 import logo from "../images/logo.jpeg";
+import { LiveFixtures } from "../../components/live_score";
 
 const toggleButtons = [
   {
@@ -53,25 +52,34 @@ export default function Home() {
 
   return (
     <main className={`flex flex-col items-center pt-8 ${euroFont.className}`}>
-      {/* <img className="banner" src={banner.src} /> */}
       <div className="header">
         <img src={logo.src} style={{ height: "125px" }} />
         <div className="header-title">
-          <h1>Match</h1>
-          <h1>Predictor</h1>
+          <h1>MATCH</h1>
+          <h1>PREDICTOR</h1>
         </div>
       </div>
-      {/* <h1 className="title text-2xl font-bold text-white">
-        Euros 2024 Match Predictor
-      </h1> */}
-      <EuiButtonGroup
-        className="navbar"
-        legend="options to select table or prediction tabs"
-        options={toggleButtons}
-        idSelected={toggleIdSelected}
-        onChange={(id) => setToggleIdSelected(id)}
-        isFullWidth
-      />
+      <div className="navbar">
+        <EuiButton
+          className={`table-button ${
+            toggleIdSelected === "table" ? "isSelected" : ""
+          }`}
+          onClick={() => setToggleIdSelected("table")}
+          fill
+        >
+          Table
+        </EuiButton>
+        <EuiButton
+          className={`table-button ${
+            toggleIdSelected === "pred" ? "isSelected" : ""
+          }`}
+          onClick={() => setToggleIdSelected("pred")}
+          fill
+        >
+          Predictions
+        </EuiButton>
+      </div>
+      <LiveFixtures />
       <ListItems selectedTabId={toggleIdSelected} />
     </main>
   );

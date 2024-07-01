@@ -152,13 +152,8 @@ const Predictions = () => {
 
   return (
     <div className="predictions-page">
-      <div className="fixture-list">
-        <h4>Today's fixtures</h4>
-        {getFixtures()}
-      </div>
       <div className="toggle-predictions">
         <ThemeProvider theme={theme}>
-          <EuiSpacer />
           <div className="toggle-table">
             <Switch checked={open} onChange={handleSwitchChange} />
             <span className="toggle-desc">Open all predictions</span>

@@ -25,8 +25,6 @@ import players from "../data/players";
 import { faAngleUp, faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { getLiveScore } from "./get_live_score";
-
 import { ViewOtherResults } from "./view_other_results";
 
 import david from "../data/david.png";
@@ -38,7 +36,20 @@ import phil from "../data/phil.jpg";
 import stephen from "../data/stephen.jpg";
 import kenny from "../data/kenny.jpg";
 
-const defaultOne = {};
+import france from "../data/france.png";
+import england from "../data/england.png";
+import portugal from "../data/portugal.png";
+
+const winners = {
+  David: france,
+  Philip: france,
+  Shane: portugal,
+  Stephen: portugal,
+  Alan: france,
+  Dylan: england,
+  Hugh: france,
+  Kenny: france,
+};
 
 const avatars = {
   Alan: alan,
@@ -145,7 +156,14 @@ const sortingComparator = (a, b) => {
 
 const getAvatar = (name) => {
   if (avatars[name] && avatars[name].src) {
-    return <img className="avatar" src={avatars[name].src} />;
+    return (
+      <div>
+        <img className="avatar" src={avatars[name].src} />
+        <div className="flag">
+          <img src={winners[name].src} height="30" width="30" />
+        </div>
+      </div>
+    );
   }
 
   return <span></span>;
@@ -178,15 +196,14 @@ const Scores = ({ scores, positionUpdates, pointDiff }) => {
         const pointDifference = pointDiff[player.name];
         let x = "";
         let pointDiffClass = "";
-
         if (pointDifference > 0) {
-          x = `(+${pointDifference})`;
+          x = `+${pointDifference}`;
           pointDiffClass = "points-up";
         } else if (pointDifference < 0) {
-          x = `(${pointDifference})`;
+          x = `${pointDifference}`;
           pointDiffClass = "points-down";
         } else {
-          x = `(+${pointDifference})`;
+          x = `+${pointDifference}`;
           pointDiffClass = "points-same";
         }
 
@@ -206,9 +223,9 @@ const Scores = ({ scores, positionUpdates, pointDiff }) => {
             </div>
             <div className="leaderboard-score font-bold">
               <span>{score}</span>
-              <span className={`pointDiff ${pointDiffClass}`}>
+              <div className={`pointDiff ${pointDiffClass}`}>
                 <b> {x}</b>
-              </span>
+              </div>
             </div>
           </li>
         );
@@ -372,7 +389,6 @@ const ListItems = ({ selectedTabId }) => {
 
   const renderTableContent = () => (
     <>
-      <EuiSpacer />
       <ThemeProvider theme={theme}>
         <div className="toggle-table">
           <Switch checked={showAdvancedTable} onChange={handleSwitchChange} />
@@ -396,12 +412,7 @@ const ListItems = ({ selectedTabId }) => {
   const renderContent = () => {
     switch (selectedTabId) {
       case "table":
-        return (
-          <>
-            {getLiveScore(lastResult?.id, isHistorical)}
-            {renderTableContent()}
-          </>
-        );
+        return <>{renderTableContent()}</>;
       case "pred":
         return (
           <div className="border w-screen h-24 text-center p-4 calc">

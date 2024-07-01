@@ -7,7 +7,7 @@
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
   --primary: #143cdb;
-  --primary-offset: #013771;
+  --primary-offset: #1131ad;
   --primary-light: #4a7db3;
   --secondary: #dbe8f1;
   --secondary-offset: #ecf2f5;
@@ -125,6 +125,11 @@ h5 {
   padding: 20px;
   align-items: center;
   height: 75px;
+  border-bottom: 1px solid lightgrey;
+}
+
+.leaderboard-position:last-child {
+  border: none;
 }
 
 .leaderboard-name {
@@ -260,7 +265,9 @@ table th {
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 100px;
+  padding-bottom: 100px;
+  width: 100vw;
+  background: var(--primary-offset);
 }
 
 .lastUpdated {
@@ -335,9 +342,10 @@ ul span {
   color: lightcoral !important;
 } */
 
-/* .toggle-table {
+.toggle-table {
   align-self: flex-start;
-} */
+  margin-left: 10px;
+}
 
 .scores {
   display: flex;
@@ -347,9 +355,9 @@ ul span {
   justify-content: start;
 }
 
-.scores li:nth-child(odd) {
+/* .scores li:nth-child(odd) {
   background: rgb(193, 192, 192);
-}
+} */
 
 .special-column {
   background-color: #00a85d !important;
@@ -445,27 +453,42 @@ ul span {
     rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 }
 
+.leaderboard-score {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
 .pointDiff {
   font-weight: 400 !important;
-  font-size: 12px;
+  font-size: 11px;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .points-up {
-  color: green;
+  background-color: green;
+  color: white;
 }
 
 .points-down {
-  color: red;
+  background-color: red;
+  color: white;
 }
 
 .points-same {
-  color: orange;
+  background-color: lightgray;
+  color: black;
 }
 
 .toggle-results {
   display: flex;
   gap: 15px;
-  justify-content: center;
+  justify-content: space-between;
   width: 90vw;
 }
 
@@ -478,14 +501,24 @@ ul span {
   height: 45px;
   width: 45px;
   background: lightcoral;
+  margin-top: 18px;
 }
 
 .navbar {
   width: 90vw;
   margin-top: 20px;
-  background-color: var(--primary-light);
-  padding: 2px;
-  border-radius: 5px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.navbar .euiButton {
+  background: var(--primary);
+  border-radius: 20px;
+}
+
+.navbar .isSelected {
+  background: var(--accent-yellow);
+  color: black;
 }
 
 .header {
@@ -504,27 +537,36 @@ ul span {
   align-items: center;
   justify-content: center;
   height: 125px;
+  font-weight: 700;
+}
+
+.header-title h1 {
+  margin-top: -10px;
+  margin-bottom: -10px;
 }
 
 .euiButtonGroupButton {
-  background-color: var(--primary-light);
+  background-color: var(--primary);
   color: white;
 }
 
 .euiButtonGroupButton-isSelected {
-  background-color: var(--primary-offset);
+  background-color: var(--accent-yellow);
+  color: black;
 }
 
 .latest-button {
-  background-color: var(--primary-offset);
+  background-color: var(--primary);
   color: white;
+  border: 1px solid #324ebb;
 }
 
-/* .next-button,
+.next-button,
 .prev-button {
-  background-color: var(--accent-red-offset);
-  color: white;
-} */
+  background-color: var(--secondary-offset);
+  color: black;
+  border: 1px solid #324ebb;
+}
 
 .teams {
   display: flex;
@@ -602,4 +644,65 @@ ul span {
     justify-content: center;
     align-items: center;
   }
+}
+
+.live-fixtures-container {
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  gap: 20px;
+  width: 100vw;
+  overflow: auto;
+  height: 120px;
+}
+
+.fixture {
+  height: 110px;
+  min-width: 150px;
+  background-color: var(--primary-offset);
+  border-radius: 10px;
+  border: 1px solid #324ebb;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 14px;
+  box-shadow: #324ebb 0px 2px 8px 0px;
+}
+
+.fixture:last-child {
+  margin-right: 20px;
+}
+
+.fixture-time {
+  color: rgb(202, 201, 201);
+  padding: 10px;
+}
+
+.fixture-teams {
+  display: flex;
+  flex-direction: column;
+  color: var(--secondary);
+  padding: 10px;
+  gap: 3px;
+}
+
+.fixture-teams div {
+  display: flex;
+  gap: 8px;
+}
+
+.flag {
+  width: 18px;
+  height: 18px;
+  position: relative;
+  left: 29px;
+  top: -13px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.flag img {
+  height: 20px !important;
+  width: 20px !important;
 }
