@@ -639,10 +639,14 @@ ul span {
     width: 90vw;
   }
   .container {
-    width: 60vw !important;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    width: 100vw !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  .live-fixtures-container {
+    overflow: hidden !important;
   }
 
   .now {
@@ -654,6 +658,13 @@ ul span {
     width: 30vw;
   }
 
+  .toggle-table {
+    display: flex;
+    justify-content: center !important;
+    width: 50vw;
+    align-self: center;
+  }
+
   .leaderboard {
     width: 30vw;
   }
@@ -662,6 +673,19 @@ ul span {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  .data-grid {
+    width: 50vw !important;
+  }
+
+  .toggle-results {
+    width: 50vw;
+    justify-content: center;
+  }
+
+  .latest-button {
+    flex-grow: unset;
   }
 }
 
