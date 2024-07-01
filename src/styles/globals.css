@@ -16,8 +16,8 @@
   --accent-red: #e4010b;
   --accent-red-offset: #e3767c;
   --tertiary: #2b2c36;
-  --accent-yellow: #ffd600;
-  --accent-yellow-offset: #ffd500;
+  --accent-yellow: #f8bf4b;
+  --accent-yellow-offset: #f8bf4b;
   --blue: #1677ff;
 }
 
@@ -507,6 +507,7 @@ ul span {
   width: 45px;
   background: lightcoral;
   margin-top: 18px;
+  border: 1px solid var(--accent-yellow);
 }
 
 .navbar {
@@ -525,7 +526,7 @@ ul span {
 
 .navbar .isSelected {
   background: var(--accent-yellow);
-  color: black;
+  color: #000036;
 }
 
 .header {
@@ -724,7 +725,7 @@ ul span {
 }
 
 .fixture-round {
-  padding-top: 5px;
+  margin-top: -5px;
   padding-left: 10px;
   color: rgb(202, 201, 201);
   /* font-weight: 600; */
