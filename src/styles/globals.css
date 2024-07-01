@@ -250,6 +250,13 @@ h5 {
   font-size: 12px;
   margin: 15px 0px;
 }
+
+.other-predictions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 table {
   border-collapse: collapse;
   border: 1px solid lightgray;
@@ -271,6 +278,10 @@ table th {
   padding-bottom: 100px;
   width: 100vw;
   background: var(--primary-offset);
+}
+
+.toggle-table {
+  color: white;
 }
 
 .lastUpdated {

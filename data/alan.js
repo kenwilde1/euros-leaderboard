@@ -2,6 +2,14 @@ const highestScoringTeam = "Belgium";
 const bestDefence = "Portugal";
 const topGoalscorer = "Lukaku";
 
+const semiFinalist = "Spain, Portugal, France, Croatia";
+const finalists = "Spain vs France";
+const totalYellowCards = "N/A";
+const totalRedCards = "N/A";
+const totalPenalties = "3";
+const quarterFinalists =
+  "Germany, Croatia, Spain, England, Portugal, Netherlands, Belgium, France";
+
 export default {
   matchPredictions: [
     {
@@ -312,4 +320,11 @@ export default {
   highestScoringTeam,
   bestDefence,
   topGoalscorer,
+  semiFinalist,
+  finalists,
+  totalYellowCards,
+  totalPenalties,
+  totalRedCards,
+  quarterFinalists,
+  winner: "France",
 };

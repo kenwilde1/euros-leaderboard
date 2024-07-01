@@ -224,10 +224,24 @@ const matchPredictions = [
 const highestScoringTeam = "England";
 const bestDefence = "Germany";
 const topGoalscorer = "Mbappe";
+const semiFinalist = "France, England, Germany, Spain";
+const finalists = "France vs England";
+const totalYellowCards = "194";
+const totalRedCards = "6";
+const totalPenalties = "3";
+const quarterFinalists =
+  "England, France, Germany, Spain, Portugal, Netherlands, Italy, Belgium";
 
 export default {
   matchPredictions,
   highestScoringTeam,
   bestDefence,
   topGoalscorer,
+  semiFinalist,
+  finalists,
+  totalYellowCards,
+  totalPenalties,
+  totalRedCards,
+  quarterFinalists,
+  winner: "England",
 };

@@ -64,16 +64,43 @@ const getMetadataForPerson = (player) => {
     highestScoringTeam: metadata.highestScoringTeam,
     bestDefence: metadata.bestDefence,
     topGoalscorer: metadata.topGoalscorer,
+    quarterFinalists: metadata.quarterFinalists,
+    semiFinalist: metadata.semiFinalist,
+    finalists: metadata.finalists,
+    totalYellowCards: metadata.totalYellowCards,
+    totalRedCards: metadata.totalRedCards,
+    totalPenalties: metadata.totalPenalties,
+    winner: metadata.winner,
   };
 };
 
 const MetadataDisplay = ({ metadata }) => (
   <div className="other-predictions">
     <div>
-      <span>Top Goalscorer: </span>
-      <span>
-        <b>{metadata.topGoalscorer}</b>
-      </span>
+      <div>
+        🏆: <b>{metadata.winner}</b>
+      </div>
+      <div>
+        Final: <b>{metadata.finalists}</b>
+      </div>
+      <div>
+        SF: <b>{metadata.semiFinalist}</b>
+      </div>
+      <div>
+        QF: <b>{metadata.quarterFinalists}</b>
+      </div>
+      <div>
+        ⚽: <b>{metadata.topGoalscorer}</b>
+      </div>
+      <div>
+        🟨: <b>{metadata.totalYellowCards}</b>
+      </div>
+      <div>
+        🟥: <b>{metadata.totalRedCards}</b>
+      </div>
+      <div>
+        🥅: <b>{metadata.totalPenalties}</b>
+      </div>
     </div>
   </div>
 );
@@ -156,7 +183,7 @@ const Predictions = () => {
         <ThemeProvider theme={theme}>
           <div className="toggle-table">
             <Switch checked={open} onChange={handleSwitchChange} />
-            <span className="toggle-desc">Open all predictions</span>
+            <span className="toggle-desc">Expand all</span>
           </div>
         </ThemeProvider>
       </div>
