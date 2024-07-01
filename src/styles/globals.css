@@ -690,6 +690,7 @@ ul span {
 .fixture-teams div {
   display: flex;
   gap: 8px;
+  align-items: center;
 }
 
 .flag {
