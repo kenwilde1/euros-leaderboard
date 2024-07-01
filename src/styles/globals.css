@@ -32,6 +32,7 @@
   align-items: center;
   gap: 10px;
   padding: 10px;
+  border-radius: 5px !important;
 }
 
 main {
@@ -306,6 +307,7 @@ table th {
 
 div[role="grid"] {
   width: 150vw;
+  border-radius: 5px;
 }
 
 div[role="gridcell"],
@@ -362,25 +364,25 @@ ul span {
 } */
 
 .special-column {
-  background-color: #00a85d !important;
+  background-color: var(--primary) !important;
   border: 1px solid black !important;
   color: white;
 }
 
 .special-column-header {
-  background-color: #027541 !important;
+  background-color: var(--primary) !important;
   border: 1px solid black !important;
   color: white;
 }
 
 .perfect-column {
-  background-color: #e9c304 !important;
+  background-color: var(--blue) !important;
   border: 1px solid black !important;
   color: white;
 }
 
 .perfect-column-header {
-  background-color: #c3a302 !important;
+  background-color: var(--blue) !important;
   border: 1px solid black !important;
   color: white;
 }
