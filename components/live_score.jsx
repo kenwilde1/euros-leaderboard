@@ -20,6 +20,10 @@ const countryFlagMap = {
   Turkey: "TR",
 };
 
+const Placeholder = () => {
+  return <div className="placeholder"></div>;
+};
+
 const Fixture = ({ fixture, index }) => {
   const day = new Date().getDate().toString();
   let date;
@@ -39,16 +43,25 @@ const Fixture = ({ fixture, index }) => {
   return (
     <div className="fixture">
       <div className="fixture-time">{date}</div>
+      <div className="fixture-round">{fixture.round}</div>
       <div className="fixture-teams">
         <div className="fixture-home">
           <div className="fixture-flag">
-            <Flag country={countryFlagMap[fixture.home]} size={20} />
+            {fixture.home !== "TBD" ? (
+              <Flag country={countryFlagMap[fixture.home]} size={20} />
+            ) : (
+              <Placeholder />
+            )}
           </div>
           {fixture.home}
         </div>
         <div className="fixture-away">
           <div className="fixture-flag">
-            <Flag country={countryFlagMap[fixture.away]} size={20} />
+            {fixture.away !== "TBD" ? (
+              <Flag country={countryFlagMap[fixture.away]} size={20} />
+            ) : (
+              <Placeholder />
+            )}
           </div>
           {fixture.away}
         </div>
