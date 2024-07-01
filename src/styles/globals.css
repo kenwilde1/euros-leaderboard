@@ -566,6 +566,7 @@ ul span {
   border: 1px solid #324ebb;
   flex-grow: 2;
   font-weight: 400;
+  text-decoration: none !important;
 }
 
 .next-button,
@@ -574,6 +575,14 @@ ul span {
   color: white;
   border: 1px solid #324ebb;
   font-weight: 400;
+  text-decoration: none !important;
+}
+
+.euiAccordion__buttonContent,
+.euiAccordion__button {
+  text-decoration: none !important;
+  text-decoration-style: none !important;
+  text-decoration-line: none !important;
 }
 
 .teams {
