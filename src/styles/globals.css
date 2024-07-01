@@ -655,6 +655,7 @@ ul span {
   width: 100vw;
   overflow: auto;
   height: 120px;
+  padding-right: 20px;
 }
 
 .fixture {
@@ -668,10 +669,6 @@ ul span {
   justify-content: space-between;
   font-size: 14px;
   box-shadow: #324ebb 0px 2px 8px 0px;
-}
-
-.fixture:last-child {
-  margin-right: 20px;
 }
 
 .fixture-time {
