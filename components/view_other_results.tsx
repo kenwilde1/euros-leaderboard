@@ -17,7 +17,7 @@ export function ViewOtherResults({ filterResults }) {
         onClick={() => filterResults()}
         size="s"
       >
-        Back to latest
+        Latest
       </EuiButton>
       <EuiButton
         onClick={() => filterResults(1)}

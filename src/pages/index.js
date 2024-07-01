@@ -34,14 +34,19 @@ const euroFont = localFont({
       weight: "400",
       style: "italic",
     },
-    // {
-    //   path: "../../fonts/book.woff2",
-    //   weight: "500",
-    //   style: "italic",
-    // },
+    {
+      path: "../../fonts/medium.woff2",
+      weight: "500",
+      style: "bold",
+    },
     {
       path: "../../fonts/bold.woff2",
       weight: "700",
+      style: "bold",
+    },
+    {
+      path: "../../fonts/extraBold.woff2",
+      weight: "800",
       style: "bold",
     },
   ],
