@@ -277,6 +277,14 @@ table th {
   color: rgb(202, 201, 201);
   font-size: 12px;
   font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90vw;
+}
+
+.last-updated-text {
+  margin-bottom: 4px;
 }
 
 .euiAccordion__button {
@@ -338,18 +346,14 @@ ul span {
   color: lightcoral !important;
 } */
 
-.toggle-desc {
-  color: white;
-}
-
 /* .MuiSwitch-track {
   color: lightcoral !important;
 } */
 
-.toggle-table {
+/* .toggle-table {
   align-self: flex-start;
   margin-left: 10px;
-}
+} */
 
 .scores {
   display: flex;
@@ -653,16 +657,8 @@ ul span {
     width: 30vw;
   }
 
-  .navbar,
-  .toggle-table {
+  .navbar {
     width: 30vw;
-  }
-
-  .toggle-table {
-    display: flex;
-    justify-content: center !important;
-    width: 50vw;
-    align-self: center;
   }
 
   .leaderboard {

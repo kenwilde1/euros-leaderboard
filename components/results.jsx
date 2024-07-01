@@ -365,9 +365,21 @@ const ListItems = ({ selectedTabId }) => {
     });
 
   const renderLastUpdated = () => (
-    <p className="lastUpdated">
-      Last Updated by: {lastResult && getLastUpdated(lastResult)}
-    </p>
+    <div className="lastUpdated">
+      <ThemeProvider theme={theme}>
+        <div className="toggle-table">
+          <Switch
+            checked={showAdvancedTable}
+            onChange={handleSwitchChange}
+            size="small"
+          />
+          <span className="toggle-desc">Advanced</span>
+        </div>
+      </ThemeProvider>
+      <div className="last-updated-text">
+        Latest update: {lastResult && getLastUpdated(lastResult)}
+      </div>
+    </div>
   );
 
   const renderScores = () => (
@@ -389,13 +401,6 @@ const ListItems = ({ selectedTabId }) => {
 
   const renderTableContent = () => (
     <>
-      <ThemeProvider theme={theme}>
-        <div className="toggle-table">
-          <Switch checked={showAdvancedTable} onChange={handleSwitchChange} />
-          <span className="toggle-desc">Advanced View</span>
-        </div>
-      </ThemeProvider>
-      <EuiSpacer />
       <ViewOtherResults filterResults={filterResults} />
       <EuiSpacer />
       {showAdvancedTable && Object.keys(positionUpdates).length ? (
