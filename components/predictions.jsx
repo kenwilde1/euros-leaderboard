@@ -81,13 +81,13 @@ const MetadataDisplay = ({ metadata }) => (
         🏆: <b>{metadata.winner}</b>
       </div>
       <div>
-        Final: <b>{metadata.finalists}</b>
+        2️⃣: <b>{metadata.finalists}</b>
       </div>
       <div>
-        SF: <b>{metadata.semiFinalist}</b>
+        4️⃣: <b>{metadata.semiFinalist}</b>
       </div>
       <div>
-        QF: <b>{metadata.quarterFinalists}</b>
+        8️⃣: <b>{metadata.quarterFinalists}</b>
       </div>
       <div>
         ⚽: <b>{metadata.topGoalscorer}</b>
