@@ -124,29 +124,31 @@ const PersonalPredictions = ({ player, open }) => {
         onToggle={setIsOpen}
         forceState={isContentOpen ? "open" : "closed"}
       >
-        {isContentOpen && !!predictions.length && (
+        {isContentOpen && (
           <>
             <MetadataDisplay metadata={metadata} />
-            <table className="prediction-table">
-              <thead>
-                <tr>
-                  <th>Home</th>
-                  <th>Home Goals</th>
-                  <th>Away Goals</th>
-                  <th>Away</th>
-                </tr>
-              </thead>
-              <tbody>
-                {predictions.map((pred) => (
-                  <tr key={pred.id}>
-                    <td>{pred.home}</td>
-                    <td>{pred.homeGoals}</td>
-                    <td>{pred.awayGoals}</td>
-                    <td>{pred.away}</td>
+            {!!predictions.length && (
+              <table className="prediction-table">
+                <thead>
+                  <tr>
+                    <th>Home</th>
+                    <th>Home Goals</th>
+                    <th>Away Goals</th>
+                    <th>Away</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {predictions.map((pred) => (
+                    <tr key={pred.id}>
+                      <td>{pred.home}</td>
+                      <td>{pred.homeGoals}</td>
+                      <td>{pred.awayGoals}</td>
+                      <td>{pred.away}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
           </>
         )}
       </EuiAccordion>

@@ -367,7 +367,7 @@ const ListItems = ({ selectedTabId }) => {
   const renderLastUpdated = () => (
     <div className="lastUpdated">
       <ThemeProvider theme={theme}>
-        <div>
+        <div className="advanced-view-toggle">
           <Switch
             checked={showAdvancedTable}
             onChange={handleSwitchChange}

@@ -295,7 +295,8 @@ table th {
 }
 
 .last-updated-text {
-  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
 }
 
 .euiAccordion__button {
@@ -775,4 +776,9 @@ ul span {
   height: 14.2px;
   width: 20px;
   background-color: lightgray;
+}
+
+.advanced-view-toggle {
+  display: flex;
+  align-items: center;
 }
