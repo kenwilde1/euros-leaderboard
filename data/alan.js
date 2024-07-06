@@ -4,8 +4,8 @@ const topGoalscorer = "Lukaku";
 
 const semiFinalist = "Spain, Portugal, France, Croatia";
 const finalists = "Spain vs France";
-const totalYellowCards = "N/A";
-const totalRedCards = "N/A";
+const totalYellowCards = 170;
+const totalRedCards = 5;
 const totalPenalties = "3";
 const quarterFinalists =
   "Germany, Croatia, Spain, England, Portugal, Netherlands, Belgium, France";
@@ -317,33 +317,34 @@ export default {
       awayGoals: 0,
     },
     {
-      id: 'SPAGER',
-      home: 'Spain',
-      away: 'Germany',
+      id: "SPAGER",
+      home: "Spain",
+      away: "Germany",
       homeGoals: 1,
-      awayGoals: 0
+      awayGoals: 0,
     },
     {
-      id: 'PORFRA',
-      home: 'Portugal',
-      away: 'France',
+      id: "PORFRA",
+      home: "Portugal",
+      away: "France",
       homeGoals: 1,
-      awayGoals: 1
+      awayGoals: 1,
+    },
+    {},
+    {
+      id: "ENGSUI",
+      home: "England",
+      away: "Switzerland",
+      homeGoals: 1,
+      awayGoals: 1,
     },
     {
-      id: 'ENGSUI',
-      home: 'England',
-      away: 'Switzerland',
-      homeGoals: 1,
-      awayGoals: 1
-    },
-    {
-      id: 'NETTUR',
-      home: 'Netherlands',
-      away: 'Turkey',
+      id: "NETTUR",
+      home: "Netherlands",
+      away: "Turkey",
       homeGoals: 2,
-      awayGoals: 0
-    }
+      awayGoals: 0,
+    },
   ],
   highestScoringTeam,
   bestDefence,

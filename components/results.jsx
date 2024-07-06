@@ -89,6 +89,22 @@ const groupStageUpdates = [
   },
 ];
 
+const quarterFinalistUpdates = [
+  {
+    id: "group-stage",
+    text: "Quarter Finalists",
+    Stephen: 30,
+    Hugh: 30,
+    Philip: 30,
+    Dylan: 30,
+    Kenny: 25,
+    Alan: 30,
+    Shane: 30,
+    David: 30,
+    match: 47,
+  },
+];
+
 const getLastUpdated = (lastResult) => {
   if (lastResult.id === "group-stage") {
     return <span>{lastResult.text}</span>;
@@ -262,6 +278,7 @@ const ListItems = ({ selectedTabId }) => {
 
       // Insert groupStageUpdates at index 36
       items.splice(36, 0, ...groupStageUpdates);
+      items.splice(48, 0, ...quarterFinalistUpdates);
 
       // Process tally
       const { scores, updatesToPositions, pointDiff } = fetchTally(
@@ -377,7 +394,8 @@ const ListItems = ({ selectedTabId }) => {
         </div>
       </ThemeProvider>
       <div className="last-updated-text">
-        Latest update: {lastResult && getLastUpdated(lastResult)}
+        Latest update:
+        {lastResult && getLastUpdated(lastResult)}
       </div>
     </div>
   );

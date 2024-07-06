@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import fixtures from "../data/fixtures";
 import players from "../data/players";
 
-import { Switch, ThemeProvider } from "@mui/material";
+import { Checkbox, Switch, ThemeProvider } from "@mui/material";
 import { theme } from "./results";
 
 import { countryFlagMap } from "./get_live_score";
@@ -76,36 +76,36 @@ const getMetadataForPerson = (player) => {
 
 const MetadataDisplay = ({ metadata }) => (
   <div className="other-predictions">
-    <div>
+    <div className="metadata-predictions">
       <div>
-        🏆: <b>{metadata.winner}</b>
+        🏆 <b>{metadata.winner}</b>
       </div>
       <div>
-        2️⃣: <b>{metadata.finalists}</b>
+        2️⃣ <b>{metadata.finalists}</b>
       </div>
       <div>
-        4️⃣: <b>{metadata.semiFinalist}</b>
+        4️⃣ <b>{metadata.semiFinalist}</b>
       </div>
       <div>
-        8️⃣: <b>{metadata.quarterFinalists}</b>
+        8️⃣ <b>{metadata.quarterFinalists}</b>
       </div>
       <div>
-        ⚽: <b>{metadata.topGoalscorer}</b>
+        ⚽ <b>{metadata.topGoalscorer}</b>
       </div>
       <div>
-        🟨: <b>{metadata.totalYellowCards}</b>
+        🟨 <b>{metadata.totalYellowCards}</b>
       </div>
       <div>
-        🟥: <b>{metadata.totalRedCards}</b>
+        🟥 <b>{metadata.totalRedCards}</b>
       </div>
       <div>
-        🥅: <b>{metadata.totalPenalties}</b>
+        🥅 <b>{metadata.totalPenalties}</b>
       </div>
     </div>
   </div>
 );
 
-const PersonalPredictions = ({ player, open }) => {
+const PersonalPredictions = ({ player, open, checked }) => {
   const predictions = getFixturesForPerson(player);
   const metadata = getMetadataForPerson(player);
   const [isContentOpen, setIsOpen] = useState(open);
@@ -126,7 +126,7 @@ const PersonalPredictions = ({ player, open }) => {
       >
         {isContentOpen && (
           <>
-            <MetadataDisplay metadata={metadata} />
+            {checked && <MetadataDisplay metadata={metadata} />}
             {!!predictions.length && (
               <table className="prediction-table">
                 <thead>
@@ -157,41 +157,82 @@ const PersonalPredictions = ({ player, open }) => {
 };
 
 const LOCAL_STORAGE_KEY = "euros:open-predictions";
+const LOCAL_STORAGE_KEY_2 = "euros:show-overall";
 
 const Predictions = () => {
   const people = Object.keys(players);
   const [open, setOpen] = useState();
+  const [checked, setChecked] = useState();
 
   const handleSwitchChange = (e) => {
     window.localStorage.setItem(LOCAL_STORAGE_KEY, e.target.checked);
     setOpen(e.target.checked);
   };
 
+  const handleCheckboxChange = (e) => {
+    window.localStorage.setItem(LOCAL_STORAGE_KEY_2, e.target.checked);
+    setChecked(e.target.checked);
+  };
+
   useEffect(() => {
     const getLocal = () => {
-      const local = window.localStorage.getItem(LOCAL_STORAGE_KEY);
-      if (local) {
-        return JSON.parse(local);
+      let isOpen;
+      let isChecked;
+
+      const localSwitch = window.localStorage.getItem(LOCAL_STORAGE_KEY);
+      const localCheckbox = window.localStorage.getItem(LOCAL_STORAGE_KEY_2);
+      if (localSwitch) {
+        isOpen = JSON.parse(localSwitch);
       } else {
-        return false;
+        isOpen = false;
       }
+
+      if (localCheckbox) {
+        isChecked = JSON.parse(localCheckbox);
+      } else {
+        isChecked = false;
+      }
+
+      return { isChecked, isOpen };
     };
-    setOpen(getLocal());
+    const { isOpen, isChecked } = getLocal();
+
+    setOpen(isOpen);
+    setChecked(isChecked);
   }, []);
 
   return (
     <div className="predictions-page">
-      <div className="toggle-predictions">
-        <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
+        <div className="toggle-predictions">
           <div className="toggle-table">
-            <Switch checked={open} onChange={handleSwitchChange} />
+            <Switch
+              checked={open}
+              onChange={handleSwitchChange}
+              inputProps={{ "aria-label": "controlled" }}
+            />
             <span className="toggle-desc">Expand all</span>
           </div>
-        </ThemeProvider>
-      </div>
+        </div>
+        <div className="toggle-predictions">
+          <div className="toggle-table">
+            <Switch
+              checked={checked}
+              onChange={handleCheckboxChange}
+              inputProps={{ "aria-label": "controlled" }}
+            />
+            <span className="toggle-desc">Show overall predictions</span>
+          </div>
+        </div>
+      </ThemeProvider>
       <div className="predictions-list">
         {people.map((player) => (
-          <PersonalPredictions key={player} player={player} open={open} />
+          <PersonalPredictions
+            key={player}
+            player={player}
+            open={open}
+            checked={checked}
+          />
         ))}
       </div>
     </div>

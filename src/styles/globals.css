@@ -297,6 +297,7 @@ table th {
 .last-updated-text {
   display: flex;
   align-items: center;
+  gap: 2px;
 }
 
 .euiAccordion__button {
@@ -482,7 +483,7 @@ ul span {
 
 .pointDiff {
   font-weight: 400 !important;
-  font-size: 11px;
+  font-size: 10px;
   border-radius: 50%;
   height: 20px;
   width: 20px;
@@ -781,4 +782,15 @@ ul span {
 .advanced-view-toggle {
   display: flex;
   align-items: center;
+}
+
+.metadata-predictions div {
+  display: flex;
+  gap: 5px;
+  border-bottom: 1px solid lightgray;
+  padding: 4px;
+}
+
+.metadata-predictions div:last-child {
+  border: none;
 }
