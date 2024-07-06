@@ -219,6 +219,34 @@ const matchPredictions = [
     awayGoals: 1,
   },
   { id: "AUTTUR", home: "Austria", away: "Turkey", homeGoals: 2, awayGoals: 1 },
+  {
+    id: 'SPAGER',
+    home: 'Spain',
+    away: 'Germany',
+    homeGoals: 0,
+    awayGoals: 1
+  },
+  {
+    id: 'PORFRA',
+    home: 'Portugal',
+    away: 'France',
+    homeGoals: 1,
+    awayGoals: 1
+  },
+  {
+    id: 'ENGSUI',
+    home: 'England',
+    away: 'Switzerland',
+    homeGoals: 2,
+    awayGoals: 0
+  },
+  {
+    id: 'NETTUR',
+    home: 'Netherlands',
+    away: 'Turkey',
+    homeGoals: 1,
+    awayGoals: 2
+  }
 ];
 
 const highestScoringTeam = "France";

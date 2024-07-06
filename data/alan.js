@@ -316,6 +316,34 @@ export default {
       homeGoals: 2,
       awayGoals: 0,
     },
+    {
+      id: 'SPAGER',
+      home: 'Spain',
+      away: 'Germany',
+      homeGoals: 1,
+      awayGoals: 0
+    },
+    {
+      id: 'PORFRA',
+      home: 'Portugal',
+      away: 'France',
+      homeGoals: 1,
+      awayGoals: 1
+    },
+    {
+      id: 'ENGSUI',
+      home: 'England',
+      away: 'Switzerland',
+      homeGoals: 1,
+      awayGoals: 1
+    },
+    {
+      id: 'NETTUR',
+      home: 'Netherlands',
+      away: 'Turkey',
+      homeGoals: 2,
+      awayGoals: 0
+    }
   ],
   highestScoringTeam,
   bestDefence,

@@ -157,10 +157,10 @@ export default {
       round: "SF",
     },
     {
-      id: "TBD",
+      id: "SPAFRA",
       time: "20:00",
-      home: "TBD",
-      away: "TBD",
+      home: "Spain",
+      away: "France",
       day: "9",
       dayOfWeek: "9 July",
       round: "SF",
