@@ -148,21 +148,23 @@ export default {
   ],
   9: [
     {
-      id: "TBD",
-      time: "17:00",
-      home: "TBD",
-      away: "TBD",
-      day: "9",
-      dayOfWeek: "9 July",
-      round: "SF",
-    },
-    {
       id: "SPAFRA",
       time: "20:00",
       home: "Spain",
       away: "France",
       day: "9",
       dayOfWeek: "9 July",
+      round: "SF",
+    },
+  ],
+  10: [
+    {
+      id: "TBD",
+      time: "20:00",
+      home: "TBD",
+      away: "TBD",
+      day: "10",
+      dayOfWeek: "10 July",
       round: "SF",
     },
   ],
