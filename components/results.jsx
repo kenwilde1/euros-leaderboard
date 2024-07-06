@@ -394,8 +394,8 @@ const ListItems = ({ selectedTabId }) => {
         </div>
       </ThemeProvider>
       <div className="last-updated-text">
-        Latest update:
-        {lastResult && getLastUpdated(lastResult)}
+        <span>Latest update:</span>
+        {lastResult && <span>{getLastUpdated(lastResult)}</span>}
       </div>
     </div>
   );
