@@ -248,6 +248,7 @@ const matchPredictions = [
     homeGoals: 1,
     awayGoals: 2,
   },
+  {},
 ];
 
 const highestScoringTeam = "Portugal";

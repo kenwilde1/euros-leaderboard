@@ -161,8 +161,8 @@ const LOCAL_STORAGE_KEY_2 = "euros:show-overall";
 
 const Predictions = () => {
   const people = Object.keys(players);
-  const [open, setOpen] = useState();
-  const [checked, setChecked] = useState();
+  const [open, setOpen] = useState(true);
+  const [checked, setChecked] = useState(true);
 
   const handleSwitchChange = (e) => {
     window.localStorage.setItem(LOCAL_STORAGE_KEY, e.target.checked);

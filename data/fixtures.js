@@ -159,10 +159,10 @@ export default {
   ],
   10: [
     {
-      id: "TBD",
+      id: "NETENG",
       time: "20:00",
-      home: "TBD",
-      away: "TBD",
+      home: "Netherlands",
+      away: "England",
       day: "10",
       dayOfWeek: "10 July",
       round: "SF",

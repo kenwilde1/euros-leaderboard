@@ -49,7 +49,7 @@ const calculateScore = (
     if (prediction.awayGoals === result.awayGoals) {
       runningScore += 1;
     }
-    console.log(runningScore);
+
     scores[pos].score += runningScore;
     if (index <= lengthOfResults) {
       previousScores[pos].score += runningScore;

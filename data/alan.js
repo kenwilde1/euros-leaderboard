@@ -345,6 +345,7 @@ export default {
       homeGoals: 2,
       awayGoals: 0,
     },
+    {},
   ],
   highestScoringTeam,
   bestDefence,
