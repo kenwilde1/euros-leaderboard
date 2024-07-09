@@ -172,7 +172,7 @@ export default {
     {
       id: "TBD",
       time: "20:00",
-      home: "TBD",
+      home: "Spain",
       away: "TBD",
       day: "14",
       dayOfWeek: "14 July",
