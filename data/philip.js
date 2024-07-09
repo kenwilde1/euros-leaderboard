@@ -249,6 +249,20 @@ const matchPredictions = [
     awayGoals: 0,
   },
   {},
+  {
+    id: 'SPAFRA',
+    home: 'Spain',
+    away: 'France',
+    homeGoals: 0,
+    awayGoals: 0
+  },
+  {
+    id: 'NETENG',
+    home: 'Netherlands',
+    away: 'England',
+    homeGoals: 1,
+    awayGoals: 0
+  },
 ];
 
 const highestScoringTeam = "Portugal";

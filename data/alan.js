@@ -346,6 +346,20 @@ export default {
       awayGoals: 0,
     },
     {},
+    {
+      id: 'SPAFRA',
+      home: 'Spain',
+      away: 'France',
+      homeGoals: 1,
+      awayGoals: 0
+    },
+    {
+      id: 'NETENG',
+      home: 'Netherlands',
+      away: 'England',
+      homeGoals: 1,
+      awayGoals: 1
+    },
   ],
   highestScoringTeam,
   bestDefence,

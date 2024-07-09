@@ -1,7 +1,5 @@
 import {
   EuiAccordion,
-  EuiHorizontalRule,
-  EuiSpacer,
   EuiPanel,
 } from "@elastic/eui";
 import { useEffect, useState } from "react";
@@ -9,41 +7,18 @@ import { useEffect, useState } from "react";
 import fixtures from "../data/fixtures";
 import players from "../data/players";
 
-import { Checkbox, Switch, ThemeProvider } from "@mui/material";
+import { Switch, ThemeProvider } from "@mui/material";
 import { theme } from "./results";
-
-import { countryFlagMap } from "./get_live_score";
-
-import Flag from "react-flagkit";
-
-const getFixtures = () => {
-  const date = new Date().getDate();
-  const todaysFixtures = fixtures[date];
-  if (!todaysFixtures) {
-    return <span>Future fixtures in progress...</span>;
-  }
-  const lastIndex = todaysFixtures.length - 1;
-
-  return todaysFixtures.map((match, index) => (
-    <>
-      <div className="fixture-item">
-        <div className="fixture-item-home">
-          <Flag country={countryFlagMap[match.home]} />
-        </div>
-        <span>vs</span>
-        <div className="fixture-item-away">
-          <Flag country={countryFlagMap[match.away]} />
-        </div>
-      </div>
-      <span className="time">{match.time}</span>
-      {lastIndex !== index && <EuiHorizontalRule />}
-    </>
-  ));
-};
 
 const getFixturesForPerson = (person) => {
   const date = new Date().getDate();
-  const todaysFixtures = fixtures[date];
+  let todaysFixtures = fixtures[date];
+  if (date === 9) {
+    todaysFixtures = [...fixtures[date], ...fixtures[date+1]]
+  } else if (date === 10) {
+    todaysFixtures = [...fixtures[date-1], ...fixtures[date]]
+  }
+
   if (!todaysFixtures) {
     return [];
   }
@@ -51,10 +26,10 @@ const getFixturesForPerson = (person) => {
   const predictions = players[person]?.matchPredictions;
 
   if (!predictions) return [];
-
-  return predictions.filter((prediction) =>
+  const x = predictions.filter((prediction) =>
     todaysFixtures.some((fix) => fix.id === prediction.id)
   );
+  return x;
 };
 
 const getMetadataForPerson = (player) => {
