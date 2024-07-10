@@ -170,10 +170,10 @@ export default {
   ],
   14: [
     {
-      id: "TBD",
+      id: "SPAENG",
       time: "20:00",
       home: "Spain",
-      away: "TBD",
+      away: "England",
       day: "14",
       dayOfWeek: "14 July",
       round: "F",
