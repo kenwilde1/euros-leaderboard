@@ -137,6 +137,22 @@ const finalUpdates = [
   },
 ];
 
+const winnerUpdates = [
+  {
+    id: "group-stage",
+    text: "Winners",
+    Stephen: 0,
+    Hugh: 0,
+    Philip: 0,
+    Dylan: 10,
+    Kenny: 0,
+    Alan: 0,
+    Shane: 0,
+    David: 0,
+    match: 54,
+  },
+];
+
 
 
 const getLastUpdated = (lastResult) => {
@@ -315,6 +331,7 @@ const ListItems = ({ selectedTabId }) => {
       items.splice(48, 0, ...quarterFinalistUpdates);
       items.splice(51, 0, ...semiFinalUpdates);
       items.splice(54, 0, ...finalUpdates)
+      items.splice(56, 0, ...winnerUpdates);
 
       // Process tally
       const { scores, updatesToPositions, pointDiff } = fetchTally(
