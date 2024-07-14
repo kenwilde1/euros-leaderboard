@@ -263,6 +263,14 @@ const matchPredictions = [
     homeGoals: 1,
     awayGoals: 2
   },
+  {},
+  {
+    id: 'SPAENG',
+    home: 'Spain',
+    away: 'England',
+    homeGoals: 2,
+    awayGoals: 1
+  },
 ];
 
 const highestScoringTeam = "England";
