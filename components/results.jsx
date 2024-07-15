@@ -144,7 +144,7 @@ const winnerUpdates = [
     Stephen: 0,
     Hugh: 0,
     Philip: 0,
-    Dylan: 10,
+    Dylan: 0,
     Kenny: 0,
     Alan: 0,
     Shane: 0,
