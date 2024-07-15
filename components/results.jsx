@@ -153,6 +153,54 @@ const winnerUpdates = [
   },
 ];
 
+const yellowCardUpdate = [
+  {
+    id: "group-stage",
+    text: "Yellow Cards",
+    Stephen: 0,
+    Hugh: 0,
+    Philip: 0,
+    Dylan: 0,
+    Kenny: 0,
+    Alan: 0,
+    Shane: 0,
+    David: 0,
+    match: 55,
+  },
+]
+
+const redCardUpdate = [
+  {
+    id: "group-stage",
+    text: "Red Cards",
+    Stephen: 0,
+    Hugh: 0,
+    Philip: 15,
+    Dylan: 10,
+    Kenny: 0,
+    Alan: 15,
+    Shane: 0,
+    David: 15,
+    match: 56,
+  },
+]
+
+const penaltyUpdate = [
+  {
+    id: "group-stage",
+    text: "Penalties",
+    Stephen: 10,
+    Hugh: 10,
+    Philip: 10,
+    Dylan: 10,
+    Kenny: 5,
+    Alan: 10,
+    Shane: 10,
+    David: 10,
+    match: 57,
+  },
+]
+
 
 
 const getLastUpdated = (lastResult) => {
@@ -332,6 +380,9 @@ const ListItems = ({ selectedTabId }) => {
       items.splice(51, 0, ...semiFinalUpdates);
       items.splice(54, 0, ...finalUpdates)
       items.splice(56, 0, ...winnerUpdates);
+      items.splice(57, 0, ...yellowCardUpdate);
+      items.splice(58, 0, ...redCardUpdate);
+      items.splice(59, 0, ...penaltyUpdate);
 
       // Process tally
       const { scores, updatesToPositions, pointDiff } = fetchTally(
